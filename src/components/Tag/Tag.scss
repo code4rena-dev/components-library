@@ -1,0 +1,49 @@
+@import "../../styles/variables";
+
+.c4tag, .tag--default {
+    height: fit-content;
+    padding: $spacing__xs 0.75rem;
+    font-family: $font__default;
+    font-size: 1rem;
+    font-weight: bold !important;
+    letter-spacing: 0.5px;
+    display: flex;
+    flex-direction: row;
+    gap: $spacing__xs;
+    align-items: center;
+    color: $color__white;
+    border-radius: 2.25rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $color__n-80;
+    background: $color__n-80;
+
+    &.wide {
+        padding: $spacing__s $spacing__m;
+    }
+
+    &.tag--blurple {
+        background: $color__blurple-60;
+        border-color: $color__blurple-60;
+    }
+
+    &.tag--white {
+        background: rgba(255, 255, 255, 0.13);
+        border-color: none;
+    }
+
+    &.tag--red {
+        background: transparent;
+        border-color: $color__red;
+    }
+
+    &.tag--yellow {
+        background: transparent;
+        border-color: $color__y-1;
+    }
+
+    &.tag--white-outline {
+        background: transparent;
+        border-color: $color__white;
+    }
+}

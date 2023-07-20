@@ -1,0 +1,73 @@
+@import "../../styles/variables";
+
+.c4alert {
+    width: 100%;
+    max-width: 1000px;
+    // height: 100px;
+    background: grey;
+    text-align: left;
+    border-radius: $border-radius__base;
+    font-size: $font-size__small;
+    border-width: 2px;
+    border-style: solid;
+    border-color: $color__n-80;
+
+    // Alert title
+    strong {
+        display: inline;
+        font-weight: normal;
+        color: $color__n-2;
+    }
+    // Alert message
+    p {
+        display: inline;
+        color: $color__n-10;
+    }
+    // Alert redirect url
+    a {
+        display: inline;
+        color: $color__blurple__text--light;
+
+        &:after {
+            content: " →"
+        }
+    }
+
+    // Alert types
+    .alert--icon {
+        padding: 0.75rem 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-right: 2px solid;
+        border-color: inherit;
+    }
+
+    .alert--content {
+        padding: 0.75rem 1rem;
+    }
+
+    &.alert--muted, &.alert--warning, &.alert--error {
+        background: transparent;
+    }
+    &.alert--warning, &.alert--error {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &.alert--info {
+        background: $color__n-80;
+    }
+    &.alert--warning {
+        border-color: $color__y-1;
+        a {
+            color: $color__y-1;
+        }
+    }
+    &.alert--error {
+        border-color: $color__red;
+        a {
+            color: $color__red;
+        }
+    }
+}

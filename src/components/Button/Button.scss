@@ -1,0 +1,76 @@
+@import "../../styles/variables";
+
+// ========== VARIABLES ========== \\
+$button__border-width: 2px;
+
+// ========== MIXINS =========== \\
+@mixin button--primary--disabled {
+  background: $color__n-80 !important;
+  border-color: $color__n-80 !important;
+  color: $color__n-40 !important;
+
+  cursor: not-allowed !important;
+}
+
+// ========== BUTTONS ========== \\
+.button--primary, .c4button {
+  padding: $spacing__s 1.25rem;
+  margin-right: $spacing__s;
+  display: flex;
+  gap: $spacing__s;
+  align-items: center;
+  background: $color__button-blurple;
+  border: $button__border-width solid $color__button-blurple;
+  border-radius: $border-radius__m;
+  color: $color__white;
+  font-family: $font__default;
+  font-weight: 500 !important; // These could be inherited from copy/text styles
+  text-decoration: none !important; // These could be inherited from copy/text styles
+  text-align: center;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  &.wide {
+    padding: 0.75rem 1.75rem;
+  }
+
+  @include accessible-animation {
+    transition: background 0.2s ease-in-out;
+  }
+
+  &:focus {
+    border-color: $color__white;
+    outline: none;
+  }
+
+  &:active {
+    border-color: $color__n-80 !important;
+    background: $color__n-80 !important;
+  }
+
+  &:hover {
+    background: $color__button-blurple--hover;
+    border-color: $color__button-blurple--hover;
+    color: $color__white;
+  }
+
+  &[disabled] {
+    @include button--primary--disabled;
+  }
+}
+
+.button--secondary {
+  background: transparent;
+  border: $button__border-width solid $color__button-blurple;
+  color: $color__white;
+
+  &:focus {
+    background: $color__button-blurple;
+  }
+
+  &:hover {
+    border-color: $color__button-blurple--hover;
+    background: $color__button-blurple;
+    color: $color__white;
+  }
+}

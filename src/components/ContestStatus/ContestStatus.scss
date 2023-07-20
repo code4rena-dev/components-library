@@ -1,0 +1,28 @@
+@import "../../styles/variables";
+
+.c4conteststatus {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: $color__white;
+    
+    .statusindicator {
+        width: $spacing__s;
+        height: $spacing__s;
+        border-radius: 50%;
+
+        &.ended {
+            display: none;
+        }
+        &.upcoming {
+            display: block;
+            background: white;
+        }
+        &.live {
+            display: block;
+            background: $color__green;
+        }
+    }
+}
