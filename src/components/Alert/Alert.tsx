@@ -40,15 +40,11 @@ const Alert: React.FC<AlertProps> = ({
   });
 
   return (
-    <div
-      id={id ?? undefined}
-      className={`${styling} ${className}`}
-      role="alert"
-    >
+    <div id={id} className={`${styling} ${className}`} role="alert">
       {(variant === AlertVariant.WARNING || variant === AlertVariant.ERROR) && (
         <div className="alert--icon">
           <img
-            alt=""
+            alt={variant === AlertVariant.WARNING ? "Warning" : "Error"}
             src={
               variant === AlertVariant.WARNING
                 ? "/icons/warning.svg"
@@ -64,13 +60,15 @@ const Alert: React.FC<AlertProps> = ({
         {redirectUrl && (
           <a
             aria-label={`${
-              redirectLabel ?? "Read more on this alert"
-            } (opens in new window)`}
+              redirectLabel
+                ? `${redirectLabel} (opens in new window)`
+                : "Read more on this alert (opens in new window)"
+            }`}
             href={redirectUrl}
             target="_blank"
             rel="noreferrer noopener"
           >
-            {redirectLabel ?? "Read more on this alert"}
+            {redirectLabel ? redirectLabel : "Read more on this alert"}
           </a>
         )}
       </div>
