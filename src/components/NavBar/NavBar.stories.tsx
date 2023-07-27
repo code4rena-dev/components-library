@@ -6,6 +6,11 @@ const meta: Meta<typeof NavBar> = {
   component: NavBar,
   title: "Navigation Bar",
   tags: ["autodocs"],
+  argTypes: {
+    loginHandler: { control: "function" },
+    logoutHandler: { control: "function" },
+    modalHandler: { control: "function" },
+  },
 };
 export default meta;
 
@@ -18,7 +23,7 @@ SampleComponent.parameters = {
       sourceState: "shown",
     },
     story: {
-      height: "200px",
+      height: "300px",
     },
   },
 };
@@ -35,4 +40,7 @@ SampleComponent.args = {
     { label: "Docs", href: "https://docs.code4rena.com", external: true },
     { label: "Help", href: "/help" },
   ],
+  loginHandler: () => console.log("Clicked Login!"),
+  logoutHandler: () => console.log("Clicked Logout!"),
+  modalHandler: () => console.log("Modal opening!"),
 };
