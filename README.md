@@ -1,3 +1,5 @@
+[![Jest](https://github.com/code4rena-dev/components-library/actions/workflows/test-runner.yml/badge.svg)](https://github.com/code4rena-dev/components-library/actions/workflows/test-runner.yml)
+
 # Code4rena Components Library
 
 ## Run Storybook
