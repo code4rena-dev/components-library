@@ -1,8 +1,9 @@
 dist
 node_modules
 
-# Jest test coverage results directory
+# Jest test results directories
 coverage
+reports
 # Storybook build directory
 storybook-static
 # Prefer npm to yarn
