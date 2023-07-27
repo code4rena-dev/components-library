@@ -1,0 +1,232 @@
+@import "../../styles/variables";
+
+header {
+    &.full-width--padded {
+        width: 100%;
+        padding: 0 2rem;
+    }
+
+    // This hides an element visually, but still allows it to be read by screen readers.
+    .visually-hidden {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+    }
+  
+    // Pair .visually-hidden with .focusable to show the element when it's focused.
+    // This is useful for off-screen navigations like the skip link.
+    .visually-hidden.focusable:focus {
+        clip: auto;
+        clip-path: none;
+        height: auto;
+        overflow: auto;
+        position: static;
+        white-space: normal;
+        width: auto;
+    }
+
+    nav {
+        background: transparent;
+        width: 100%;
+        padding: $spacing__l 0 $spacing__xl;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        column-gap: 4rem;
+
+        @include accessible-animation {
+            .menu--hamburger * {
+                transition: all 0.5s ease-out;
+            }
+        }
+
+        .menu--hamburger {
+            display: block;
+            cursor: pointer;
+            background: none;
+            border: none;
+            justify-self: flex-end;
+        }
+
+        &.open  {
+            .menu--hamburger {
+                .top-bun {
+                    opacity: 0;
+                }
+                .patty {
+                    transform: rotate(45deg) translate(20%, -48%);
+                }
+                .bottom-bun  {
+                    transform: rotate(-45deg) translate(-48%, -20%);
+                }
+            }
+
+            .nav--links {
+                display: flex;
+            }
+        }
+
+        .logo {
+            max-width: 160px;
+            display: flex;
+            align-items: center; // [Tip] always set `align-items` on flex parents with images as direct children to prevent image stretching. We're using an svg so it's not an issue here, but it's good to know.
+
+            img {
+                object-fit: cover;
+                min-width: 143px;
+                min-height: 28px;
+            }
+        }
+
+        .nav--links {
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: $spacing__l 0;
+            margin-bottom: $spacing__l;
+            border-bottom: 1px solid $color__n-60;
+
+            > a {
+                cursor: pointer;
+                text-decoration: none;
+                width: fit-content;
+                margin: $spacing__s auto $spacing__s 0;
+                color: $color__white;
+                display: block;
+                word-break: normal;
+                &:hover {
+                    color: $color__blurple__text--light;
+                }
+            }
+
+            .nav--buttons {
+                width: 100%;
+                margin-top: 1.5rem;
+
+                .nav--dropdown--user {
+
+                    &--trigger {
+                        background: transparent;
+
+                        .c4dropdown--icon {
+                            color: $color__white;
+                        }
+                    }
+                }
+
+                .nav--login--mobile, .nav--user--mobile {
+                    border-top: 1px solid $color__n-60;
+                    padding-top: 1.5rem;
+
+                    .c4dropdown--button {
+                        cursor: pointer;
+                        width: fit-content;
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                        gap: 0.75rem;
+                        color: $color__blurple__text;
+                        justify-content: flex-start;
+                        background: transparent;
+                        border: 0px;
+                        padding: 0px;
+                        margin-bottom: 0.5rem;
+                        font-family: $font__default;
+                        font-size: 1rem;
+                        line-height: 1.5rem;
+                        font-weight: normal;
+                        text-decoration: none;
+
+                        &:last-child {
+                            margin-top: -0.2rem;
+                            margin-bottom: 0px;
+                        }
+
+                        @include accessible-animation {
+                            transition: color 0.2s ease-in-out;
+                        }
+
+                        &:hover {
+                            color: $color__blurple__text--light;
+                        }
+                    }
+
+                    @include breakpoint("m") {
+                        display: none;
+                    }
+                }
+
+                .nav--dropdown--user {
+                    display: none;
+
+                    @include breakpoint("m") {
+                        display: block;
+                    }
+                }
+
+                .nav--dropdown--login {
+                    display: none;
+
+                    @include breakpoint("m") {
+                        display: block;
+                        background: transparent;
+                        border: 2px solid $color__button-blurple;
+                        border-radius: $border-radius__m;
+
+                        padding: $spacing__xs $spacing__s;
+
+                        &:hover {
+                            background: $color__button-blurple;
+                        }
+
+                        &--trigger {
+                            font-family: $font__default;
+                            font-weight: 500 !important;
+                            text-decoration: none !important;
+                            text-align: center;
+                            background: transparent;
+                            color: $color__white;
+                            padding: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        @include breakpoint("m") {
+            flex-wrap: nowrap;
+
+            .menu--hamburger {
+                display: none;
+                height: 25px;
+            }
+
+            .nav--links {
+                display: flex;
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+                padding: 0;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 1rem;
+
+                > a {
+                    width: auto;
+                }
+
+                .nav--buttons {
+                    width: unset;
+                    margin-top: unset;
+                }
+            }
+        }
+    }
+}

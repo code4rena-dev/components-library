@@ -10,7 +10,7 @@ export interface ContestTileProps {
   /** An html `id` for the contest tile's wrapping div. */
   htmlId?: string;
   /** Style variant to be applied to rendered component. */
-  variant: ContestTileVariant;
+  variant?: ContestTileVariant;
   /** String indicating required access for viewing contest. */
   codeAccess: string;
   /** Boolean indicating certification status of logged in user. Required for viewing certain contests. */
@@ -33,8 +33,6 @@ export interface ContestTileProps {
   description: string;
   /** Reward pool for the current contest. */
   amount: string;
-  /** Active status of the current contest. */
-  status: Status;
   /** Date string for the current contest's start date. */
   startDate: string;
   /** Date string for the current contest's end date. */
@@ -51,15 +49,9 @@ export interface ContestSchedule {
   botRaceEnd: Date;
   formattedStart: string;
   formattedEnd: string;
+  timeZone: string;
   formattedBotRaceEnd: string;
   formattedDuration: string;
-}
-
-export interface DropdownLink {
-  label: string;
-  href: string;
-  external?: boolean;
-  ariaLabel?: string;
 }
 
 export interface CountdownProps {
@@ -67,14 +59,4 @@ export interface CountdownProps {
   end: string;
   text?: string | ReactNode;
   updateContestStatus: () => void;
-}
-
-export interface DropdownProps {
-  wrapperClass?: string;
-  triggerButtonClass?: string;
-  openOnHover: boolean;
-  triggerButton: string | ReactNode;
-  triggerAriaLabel?: string;
-  hideDownArrow?: boolean;
-  children: ReactNode;
 }

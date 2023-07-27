@@ -21,6 +21,7 @@ export const SampleComponent: Story = (args) => (
 SampleComponent.parameters = {
   docs: {
     canvas: { sourceState: "shown" },
+    story: { height: "400px" },
   },
 };
 SampleComponent.args = {
@@ -30,7 +31,7 @@ SampleComponent.args = {
   /** @ts-ignore */
   variant: "DARK",
   contestId: 321,
-  sponsorImage: "/apple-touch-icon.png",
+  sponsorImage: "/logos/apple-touch-icon.png",
   sponsorUrl: "https://twitter.com/axelarcore",
   contestUrl: "https://code4rena.com/contests/2023-07-axelar-network#top",
   contestRepo: "https://github.com/code-423n4/2023-07-axelar",
@@ -38,8 +39,6 @@ SampleComponent.args = {
   title: "Axelar Network",
   description: "Decentralized interoperability network.",
   amount: "$80,000 USDC",
-  /** @ts-ignore */
-  status: "LIVE",
   startDate: "2023-07-12T18:00:00Z",
   endDate: "2023-07-21T18:00:00Z",
 };

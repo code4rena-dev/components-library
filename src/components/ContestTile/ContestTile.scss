@@ -31,7 +31,6 @@
         }
 
         &--contestredirect {
-            width: calc(100% - 97px);
             border-top: 1px solid hsla(0,0%,100%,.4);
             color: $color__white;
 
@@ -43,7 +42,7 @@
             border-left: 1px solid hsla(0,0%,100%,.4);
             border-top: 1px solid hsla(0,0%,100%,.4);
 
-            button {
+            &--trigger {
                 &:hover {
                     background: hsla(0,0%,100%,.1);
                 }
@@ -52,6 +51,9 @@
 
         @include breakpoint("m") {
             &--timer {
+                border-right: 1px solid hsla(0,0%,100%,.4);
+            }
+            &--status.ended {
                 border-right: 1px solid hsla(0,0%,100%,.4);
             }
             &--contestredirect {
@@ -190,128 +192,50 @@
             padding: $spacing__s $spacing__m;
         }
         &--status {
+            justify-content: flex-start;
             width: max-content;
             border-right: 1px solid $color__n-60;
+
+            &.ended {
+                border-right: 0px;
+            }
         }
         &--timer {
             width:  100%;
             margin: 0px;
         }
+        &--options {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+
         &--contestredirect {
-            width: calc(100% - 97px);
+            text-align: center;
+            width: 100%;
             border-top: 1px solid $color__n-60;
             text-decoration: none;
             color: $color__white;
-
-            &.certified--invisible {
-                width: 100%;
-            }
 
             &:hover {
                 background: $color__n-80;
             }
         }
         &--dropdown {
-            position: relative;
             border-left: 1px solid $color__n-60;
             border-top: 1px solid $color__n-60;
 
-            button {
-                height: 100%;
-                padding: 0rem $spacing__m;
-                background: none;
-                border: none;
-                color: $color__white;
-                cursor: pointer;
-
-                img {
-                    height: 100%;
-                }
-
-                &:hover {
-                    background: $color__n-80;
-                }
-            }
-
             &--trigger {
-              .dropdown--icon {
-                fill: currentColor;
-                display: inline-flex;
-                padding: 0;
-                margin-left: 5px;
-                height: 100%;
+               height: 100%;
+               padding: 0rem $spacing__m;
+               background: none;
+               border: none;
+               color: $color__white;
+               cursor: pointer;
 
-                &:hover {
-                  box-shadow: none;
-                }
-              
-                &.dropdown--open {
-                  transform: rotate(-180deg);
-                  transition: transform 150ms ease;
-                }
-              }
-            }
-
-            .dropdown--listcontainer {
-              visibility: hidden;
-              position: absolute;
-              top: 100%;
-              right: 0;
-              transition: all 300ms;
-              width: 260px;
-              background: transparent;
-              padding-top: $spacing__s;
-              transform: translateY(-15px);
-              opacity: 0;
-              display: flex;
-              flex-direction: column;
-              align-items: flex-start;
-            
-              &.dropdown--open {
-                visibility: visible;
-                opacity: 1;
-                z-index: 1;
-                transform: translateY(0);
-              }
-
-              .dropdown--list {
-                background: $color__n-90;
-                border-radius: 6px;
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                border: 1px solid $color__n-50;
-
-                .dropdown--button {
-                  padding: $spacing__m;
-                  border-bottom: 1px solid $color__n-60;
-                  color: $color__white;
-                  background: $color__n-90;
-                  text-align: left;
-                  margin: 0;
-                  padding: 15px;
-                  display: flex;
-                  align-items: center;
-                  font-weight: normal;
-                  text-transform: none;
-                  text-decoration: none;
-
-                  &[target="_blank"]::after {
-                    content: "↗";
-                    padding-left: 5px;
-                  }
-                
-                  &:hover {
-                    background: $color__n-80;
-                    color: white;
-                  }
-                }
-              }
-            
-              @media screen and (min-width: 960px) {
-                left: unset;
-                right: 0;
-              }
+               &:hover {
+                   background: $color__n-80;
+               }
             }
         }
 
@@ -321,11 +245,21 @@
             &--timer {
                 border-right: 1px solid $color__n-60;
             }
+
+            &--status.ended {
+                width: 100%;
+                border-right: 1px solid $color__n-60;
+            }
+
+            &--options {
+                width: fit-content;
+            }
+
             &--contestredirect {
                 width: fit-content;
                 white-space: nowrap;
                 border-top: none;
-                &.certified--invisible {
+                &.certified--invisible,&.dropdown--invisible {
                     width: fit-content;
                 }
             }

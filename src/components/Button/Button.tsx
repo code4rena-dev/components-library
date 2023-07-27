@@ -47,7 +47,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return href != null && href.length ? (
     <a
-      aria-label={`${label} (opens in new window)`}
+      aria-label={`${label}${external ? " (opens in new window)" : ""}`}
       id={id ?? undefined}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer noopener" : undefined}

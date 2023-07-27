@@ -7,12 +7,16 @@ import {
   ContestTileProps,
   ContestTileVariant,
   CountdownProps,
-  DropdownLink,
-  DropdownProps,
 } from "./ContestTile.types";
 import { getDates } from "../../utils/time";
 import { Status } from "../ContestStatus/ContestStatus.types";
-import { formatDistanceToNow, isBefore } from "date-fns";
+import {
+  formatDistanceToNow,
+  formatDistanceToNowStrict,
+  isBefore,
+} from "date-fns";
+import { DropdownLink } from "../Dropdown/Dropdown.types";
+import Dropdown from "../Dropdown/Dropdown";
 
 /**
  * Contest tile time tracker displayed right next to the contest status in the contest tile footer.
@@ -28,6 +32,8 @@ const Countdown = ({
   text,
   updateContestStatus,
 }: CountdownProps) => {
+  const secondsInDay = 86400;
+  const [lessThan24h, setLessThan24h] = useState(false);
   const [contestTimer, setContestTimer] = useState<ContestSchedule>();
 
   const getCountdownTarget = (schedule: ContestSchedule): Date => {
@@ -37,104 +43,89 @@ const Countdown = ({
     return schedule.start;
   };
 
+  /**
+   * Formats the remaining time to display in Hours:Minutes:Seconds whenever there is less than a day remaining for a contest.
+   *
+   * @param secondsText - Text string returned from formatDistanceToNowStrict method from date-fns with the unit option set to seconds.
+   *
+   * @returns a formatted date string.
+   */
+  function formatSeconds(secondsText: string) {
+    let secsToNum = Number(secondsText.split(" ")[0]);
+    const hours = Math.floor(secsToNum / 3600);
+    secsToNum %= 3600;
+    const minutes = Math.floor(secsToNum / 60);
+    secsToNum %= 60;
+
+    return `${hours < 10 ? `0${hours}` : hours}:${
+      minutes < 10 ? `0${minutes}` : minutes
+    }:${secsToNum < 10 ? `0${secsToNum}` : secsToNum}`;
+  }
+
   const countDown = useCallback(() => {
     const newTimer = getDates(start, end);
     const target = getCountdownTarget(newTimer);
-    return formatDistanceToNow(target, { includeSeconds: true });
+    // Get total number of seconds remaining
+    const totalSeconds = formatDistanceToNowStrict(target, {
+      unit: "second",
+    }).split(" ")[0];
+    if (Number(totalSeconds) > secondsInDay) {
+      return formatDistanceToNow(target, { includeSeconds: true });
+    } else {
+      setLessThan24h(true);
+      return formatSeconds(
+        formatDistanceToNowStrict(target, { unit: "second" })
+      );
+    }
   }, [start, end]);
 
   const [formattedCountdown, setFormattedCountdown] = useState(countDown);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      const newTimer = getDates(start, end);
-      if (
-        contestTimer &&
-        (contestTimer.contestStatus !== newTimer.contestStatus ||
-          contestTimer.botRaceStatus !== newTimer.botRaceStatus)
-      ) {
-        setContestTimer(newTimer);
-        if (updateContestStatus) {
-          updateContestStatus();
+    const timer = setInterval(
+      () => {
+        const newTimer = getDates(start, end);
+        if (
+          contestTimer &&
+          (contestTimer.contestStatus !== newTimer.contestStatus ||
+            contestTimer.botRaceStatus !== newTimer.botRaceStatus)
+        ) {
+          setContestTimer(newTimer);
+          if (updateContestStatus) {
+            updateContestStatus();
+          }
         }
-      }
-      if (newTimer.contestStatus === Status.ENDED) {
-        clearInterval(timer);
-        return;
-      }
-      const target = getCountdownTarget(newTimer);
-
-      setFormattedCountdown(
-        formatDistanceToNow(target, { includeSeconds: true })
-      );
-    }, 10000); // only up to 10 sec precision
+        if (newTimer.contestStatus === Status.ENDED) {
+          clearInterval(timer);
+          return;
+        }
+        const target = getCountdownTarget(newTimer);
+        // Get total number of seconds remaining
+        const totalSeconds = formatDistanceToNowStrict(target, {
+          unit: "second",
+        }).split(" ")[0];
+        // If more than 24 hours are remaining, show days remaining
+        if (Number(totalSeconds) > secondsInDay) {
+          setFormattedCountdown(
+            formatDistanceToNow(target, { includeSeconds: true })
+          );
+        } else {
+          // If less than 24 hours are remaining, update countdown every second
+          setLessThan24h(true);
+          setFormattedCountdown(
+            formatSeconds(formatDistanceToNowStrict(target, { unit: "second" }))
+          );
+        }
+      },
+      lessThan24h ? 1000 : 10000
+    ); // 10 second precision if more than 1 day remaining, else 1 second precision`
     return () => clearInterval(timer);
-  }, [start, end, contestTimer, updateContestStatus]);
+  }, [lessThan24h, start, end, contestTimer, updateContestStatus]);
 
   return (
     <div className="countdown">
       {text && text}
       <span>{formattedCountdown}</span>
-    </div>
-  );
-};
-
-/**
- * Dropdown component to display additional options `onHover` of the button generated from the `triggerButton` prop.
- *
- * @param wrapperClass - Additional classes for the dropdown's wrapping div element.
- * @param triggerButtonClass - Additional classes for the dropdown's triggering button.
- * @param openOnHover - Boolean indicating whether or not hovering the trigger button will display the dropdown.
- * @param triggerButton - Children to be wrapped by a `button` element.
- * @param triggerAriaLabel - Accessibility label for the dropdown's trigger button.
- * @param hideDownArrow - Boolean indicating whether or not an arrow indicator should be displayed on the trigger button.
- * @param children - Children to be displayed inside the dropdown.
- */
-const Dropdown = ({
-  wrapperClass,
-  triggerButtonClass,
-  openOnHover,
-  triggerButton,
-  triggerAriaLabel,
-  hideDownArrow,
-  children,
-}: DropdownProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div
-      onMouseEnter={openOnHover ? () => setIsOpen(true) : undefined}
-      onMouseLeave={openOnHover ? () => setIsOpen(false) : undefined}
-      className={clsx("tile--footer--dropdown", wrapperClass && wrapperClass)}
-    >
-      <button
-        aria-label={triggerAriaLabel ?? undefined}
-        onClick={() => setIsOpen(!isOpen)}
-        onTouchStart={() => setIsOpen(!isOpen)}
-        className={clsx(
-          "tile--footer--dropdown--trigger",
-          triggerButtonClass && triggerButtonClass
-        )}
-      >
-        {triggerButton}
-        {!hideDownArrow && (
-          <svg
-            height="20"
-            width="20"
-            viewBox="0 0 20 20"
-            aria-hidden="true"
-            focusable="false"
-            className={clsx("dropdown--icon", isOpen && "dropdown--open")}
-          >
-            <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
-          </svg>
-        )}
-      </button>
-      <div
-        className={clsx(isOpen && "dropdown--open", "dropdown--listcontainer")}
-      >
-        <div className={"dropdown--list"}>{children}</div>
-      </div>
     </div>
   );
 };
@@ -179,27 +170,21 @@ const ContestTile: React.FC<ContestTileProps> = ({
   title,
   description,
   amount,
-  status,
   startDate,
   endDate,
   updateContestStatus,
 }) => {
-  const styling = clsx({
-    c4contesttile: true,
-    "tile--light": variant === ContestTileVariant.LIGHT,
-    "tile--dark": variant === ContestTileVariant.DARK,
-  });
-
-  const footerOptionsStyling = clsx({
-    "certified--visible": codeAccess === "certified" && isUserCertified,
-    "certified--invisible": codeAccess === "certified" && !isUserCertified,
-  });
-
   const [canViewContest, setCanViewContest] = useState(false);
   const [contestTimelineObject, setContestTimelineObject] =
     useState<ContestSchedule>(getDates(startDate, endDate));
   const [dropdownLinks, setDropdownLinks] = useState<DropdownLink[]>([]);
   const [hasBotRace, setHasBotRace] = useState(false);
+
+  const wrapperStyling = clsx({
+    c4contesttile: true,
+    "tile--light": variant === ContestTileVariant.LIGHT,
+    "tile--dark": variant === ContestTileVariant.DARK,
+  });
 
   useEffect(() => {
     setHasBotRace(codeAccess === "public" && contestId !== 252);
@@ -280,7 +265,7 @@ const ContestTile: React.FC<ContestTileProps> = ({
   }, [startDate, endDate, updateContestStatus]);
 
   return (
-    <div id={htmlId ?? undefined} className={styling}>
+    <div id={htmlId ?? undefined} className={wrapperStyling}>
       <div className="tile--body">
         <header>
           {sponsorUrl ? (
@@ -309,7 +294,8 @@ const ContestTile: React.FC<ContestTileProps> = ({
           <div>
             <small className="tile--body--period">
               {contestTimelineObject.formattedStart} -{" "}
-              {contestTimelineObject.formattedEnd}
+              {contestTimelineObject.formattedEnd}{" "}
+              {contestTimelineObject.timeZone}
             </small>
             <h2 className="tile--body--title">
               <a href={`${contestUrl}#top`}>{title}</a>
@@ -339,70 +325,89 @@ const ContestTile: React.FC<ContestTileProps> = ({
       </div>
       <footer className="tile--footer">
         <div className="tile--footer--details">
-          <ContestStatus className="tile--footer--status" status={status} />
-          <p className="tile--footer--timer">
-            <Countdown
-              start={startDate}
-              end={endDate}
-              updateContestStatus={updateContestTileStatus}
-              text={
-                contestTimelineObject.contestStatus === Status.UPCOMING
-                  ? "Starts in "
-                  : "Ends in "
-              }
-            />
-          </p>
-        </div>
-        <a
-          className={`tile--footer--contestredirect ${footerOptionsStyling}`}
-          aria-label="View competition"
-          href={`${contestUrl}#`}
-        >
-          {!findingsRepo || findingsRepo === "" ? "Preview" : "View"}{" "}
-          competition
-        </a>
-        {dropdownLinks.length > 0 && (
-          <Dropdown
-            triggerButton={
-              <img
-                src="/icons/ellipsis.svg"
-                alt="More options"
-                width={32}
-                height={32}
+          <ContestStatus
+            className={`tile--footer--status ${clsx(
+              contestTimelineObject.contestStatus === Status.ENDED && "ended"
+            )}`}
+            status={contestTimelineObject.contestStatus}
+          />
+          {contestTimelineObject.contestStatus !== Status.ENDED && (
+            <p className="tile--footer--timer">
+              <Countdown
+                start={startDate}
+                end={endDate}
+                updateContestStatus={updateContestTileStatus}
+                text={
+                  contestTimelineObject.contestStatus === Status.UPCOMING
+                    ? "Starts in "
+                    : "Ends in "
+                }
               />
-            }
-            triggerAriaLabel="See more contest options"
-            hideDownArrow={true}
-            openOnHover={true}
+            </p>
+          )}
+        </div>
+        <div className="tile--footer--options">
+          <a
+            className="tile--footer--contestredirect"
+            aria-label="View competition"
+            href={`${contestUrl}#`}
           >
-            {dropdownLinks.map((link) =>
-              link.external ? (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="dropdown--button"
-                  aria-label={link.ariaLabel ?? undefined}
-                >
-                  {link.label}
-                </a>
-              ) : (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="dropdown--button"
-                  aria-label={link.ariaLabel ?? undefined}
-                >
-                  {link.label}
-                </a>
-              )
-            )}
-          </Dropdown>
-        )}
+            {!findingsRepo || findingsRepo === "" ? "Preview" : "View"}{" "}
+            competition
+          </a>
+          {dropdownLinks.length > 0 && (
+            <Dropdown
+              triggerButton={
+                <img
+                  src="/icons/ellipsis.svg"
+                  alt="Options icon"
+                  width={32}
+                  height={32}
+                />
+              }
+              wrapperClass="tile--footer--dropdown"
+              triggerButtonClass="tile--footer--dropdown--trigger"
+              triggerAriaLabel="See more contest options"
+              hideDownArrow={true}
+              openOnHover={true}
+            >
+              {dropdownLinks?.map((link) =>
+                link.external ? (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label={
+                      link.ariaLabel ?? `${link.label} (opens in new window)`
+                    }
+                    className="c4dropdown--button"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <a
+                    href={link.href}
+                    aria-label={link.ariaLabel ?? link.label}
+                    className="c4dropdown--button"
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
+            </Dropdown>
+          )}
+        </div>
       </footer>
     </div>
   );
+};
+
+ContestTile.defaultProps = {
+  htmlId: "",
+  /* @ts-ignore */
+  variant: "DARK",
+  sponsorImage: undefined,
+  sponsorUrl: undefined,
 };
 
 export default ContestTile;
