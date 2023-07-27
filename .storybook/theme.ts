@@ -4,7 +4,7 @@ export default create({
   base: "dark",
   brandUrl: "https://code4rena.com",
   brandTitle: "Code4rena Storybook",
-  brandImage: "/c4-og-banner.png",
+  brandImage: "/logos/c4-logo.svg",
   brandTarget: "_blank",
 
   // UI

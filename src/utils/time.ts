@@ -1,6 +1,7 @@
 import { addHours, format, formatDistance, isAfter, isBefore } from "date-fns";
 import { ContestSchedule } from "../components/ContestTile/ContestTile.types";
 import { Status } from "../components/ContestStatus/ContestStatus.types";
+import { DateTime } from "luxon";
 
 function getContestStatuses(
   start: Date,
@@ -42,6 +43,7 @@ function getContestStatuses(
 const getDates = (start: string, end: string): ContestSchedule => {
   const startDate = new Date(start);
   const endDate = new Date(end);
+  const timeZone = DateTime.local().toFormat("ZZZZ");
 
   const botRaceEnd = addHours(new Date(startDate), 1);
   const { contestStatus, botRaceStatus } = getContestStatuses(
@@ -58,6 +60,7 @@ const getDates = (start: string, end: string): ContestSchedule => {
     botRaceEnd,
     formattedEnd: format(endDate, "d MMM h:mm a"),
     formattedStart: format(startDate, "d MMM h:mm a"),
+    timeZone: timeZone,
     formattedBotRaceEnd: format(botRaceEnd, "d MMMM h:mm a"),
     formattedDuration: formatDistance(startDate, endDate),
   };

@@ -1,0 +1,121 @@
+@import "../../styles/variables";
+
+.c4dropdown {
+    position: relative;
+    
+    &--default--styles {
+        border-radius: $border-radius__m;
+        border: none;
+        cursor: pointer;
+
+        &--trigger {
+            background-color: $color__n-90;
+            padding: $spacing__xs;
+            color: $color__white;
+            border-radius: $border-radius__m;
+
+            &:hover {
+                background: $color__n-80;
+            }
+        }
+    }
+
+    &--trigger {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      cursor: pointer;
+      
+      .c4dropdown--icon {
+        fill: currentColor;
+        display: inline-flex;
+        padding: 0;
+        margin-left: 5px;
+        height: 100%;
+
+        &:hover {
+          box-shadow: none;
+        }
+      
+        &.c4dropdown--open {
+          transform: rotate(-180deg);
+          transition: transform 150ms ease;
+        }
+      }
+    }
+
+    &--listcontainer {
+      visibility: hidden;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      transition: all 300ms;
+      width: 260px;
+      background: transparent;
+      padding-top: $spacing__s;
+      transform: translateY(-15px);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    
+      &.c4dropdown--open {
+        visibility: visible;
+        opacity: 1;
+        z-index: 1;
+        transform: translateY(0);
+      }
+
+      .c4dropdown--list {
+        background: $color__n-90;
+        border-radius: 6px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid $color__n-50;
+        overflow: hidden;
+
+        .c4dropdown--button {
+          width: 100%;
+          cursor: pointer;
+          padding: $spacing__m;
+          border: 0px;
+          border-bottom: 1px solid $color__n-60;
+          color: $color__white;
+          background: $color__n-90;
+          text-align: left;
+          margin: 0;
+          padding: 15px;
+          display: flex;
+          align-items: center;
+          font-family: $font__default;
+          font-size: 1rem;
+          line-height: 1.5rem;
+          font-weight: normal;
+          text-transform: none;
+          text-decoration: none;
+          gap: 0.75rem;
+
+          &:last-child {
+            border-bottom: 0px;
+          }
+
+          &[target="_blank"]::after {
+            content: "↗";
+            padding-left: 5px;
+          }
+        
+          &:hover {
+            background: $color__n-80;
+            color: white;
+          }
+        }
+      }
+    
+      @media screen and (min-width: 960px) {
+        left: unset;
+        right: 0;
+      }
+    }
+}

@@ -8,6 +8,7 @@ const wrapperStyle = {
   flexWrap: "wrap",
   justifyContent: "center",
   alignItems: "center",
+  padding: "0rem 1rem",
 };
 
 const preview: Preview = {
