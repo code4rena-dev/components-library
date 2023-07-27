@@ -1,0 +1,7 @@
+dist
+node_modules
+
+# Jest test coverage results directory
+coverage
+# Storybook build directory
+storybook-static
