@@ -14,7 +14,7 @@ yarn storybook
 ## Testing
 For testing, we are using [Jest](https://jestjs.io/docs/getting-started) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/).
 
-To maintain the standards, test files should be named **componentName.test.tsx** and be placed inside the component folder for which the test relates to.
+To maintain the standards, test files should be named `componentName.test.tsx` and be placed inside the component folder for which the test relates to.
 
 
 ## Publishing to NPM
