@@ -5,3 +5,6 @@ node_modules
 coverage
 # Storybook build directory
 storybook-static
+# Prefer npm to yarn
+yarn.lock
+yarn-error.log
