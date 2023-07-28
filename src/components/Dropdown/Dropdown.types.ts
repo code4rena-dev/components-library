@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 
 export interface DropdownProps {
+  /** HTML element identifier */
+  id?: string;
   /** Custom classname(s) for the rendered component's wrapping div element. */
   wrapperClass?: string;
   /** Custom classname(s) for the rendered component's trigger button. */
@@ -13,7 +15,7 @@ export interface DropdownProps {
   triggerAriaLabel?: string;
   /** Boolean determining whether the arrow indicator icon is present or not. */
   hideDownArrow?: boolean;
-  /** Elements to be rendered inside the dropdown. */
+  /** Elements to be rendered inside the dropdown. Child elements with the className `c4dropdown--button` will take on the default styling provided by the component. */
   children: ReactNode;
 }
 

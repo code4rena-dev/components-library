@@ -164,6 +164,8 @@ const Login = ({
  * @param navLinks - List of links to be rendered in the navigation bar. Array of object type `NavigationLink` which accepts the properties `label: string`, `href: string`, `external: boolean`.
  */
 const NavBar: React.FC<NavBarProps> = ({
+  id,
+  className,
   isLoggedIn,
   userImage,
   username,
@@ -181,7 +183,10 @@ const NavBar: React.FC<NavBarProps> = ({
 
   return (
     <>
-      <header>
+      <header
+        id={id ? id : undefined}
+        className={clsx(className && className, "nav--wrapper")}
+      >
         <a className="visually-hidden focusable" href="#skip-to-main">
           Skip navigation
         </a>
@@ -270,7 +275,10 @@ const NavBar: React.FC<NavBarProps> = ({
 };
 
 NavBar.defaultProps = {
+  isLoggedIn: false,
   hideConnectWalletDropdown: false,
   navLinks: [],
+  username: undefined,
+  userImage: "/",
 };
 export default NavBar;

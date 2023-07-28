@@ -28,7 +28,9 @@ SampleComponent.parameters = {
   },
 };
 SampleComponent.args = {
-  isLoggedIn: true,
+  id: "",
+  className: "",
+  isLoggedIn: false,
   hideConnectWalletDropdown: false,
   userImage: "/logos/apple-touch-icon.png",
   username: "TestUser",

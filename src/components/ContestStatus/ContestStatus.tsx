@@ -12,7 +12,7 @@ import "./ContestStatus.scss";
  *
  * @param status - Status indicator for the current contest. Enum of type {@link Status}.
  * @param className - String of custom classes to extend the default styling of the component.
- * @param id - Element identifier.
+ * @param id - HTML element identifier.
  */
 const ContestStatus: React.FC<ContestStatusProps> = ({
   status,

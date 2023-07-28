@@ -20,7 +20,7 @@ import "./Alert.scss";
  * @param redirectUrl - Relative path or absolute url to be navigated to.
  * @param variant - Style variant to be applied to rendered component.
  * @param className - String of custom classes to extend the default styling of the component.
- * @param id - Element identifier
+ * @param id - HTML element identifier
  */
 const Alert: React.FC<AlertProps> = ({
   title,

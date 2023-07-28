@@ -41,4 +41,8 @@ export interface NavBarProps {
   hideConnectWalletDropdown: boolean;
   /** List of links to be rendered in the navigation bar. Array of object type `NavigationLink` which accepts the properties `label: string`, `href: string`, `external: boolean`. */
   navLinks?: NavigationLink[];
+  /** String of custom classes to extend the default styling of the component. */
+  className?: string;
+  /** HTML element identifier */
+  id?: string;
 }

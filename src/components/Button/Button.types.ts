@@ -39,6 +39,6 @@ export interface ButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   /** String of custom classes to extend the default styling of the component. */
   className?: string;
-  /** Element identifier */
+  /** HTML element identifier */
   id?: string;
 }

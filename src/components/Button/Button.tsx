@@ -22,7 +22,7 @@ import "./Button.scss";
  * @param external - Determines whether navigation should occur on the same page or in a new tab.
  * @param onClick - Function to be triggered on button click. Does not apply to links.
  * @param className - String of custom classes to extend the default styling of the component.
- * @param id - Element identifier.
+ * @param id - HTML element identifier.
  */
 const Button: React.FC<ButtonProps> = ({
   label,
@@ -93,7 +93,7 @@ Button.defaultProps = {
   size: "NARROW",
   href: "",
   external: false,
-  onClick: () => null,
+  onClick: undefined,
   className: "",
   id: "",
 };
