@@ -9,6 +9,6 @@ export interface ContestStatusProps {
   status?: Status;
   /** String of custom classes to extend the default styling of the component. */
   className?: string;
-  /** Element identifier */
+  /** HTML element identifier */
   id?: string;
 }

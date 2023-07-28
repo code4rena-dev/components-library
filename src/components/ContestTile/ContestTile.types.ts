@@ -38,7 +38,7 @@ export interface ContestTileProps {
   /** Date string for the current contest's end date. */
   endDate: string;
   /** Callback function to be triggered on contest time/status changes. */
-  updateContestStatus: undefined | (() => void);
+  updateContestStatus?: () => void;
 }
 
 export interface ContestSchedule {

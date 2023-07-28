@@ -19,7 +19,7 @@ import "./Tag.scss";
  * @param size - Standard button size options.
  * @param iconLeft - Relative path or absolute url to an icon/image. Renders icon to the left of label.
  * @param className - String of custom classes to extend the default styling of the component.
- * @param id - Element identifier.
+ * @param id - HTML element identifier.
  */
 const Tag: React.FC<TagProps> = ({
   variant,

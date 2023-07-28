@@ -69,6 +69,14 @@
 }
 
 .c4contesttile, .tile--dark {
+    a, button {
+        &:focus {
+            outline: none;
+            border: 1px solid $color__white !important;
+            border-radius: $border-radius__base;
+        }
+    }
+
     max-width: 1036px;
     width: 100%;
     background: $color__n-85;

@@ -23,8 +23,9 @@ SampleComponent.parameters = {
   },
 };
 SampleComponent.args = {
-  wrapperClass: "c4dropdown--default--styles",
-  triggerButtonClass: "c4dropdown--default--styles--trigger",
+  id: "",
+  wrapperClass: "",
+  triggerButtonClass: "",
   openOnHover: true,
   triggerAriaLabel: "See more options",
   hideDownArrow: true,
@@ -32,11 +33,11 @@ SampleComponent.args = {
     <img src="/icons/ellipsis.svg" alt="Options icon" width={32} height={32} />
   ),
   children: (
-    <div>
+    <>
       <a
         href="https://www.google.com"
         target="_blank"
-        rel="noreferrer"
+        rel="noreferrer noopener"
         className="c4dropdown--button"
         aria-label="Google (opens in new window)"
       >
@@ -45,6 +46,6 @@ SampleComponent.args = {
       <a href="/" aria-label="Test" className="c4dropdown--button">
         Test Link
       </a>
-    </div>
+    </>
   ),
 };

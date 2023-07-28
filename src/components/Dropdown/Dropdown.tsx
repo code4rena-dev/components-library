@@ -15,6 +15,7 @@ import "./Dropdown.scss";
  * @param children - Children to be displayed inside the dropdown.
  */
 const Dropdown = ({
+  id,
   wrapperClass,
   triggerButtonClass,
   openOnHover,
@@ -27,6 +28,7 @@ const Dropdown = ({
 
   return (
     <div
+      id={id ? id : undefined}
       onMouseEnter={openOnHover ? () => setIsOpen(true) : undefined}
       onMouseLeave={openOnHover ? () => setIsOpen(false) : undefined}
       className={clsx("c4dropdown", wrapperClass && wrapperClass)}
@@ -67,7 +69,6 @@ const Dropdown = ({
 };
 
 Dropdown.defaultProps = {
-  links: [],
   wrapperClass: "",
   triggerButtonClass: "",
   triggerAriaLabel: "See more options",

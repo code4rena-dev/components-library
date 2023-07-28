@@ -17,10 +17,15 @@ const meta: Meta<typeof Button> = {
   tags: ["autodocs"],
   argTypes: {
     variant: { control: "select" },
-    type: { control: "select" },
+    type: { control: "select", if: { arg: "href", truthy: false } },
     size: { control: "select" },
     onClick: {
       control: "function",
+      action: "clicked",
+      if: { arg: "href", truthy: false },
+    },
+    disabled: {
+      if: { arg: "href", truthy: false },
     },
   },
 };
@@ -28,7 +33,9 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
-export const SampleComponent: Story = (args) => <Button {...args} />;
+export const SampleComponent: Story = (args) => (
+  <Button onClick={() => console.log("Sample Button clicked!")} {...args} />
+);
 SampleComponent.parameters = {
   docs: {
     canvas: { sourceState: "shown" },
@@ -44,7 +51,6 @@ SampleComponent.args = {
   iconLeft: "",
   iconRight: "/icons/edit.svg",
   size: ButtonSize.NARROW,
-  onClick: () => console.log("Sample button clicked!"),
   className: "",
   id: "",
 };
@@ -67,19 +73,19 @@ export const Links: Story = {
       <div style={wrapperStyle}>
         <Button
           variant={ButtonVariant.PRIMARY}
-          label="Internal Link"
+          label="Primary Internal Link"
           href="#internal-test"
         />
         <Button
           variant={ButtonVariant.PRIMARY}
           external
-          label="External Link"
+          label="Primary External Link"
           href="https://google.com"
         />
         <Button
           variant={ButtonVariant.PRIMARY}
           href="#internal-test"
-          label="Link W/ Icons"
+          label="Primary Link W/ Icons"
           iconLeft="/icons/edit.svg"
           iconRight="/icons/edit.svg"
         />
@@ -89,25 +95,28 @@ export const Links: Story = {
       <div style={wrapperStyle}>
         <Button
           variant={ButtonVariant.SECONDARY}
-          label="Internal Link"
+          label="Secondary Internal Link"
           href="#internal-test"
         />
         <Button
           variant={ButtonVariant.SECONDARY}
           external
-          label="External Link"
+          label="Secondary External Link"
           href="https://google.com"
         />
         <Button
           variant={ButtonVariant.SECONDARY}
           href="#internal-test"
-          label="Link W/ Icons"
+          label="Secondary Link W/ Icons"
           iconLeft="/icons/edit.svg"
           iconRight="/icons/edit.svg"
         />
       </div>
     </>
   ),
+};
+Links.parameters = {
+  controls: { hideNoControlsWarning: true, include: [] },
 };
 
 /**
@@ -130,12 +139,12 @@ export const Buttons: Story = {
         <Button
           variant={ButtonVariant.PRIMARY}
           onClick={() => null}
-          label="Enabled Button"
+          label="Primary Enabled Button"
         />
         <Button
           variant={ButtonVariant.PRIMARY}
           onClick={() => null}
-          label="Button W/ Icons"
+          label="Primary Button W/ Icons"
           iconLeft="/icons/edit.svg"
           iconRight="/icons/edit.svg"
         />
@@ -146,22 +155,25 @@ export const Buttons: Story = {
         <Button
           variant={ButtonVariant.SECONDARY}
           onClick={() => null}
-          label="Enabled Button"
+          label="Secondary Enabled Button"
         />
         <Button
           variant={ButtonVariant.SECONDARY}
           onClick={() => null}
-          label="Button W/ Icons"
+          label="Secondary Button W/ Icons"
           iconLeft="/icons/edit.svg"
           iconRight="/icons/edit.svg"
         />
         <Button
           variant={ButtonVariant.SECONDARY}
           onClick={() => null}
-          label="Disabled Button"
+          label="Primary/Secondary Disabled Button"
           disabled
         />
       </div>
     </>
   ),
+};
+Buttons.parameters = {
+  controls: { hideNoControlsWarning: true, include: [] },
 };

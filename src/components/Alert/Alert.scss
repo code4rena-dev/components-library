@@ -27,6 +27,13 @@
     a {
         display: inline;
         color: $color__blurple__text--light;
+        
+        &:focus {
+            outline: none;
+            padding: 0 $spacing__xs;
+            border: 1px solid $color__white !important;
+            border-radius: $border-radius__base;
+        }
 
         &:after {
             content: " →"
