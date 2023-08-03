@@ -60,5 +60,9 @@
     "ts-node": "^10.9.1",
     "tslib": "^2.6.0",
     "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@storybook/preview-api": "^7.2.0",
+    "react-select": "^5.7.4"
   }
 }
