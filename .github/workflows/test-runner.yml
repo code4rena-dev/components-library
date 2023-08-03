@@ -3,8 +3,11 @@
 
 name: Jest
 on:
+  workflow_dispatch:
   push:
+    branches: [ develop ]
   pull_request:
+    branches: [ develop, main ]
 jobs:
   build-test:
     runs-on: ubuntu-latest
