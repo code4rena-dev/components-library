@@ -1,6 +1,6 @@
 import React from "react";
 import type { Preview } from "@storybook/react";
-import "../src/styles/_global.scss";
+import "../src/styles/base/typography.scss";
 
 const wrapperStyle = {
   display: "flex",

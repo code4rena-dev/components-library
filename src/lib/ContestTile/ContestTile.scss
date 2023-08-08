@@ -1,0 +1,276 @@
+@import "../../styles/variables";
+
+.c4contesttile.tile--light {
+    background: linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,.05));
+    border: 1px solid hsla(0,0%,100%,.4);
+    color: $color__white;
+
+    .tile--body {
+        a.tile--body--logo img, img.tile--body--logo {
+            border: 1px solid hsla(0,0%,100%,.4);
+        }
+
+        &--amount {
+            border-bottom: 1px solid hsla(0,0%,100%,.4);
+        }
+
+        @include breakpoint("m") {
+            &--amount {
+                border-bottom: none;
+            }
+        }
+    }
+
+    .tile--footer {
+        border-top: 1px solid hsla(0,0%,100%,.4);
+
+        &--status {
+            border-right: 1px solid hsla(0,0%,100%,.4);
+        }
+
+        &--contestredirect {
+            border-top: 1px solid hsla(0,0%,100%,.4);
+            color: $color__white;
+
+            &:hover {
+                background: hsla(0,0%,100%,.1);
+            }
+        }
+        &--dropdown {
+            border-left: 1px solid hsla(0,0%,100%,.4);
+            border-top: 1px solid hsla(0,0%,100%,.4);
+
+            &--trigger {
+                &:hover {
+                    background: hsla(0,0%,100%,.1);
+                }
+            }
+        }
+
+        @include breakpoint("m") {
+            &--timer {
+                border-right: 1px solid hsla(0,0%,100%,.4);
+            }
+            &--status.ended {
+                border-right: 1px solid hsla(0,0%,100%,.4);
+            }
+            &--contestredirect {
+                border-top: none;
+                width: fit-content;
+                white-space: nowrap;
+            }
+            &--dropdown {
+                border-top: none;
+            } 
+        }
+    }
+}
+
+.c4contesttile, .tile--dark {
+    width: 100%;
+    background: $color__n-85;
+    border: 1px solid $color__n-60;
+    border-radius: $border-radius__base;
+    color: $color__text;
+
+    a, button {
+        &:focus {
+            outline: none;
+            border: 1px solid $color__white !important;
+            border-radius: $border-radius__base;
+        }
+    }
+
+    .tile--body {
+        padding-top: $spacing__s;
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 0;
+
+        header {
+            padding: $spacing__m;
+            display: flex;
+            flex-direction: column;
+            gap: $spacing__m;
+        }
+
+        a.tile--body--logo {
+            max-width: 90px;
+            max-height: 90px;
+            border-radius: 50%;
+            margin: auto;
+
+            img {
+                object-fit: cover;
+                border: 1px solid $color__n-60;
+                border-radius: 50%;
+                background: white;
+                min-width: 88px;
+                min-height: 88px;
+                max-width: 88px;
+                max-height: 88px;
+            }
+        }
+        img.tile--body--logo {
+            object-fit: cover;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid $color__n-60;
+            min-width: 88px;
+            min-height: 88px;
+            max-width: 88px;
+            max-height: 88px;
+            margin: auto;
+        }
+        &--botracestatus {
+            display: inline-flex;
+            gap: 0.5rem;
+            align-items: center;
+            color: $color__white;
+            font-weight: 700;
+        }
+        &--period, &--description {
+            display: block;
+            text-align: center;
+        }
+        &--title {
+            margin: 0rem;
+            color: $color__white;
+            text-align: center;
+        }
+        &--description {
+            margin: $spacing__s 0rem 0rem;
+        }
+        &--amount {
+            margin: 0rem;
+            border-bottom: 1px solid $color__n-60;
+            padding: 0rem $spacing__m $spacing__s;
+            text-align: right;
+            color: $color__white;
+            font-weight: 500px;
+            font-size: $font-size__copy;
+        }
+
+        @include breakpoint("xxs") {
+            header {
+                flex-direction: row;
+            }
+
+            a.tile--body--logo, img.tile--body--logo {
+                margin: unset;
+            }
+
+            &--period, &--description, &--title {
+                text-align: left;
+            }
+        }
+
+        @include breakpoint("m") {
+            padding: $spacing__m;
+            flex-direction: row;
+            gap: $spacing__xl;
+
+            header {
+                padding: 0rem;
+            }
+            &--amount {
+                border-bottom: none;
+                padding: 0rem;
+            }
+        }
+    }
+
+    .tile--footer {
+        border-top: 1px solid $color__n-60;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        height: fit-content;
+
+        &--details {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        &--status, &--timer, &--contestredirect {
+            padding: $spacing__s $spacing__m;
+        }
+        &--status {
+            justify-content: flex-start;
+            width: max-content;
+            border-right: 1px solid $color__n-60;
+
+            &.ended {
+                border-right: 0px;
+            }
+        }
+        &--timer {
+            width:  100%;
+            margin: 0px;
+        }
+        &--options {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        &--contestredirect {
+            text-align: center;
+            width: 100%;
+            border-top: 1px solid $color__n-60;
+            text-decoration: none;
+            color: $color__white;
+
+            &:hover {
+                background: $color__n-80;
+            }
+        }
+        &--dropdown {
+            border-left: 1px solid $color__n-60;
+            border-top: 1px solid $color__n-60;
+
+            &--trigger {
+               height: 100%;
+               padding: 0rem $spacing__m;
+               background: none;
+               border: none;
+               color: $color__white;
+               cursor: pointer;
+
+               &:hover {
+                   background: $color__n-80;
+               }
+            }
+        }
+
+        @include breakpoint("m") {
+            flex-wrap: nowrap;
+
+            &--timer {
+                border-right: 1px solid $color__n-60;
+            }
+
+            &--status.ended {
+                width: 100%;
+                border-right: 1px solid $color__n-60;
+            }
+
+            &--options {
+                width: fit-content;
+            }
+
+            &--contestredirect {
+                width: fit-content;
+                white-space: nowrap;
+                border-top: none;
+                &.certified--invisible,&.dropdown--invisible {
+                    width: fit-content;
+                }
+            }
+            &--dropdown {
+                border-top: none;
+            } 
+        }
+    }
+}

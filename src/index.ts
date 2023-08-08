@@ -1,3 +1,3 @@
-import "./styles/_global.scss";
+import "./styles/base/typography.scss";
 
-export * from "./components";
+export * from "./lib";
