@@ -1,6 +1,6 @@
 import { addHours, format, formatDistance, isAfter, isBefore } from "date-fns";
-import { ContestSchedule } from "../components/ContestTile/ContestTile.types";
-import { Status } from "../components/ContestStatus/ContestStatus.types";
+import { ContestSchedule } from "../lib/ContestTile/ContestTile.types";
+import { Status } from "../lib/ContestStatus/ContestStatus.types";
 import { DateTime } from "luxon";
 
 function getContestStatuses(
