@@ -67,9 +67,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
-  "publishConfig": {
-    "@code4rena:registry": "https://npm.pkg.github.com"
-  },
   "babel": {
     "presets": [
       "@babel/preset-env",
