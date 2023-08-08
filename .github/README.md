@@ -15,7 +15,7 @@ Next, to ensure that all the components have the appropriate styling, import the
 import "@code4rena/components-library/dist/style.css";
 ```
 
-All the components in this package can be accessed through named imports. For a full list of available components, take a look at our [Storybook](components-library-wine.vercel.app)
+All the components in this package can be accessed through named imports. For a full list of available components, take a look at our [Storybook](https://components-library-wine.vercel.app)
 
 ```
 import { Alert } from "@code4rena/components-library";
