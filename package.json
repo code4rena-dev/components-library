@@ -43,23 +43,25 @@
     "@types/jest": "^29.5.3",
     "@types/luxon": "^3.3.1",
     "@types/react": "^18.2.14",
+    "babel-jest": "^29.6.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.6.2",
     "jest-environment-jsdom": "^29.6.2",
+    "jest-transformer-svg": "^2.0.1",
     "sass": "^1.63.6",
     "storybook": "^7.0.26",
     "ts-node": "^10.9.1",
     "tslib": "^2.6.0",
     "typescript": "^5.1.6",
-    "vite": "^4.4.8"
+    "vite": "^4.4.8",
+    "vite-plugin-dts": "^3.5.1"
   },
   "dependencies": {
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",
     "luxon": "^3.3.0",
     "react-avatar": "^5.0.3",
-    "react-select": "^5.7.4",
-    "vite-plugin-dts": "^3.5.1"
+    "react-select": "^5.7.4"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -67,5 +69,12 @@
   },
   "publishConfig": {
     "@code4rena:registry": "https://npm.pkg.github.com"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-typescript",
+      "@babel/preset-react"
+    ]
   }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import Alert from "./Alert";
+import { Alert } from "./Alert";
 import { AlertVariant } from "./Alert.types";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
