@@ -1,0 +1,120 @@
+@import "../../styles/variables";
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: $color__n-85;
+  border-radius: $border-radius__m;
+  
+  &--transparent {
+    background: transparent;
+  }
+  
+  &--outlined {
+    border: 1px solid $color__n-60;
+  }
+
+  &--bottom-aligned {
+    .card__body {
+      align-self: flex-end;
+    }
+  }
+  
+  &__main {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    padding: $spacing__m;
+  }
+
+  &__image {
+    height: 5.625rem;
+    width: 5.625rem;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+
+    &--l {
+      height: 9rem;
+      width: 9rem;
+    }
+
+    &--s {
+      height: 4rem;
+      width: 4rem;
+    }
+
+    &--radius-l {
+      border-radius: $border-radius__l;
+    }
+
+    &--radius-m {
+      border-radius: $border-radius__m;
+    }
+
+    &--radius-s {
+      border-radius: $border-radius__s;
+    }
+  }
+
+  &__title {
+    color: $color__white;
+    font-size: 1.3rem;
+    margin-bottom: 0.3em;
+    font-weight: 700;
+    line-height: 120%;
+
+    a {
+      color: $color__white;
+    }
+  }
+
+  &__body {
+    color: $color__n-10;
+    font-size: 1.125rem;
+    display: flex;
+    flex-direction: column;
+    margin: 0 $spacing__m
+  }
+  
+  &__footer {
+    color: $color__n-10;
+    border-top: 1px solid $color__n-60;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+  }
+  
+  &__footer-link-wrapper {
+    padding: 0;
+    
+    a {
+      color: $color__n-10;
+      border-left: 1px solid $color__n-60;
+      padding: $spacing__s $spacing__m;
+      text-decoration: none;
+      margin: -1px 0;
+
+      &:hover {
+        color: $color__white;
+      }
+    }
+  }
+  
+  &__footer-details {
+    padding: $spacing__s $spacing__m;
+    margin: 0;
+    justify-self: flex-start;
+  }
+}
