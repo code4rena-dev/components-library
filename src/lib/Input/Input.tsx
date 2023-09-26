@@ -16,11 +16,11 @@ const mappedTypes = (
   customArgs?: CustomArgs
 ) => {
   switch (inputType) {
-    case InputVariant.FIELD:
+    case "FIELD":
       return <input {...inputArgs} />;
-    case InputVariant.TEXTAREA:
+    case "TEXTAREA":
       return <textarea {...inputArgs} />;
-    case InputVariant.SELECT:
+    case "SELECT":
       return (
         customArgs?.selectOptions != null && (
           <Select
@@ -94,9 +94,9 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   const fieldTypeClassName = clsx({
     c4input: true,
-    "c4input--field": variant === InputVariant.FIELD,
-    "c4input--textarea": variant === InputVariant.TEXTAREA,
-    "c4input--select": variant === InputVariant.SELECT,
+    "c4input--field": variant === "FIELD",
+    "c4input--textarea": variant === "TEXTAREA",
+    "c4input--select": variant === "SELECT",
   });
   const [isInvalid, setIsInvalid] = useState(false);
   const [validationErrors, setValidationErrors] = useState<
@@ -114,10 +114,10 @@ export const Input: React.FC<InputProps> = ({
     if (required) {
       console.log(selectValue);
 
-      if (variant !== InputVariant.SELECT && (value === "" || value == null)) {
+      if (variant !== "SELECT" && (value === "" || value == null)) {
         errorMessages.push("This field is required");
       } else if (
-        (variant === InputVariant.SELECT &&
+        (variant === "SELECT" &&
           !isMultiSelect &&
           (selectValue === "" ||
             selectValue == null ||
@@ -215,9 +215,9 @@ export const Input: React.FC<InputProps> = ({
         ))}
       <div className="c4input--wrapper">
         {mappedTypes(
-          variant ?? InputVariant.FIELD,
+          variant ?? "FIELD",
           controlArgs,
-          variant === InputVariant.SELECT ? customArgs : undefined
+          variant === "SELECT" ? customArgs : undefined
         )}
       </div>
       {isInvalid &&

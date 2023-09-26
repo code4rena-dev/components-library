@@ -1,7 +1,6 @@
 import React from "react";
 import { Alert } from "./Alert";
 import { Meta, StoryObj } from "@storybook/react";
-import { AlertVariant } from "./Alert.types";
 
 const meta: Meta<typeof Alert> = {
   component: Alert,
@@ -22,7 +21,7 @@ SampleComponent.parameters = {
   },
 };
 SampleComponent.args = {
-  variant: AlertVariant.INFO,
+  variant: "INFO",
   title: "🤖 Text explaining the changes.",
   message:
     "The cyclone had set the house down, very gently—for a cyclone—in the midst of a country of marvelous beauty. There were lovely patches of green sward all about, with stately trees bearing rich and luscious fruits.",

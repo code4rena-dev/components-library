@@ -1,7 +1,6 @@
 import React from "react";
 import { Tag } from "./Tag";
 import { Meta, StoryObj } from "@storybook/react";
-import { TagSize, TagVariant } from "./Tag.types";
 
 const meta: Meta<typeof Tag> = {
   component: Tag,
@@ -23,10 +22,10 @@ SampleComponent.parameters = {
   },
 };
 SampleComponent.args = {
-  variant: TagVariant.DEFAULT,
+  variant: "DEFAULT",
   label: "Private",
   iconLeft: "/icons/lock.svg",
-  size: TagSize.NARROW,
+  size: "NARROW",
   className: "",
   id: "",
 };

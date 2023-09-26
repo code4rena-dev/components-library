@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "./Button";
 import { Meta, StoryObj } from "@storybook/react";
-import { ButtonSize, ButtonType, ButtonVariant } from "./Button.types";
 
 const wrapperStyle = {
   display: "flex",
@@ -42,15 +41,15 @@ SampleComponent.parameters = {
   },
 };
 SampleComponent.args = {
-  variant: ButtonVariant.PRIMARY,
+  variant: "PRIMARY",
   label: "Sample Button",
-  type: ButtonType.BUTTON,
+  type: "button",
   external: false,
   href: "",
   disabled: false,
   iconLeft: "",
   iconRight: "/icons/edit.svg",
-  size: ButtonSize.NARROW,
+  size: "NARROW",
   className: "",
   id: "",
 };
@@ -72,18 +71,18 @@ export const Links: Story = {
       {/* @ts-ignore */}
       <div style={wrapperStyle}>
         <Button
-          variant={ButtonVariant.PRIMARY}
+          variant="PRIMARY"
           label="Primary Internal Link"
           href="#internal-test"
         />
         <Button
-          variant={ButtonVariant.PRIMARY}
+          variant="PRIMARY"
           external
           label="Primary External Link"
           href="https://google.com"
         />
         <Button
-          variant={ButtonVariant.PRIMARY}
+          variant="PRIMARY"
           href="#internal-test"
           label="Primary Link W/ Icons"
           iconLeft="/icons/edit.svg"
@@ -94,18 +93,18 @@ export const Links: Story = {
       {/* @ts-ignore */}
       <div style={wrapperStyle}>
         <Button
-          variant={ButtonVariant.SECONDARY}
+          variant="SECONDARY"
           label="Secondary Internal Link"
           href="#internal-test"
         />
         <Button
-          variant={ButtonVariant.SECONDARY}
+          variant="SECONDARY"
           external
           label="Secondary External Link"
           href="https://google.com"
         />
         <Button
-          variant={ButtonVariant.SECONDARY}
+          variant="SECONDARY"
           href="#internal-test"
           label="Secondary Link W/ Icons"
           iconLeft="/icons/edit.svg"
@@ -137,12 +136,12 @@ export const Buttons: Story = {
       {/* @ts-ignore */}
       <div style={wrapperStyle}>
         <Button
-          variant={ButtonVariant.PRIMARY}
+          variant="PRIMARY"
           onClick={() => null}
           label="Primary Enabled Button"
         />
         <Button
-          variant={ButtonVariant.PRIMARY}
+          variant="PRIMARY"
           onClick={() => null}
           label="Primary Button W/ Icons"
           iconLeft="/icons/edit.svg"
@@ -153,19 +152,19 @@ export const Buttons: Story = {
       {/* @ts-ignore */}
       <div style={wrapperStyle}>
         <Button
-          variant={ButtonVariant.SECONDARY}
+          variant="SECONDARY"
           onClick={() => null}
           label="Secondary Enabled Button"
         />
         <Button
-          variant={ButtonVariant.SECONDARY}
+          variant="SECONDARY"
           onClick={() => null}
           label="Secondary Button W/ Icons"
           iconLeft="/icons/edit.svg"
           iconRight="/icons/edit.svg"
         />
         <Button
-          variant={ButtonVariant.SECONDARY}
+          variant="SECONDARY"
           onClick={() => null}
           label="Primary/Secondary Disabled Button"
           disabled

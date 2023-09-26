@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React from "react";
-import { TagProps, TagSize, TagVariant } from "./Tag.types";
+import { TagProps } from "./Tag.types";
 import "./Tag.scss";
 
 /**
@@ -31,13 +31,13 @@ export const Tag: React.FC<TagProps> = ({
 }) => {
   const styling = clsx({
     c4tag: true,
-    "tag--white": variant === TagVariant.WHITE,
-    "tag--default": variant === TagVariant.DEFAULT,
-    "tag--blurple": variant === TagVariant.BLURPLE,
-    "tag--red": variant === TagVariant.RED,
-    "tag--yellow": variant === TagVariant.YELLOW,
-    "tag--white-outline": variant === TagVariant.WHITE_OUTLINE,
-    wide: size === TagSize.WIDE,
+    "tag--white": variant === "WHITE",
+    "tag--default": variant === "DEFAULT",
+    "tag--blurple": variant === "BLURPLE",
+    "tag--red": variant === "RED",
+    "tag--yellow": variant === "YELLOW",
+    "tag--white-outline": variant === "WHITE_OUTLINE",
+    wide: size === "WIDE",
   });
 
   return (
@@ -49,9 +49,7 @@ export const Tag: React.FC<TagProps> = ({
 };
 
 Tag.defaultProps = {
-  /* @ts-ignore value in Enum */
   variant: "DEFAULT",
-  /* @ts-ignore value in Enum */
   size: "NARROW",
   iconLeft: "",
   className: "",

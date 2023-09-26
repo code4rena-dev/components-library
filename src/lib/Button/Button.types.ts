@@ -1,20 +1,8 @@
 import { MouseEventHandler } from "react";
 
-export enum ButtonVariant {
-  PRIMARY = "PRIMARY",
-  SECONDARY = "SECONDARY",
-}
-
-export enum ButtonType {
-  BUTTON = "button",
-  SUBMIT = "submit",
-  RESET = "reset",
-}
-
-export enum ButtonSize {
-  NARROW = "NARROW",
-  WIDE = "WIDE",
-}
+export type ButtonVariant = "PRIMARY" | "SECONDARY";
+export type ButtonType = "button" | "submit" | "reset";
+export type ButtonSize = "NARROW" | "WIDE";
 
 export interface ButtonProps {
   /** Label to be attached to the button. */

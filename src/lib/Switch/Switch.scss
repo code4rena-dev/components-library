@@ -1,0 +1,78 @@
+@import "../../styles/variables";
+
+.c4toggle {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 30px;
+
+    input {
+        width: 0;
+        height: 0;
+
+        &::before, &::after {
+            position: absolute;
+            top: 0;
+            font-size: 1rem;
+            font-weight: bold;
+            line-height: 2rem;
+            z-index: 1;
+        }
+
+        &.c4toggle--on::before {
+            content: "ON";
+            color: $color__n-2;
+            left: 10px;
+        }
+
+        &.c4toggle--off::after {
+            content: "OFF";
+            color: $color__n-10;
+            right: 6px;
+        }
+
+        &:checked + .c4toggle--slider {
+            background-color: $color__blurple-60;
+            outline: 2px solid $color__blurple-70;
+
+            &::before {
+                -webkit-transform: translateX(40px);
+                -ms-transform: translateX(40px);
+                transform: translate(40px);
+            }
+        }
+
+        &:focus + .c4toggle--slider {
+            outline: 2px solid white;
+        }
+        
+    }
+
+    &--slider {
+        border-radius: 40px;
+        outline: 2px solid $color__n-80;
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $color__n-70;
+        -webkit-transition: .4s;
+        transition: .4s;
+
+        &::before {
+            border-radius: 50%;
+            position: absolute;
+            content: "";
+            height: 24px;
+            width: 24px;
+            left: 3px;
+            bottom: 3px;
+            background-color: $color__n-90;
+            z-index: 2;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+    }
+}

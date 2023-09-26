@@ -6,11 +6,9 @@ import { ContestStatus } from "../ContestStatus/ContestStatus";
 import {
   ContestSchedule,
   ContestTileProps,
-  ContestTileVariant,
   CountdownProps,
 } from "./ContestTile.types";
 import { getDates } from "../../utils/time";
-import { Status } from "../ContestStatus/ContestStatus.types";
 import {
   formatDistanceToNow,
   formatDistanceToNowStrict,
@@ -39,7 +37,7 @@ const Countdown = ({
   const [contestTimer, setContestTimer] = useState<ContestSchedule>();
 
   const getCountdownTarget = (schedule: ContestSchedule): Date => {
-    if (schedule.contestStatus === Status.LIVE) {
+    if (schedule.contestStatus === "LIVE") {
       return schedule.end;
     }
     return schedule.start;
@@ -97,7 +95,7 @@ const Countdown = ({
             updateContestStatus();
           }
         }
-        if (newTimer.contestStatus === Status.ENDED) {
+        if (newTimer.contestStatus === "ENDED") {
           clearInterval(timer);
           return;
         }
@@ -184,8 +182,8 @@ export const ContestTile: React.FC<ContestTileProps> = ({
 
   const wrapperStyling = clsx({
     c4contesttile: true,
-    "tile--light": variant === ContestTileVariant.LIGHT,
-    "tile--dark": variant === ContestTileVariant.DARK,
+    "tile--light": variant === "LIGHT",
+    "tile--dark": variant === "DARK",
   });
 
   useEffect(() => {
@@ -204,7 +202,7 @@ export const ContestTile: React.FC<ContestTileProps> = ({
 
   useEffect(() => {
     const links: DropdownLink[] = [];
-    if (contestTimelineObject.contestStatus !== Status.LIVE) {
+    if (contestTimelineObject.contestStatus !== "LIVE") {
       setDropdownLinks(links);
       return;
     }
@@ -225,7 +223,7 @@ export const ContestTile: React.FC<ContestTileProps> = ({
     if (
       findingsRepo &&
       canViewContest &&
-      (!hasBotRace || contestTimelineObject.botRaceStatus === Status.ENDED)
+      (!hasBotRace || contestTimelineObject.botRaceStatus === "ENDED")
     ) {
       links.push({
         label: "Submit finding",
@@ -235,7 +233,7 @@ export const ContestTile: React.FC<ContestTileProps> = ({
     if (
       findingsRepo &&
       canViewContest &&
-      (!hasBotRace || contestTimelineObject.botRaceStatus === Status.ENDED)
+      (!hasBotRace || contestTimelineObject.botRaceStatus === "ENDED")
     ) {
       links.push({
         label: "Submit Analysis report",
@@ -267,7 +265,11 @@ export const ContestTile: React.FC<ContestTileProps> = ({
   }, [startDate, endDate, updateContestStatus]);
 
   return (
-    <div id={htmlId ?? undefined} className={wrapperStyling}>
+    <div
+      data-testid={htmlId ?? undefined}
+      id={htmlId ?? undefined}
+      className={wrapperStyling}
+    >
       <div className="tile--body">
         <header>
           {sponsorUrl ? (
@@ -305,8 +307,8 @@ export const ContestTile: React.FC<ContestTileProps> = ({
             <p className="tile--body--description">
               {description}{" "}
               {hasBotRace &&
-                (contestTimelineObject.botRaceStatus === Status.UPCOMING ||
-                  contestTimelineObject.botRaceStatus === Status.LIVE) && (
+                (contestTimelineObject.botRaceStatus === "UPCOMING" ||
+                  contestTimelineObject.botRaceStatus === "LIVE") && (
                   <span className="tile--body--botracestatus">
                     <img
                       alt="Wolf bot"
@@ -314,9 +316,9 @@ export const ContestTile: React.FC<ContestTileProps> = ({
                       height={16}
                       width={16}
                     />
-                    {contestTimelineObject.botRaceStatus === Status.UPCOMING &&
+                    {contestTimelineObject.botRaceStatus === "UPCOMING" &&
                       "1st hour: Bot Race"}
-                    {contestTimelineObject.botRaceStatus === Status.LIVE &&
+                    {contestTimelineObject.botRaceStatus === "LIVE" &&
                       "Bot Race live"}
                   </span>
                 )}
@@ -329,18 +331,18 @@ export const ContestTile: React.FC<ContestTileProps> = ({
         <div className="tile--footer--details">
           <ContestStatus
             className={`tile--footer--status ${clsx(
-              contestTimelineObject.contestStatus === Status.ENDED && "ended"
+              contestTimelineObject.contestStatus === "ENDED" && "ended"
             )}`}
             status={contestTimelineObject.contestStatus}
           />
-          {contestTimelineObject.contestStatus !== Status.ENDED && (
+          {contestTimelineObject.contestStatus !== "ENDED" && (
             <p className="tile--footer--timer">
               <Countdown
                 start={startDate}
                 end={endDate}
                 updateContestStatus={updateContestTileStatus}
                 text={
-                  contestTimelineObject.contestStatus === Status.UPCOMING
+                  contestTimelineObject.contestStatus === "UPCOMING"
                     ? "Starts in "
                     : "Ends in "
                 }

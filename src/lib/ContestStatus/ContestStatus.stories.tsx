@@ -1,7 +1,6 @@
 import React from "react";
 import { ContestStatus } from "./ContestStatus";
 import { Meta, StoryObj } from "@storybook/react";
-import { Status } from "./ContestStatus.types";
 
 const meta: Meta<typeof ContestStatus> = {
   component: ContestStatus,
@@ -22,7 +21,7 @@ SampleComponent.parameters = {
   },
 };
 SampleComponent.args = {
-  status: Status.LIVE,
+  status: "LIVE",
   className: "",
   id: "",
 };

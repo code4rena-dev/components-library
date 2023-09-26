@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Input } from "./Input";
 import { Meta, StoryObj } from "@storybook/react";
 import { useArgs } from "@storybook/preview-api";
-import { InputVariant } from "./Input.types";
 
 const wrapperStyle = {
   display: "flex",
@@ -19,7 +18,7 @@ const meta: Meta<typeof Input> = {
   argTypes: {
     fieldType: {
       control: "select",
-      if: { arg: "variant", eq: InputVariant.FIELD },
+      if: { arg: "variant", eq: "FIELD" },
     },
     helpText: {
       options: ["ReactNode", "string"],
@@ -41,10 +40,10 @@ const meta: Meta<typeof Input> = {
       },
     },
     isMultiSelect: {
-      if: { arg: "variant", eq: InputVariant.SELECT },
+      if: { arg: "variant", eq: "SELECT" },
     },
     maxLength: {
-      if: { arg: "variant", neq: InputVariant.SELECT },
+      if: { arg: "variant", neq: "SELECT" },
     },
     onChange: {
       control: "function",
@@ -52,10 +51,10 @@ const meta: Meta<typeof Input> = {
     },
     selectValue: {
       control: "text",
-      if: { arg: "variant", eq: InputVariant.SELECT },
+      if: { arg: "variant", eq: "SELECT" },
     },
     value: {
-      if: { arg: "variant", neq: InputVariant.SELECT },
+      if: { arg: "variant", neq: "SELECT" },
     },
     variant: { control: "select" },
   },
@@ -72,7 +71,7 @@ export const SampleComponent: Story = (storyArgs) => {
       {...storyArgs}
       onChange={(e) => {
         storyArgs.onChange();
-        if (storyArgs.variant !== InputVariant.SELECT) {
+        if (storyArgs.variant !== "SELECT") {
           updateArgs({ value: e.target.value });
         } else {
           updateArgs({ selectValue: e.target.value });
@@ -94,7 +93,7 @@ SampleComponent.args = {
   maxLength: 300,
   placeholder: "Name...",
   value: "John Doe",
-  variant: InputVariant.FIELD,
+  variant: "FIELD",
   selectValue: "John Doe",
   required: true,
   selectOptions: [
@@ -156,7 +155,7 @@ InputField.args = {
   maxLength: 200,
   placeholder: "Theodore, Anthony...",
   required: false,
-  variant: InputVariant.FIELD,
+  variant: "FIELD",
 };
 InputField.parameters = {
   controls: { hideNoControlsWarning: true, include: [] },
@@ -210,7 +209,7 @@ TextArea.args = {
   maxLength: 300,
   placeholder: "Theodore, Anthony...",
   required: false,
-  variant: InputVariant.TEXTAREA,
+  variant: "TEXTAREA",
 };
 TextArea.parameters = {
   controls: { hideNoControlsWarning: true, include: [] },
@@ -287,7 +286,7 @@ Select.args = {
   helpText: "Help us be able to identify you",
   placeholder: "Select name...",
   required: false,
-  variant: InputVariant.SELECT,
+  variant: "SELECT",
   selectOptions: [
     { label: "Bob", value: "Bob Dylan" },
     { label: "John", value: "John Lennon" },

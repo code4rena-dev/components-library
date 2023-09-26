@@ -1,16 +1,11 @@
-export enum TagVariant {
-  WHITE = "WHITE",
-  DEFAULT = "DEFAULT",
-  BLURPLE = "BLURPLE",
-  RED = "RED",
-  YELLOW = "YELLOW",
-  WHITE_OUTLINE = "WHITE-OUTLINE",
-}
-
-export enum TagSize {
-  NARROW = "NARROW",
-  WIDE = "WIDE",
-}
+export type TagVariant =
+  | "WHITE"
+  | "DEFAULT"
+  | "BLURPLE"
+  | "RED"
+  | "YELLOW"
+  | "WHITE_OUTLINE";
+export type TagSize = "NARROW" | "WIDE";
 
 export interface TagProps {
   /**  Style variant to be applied to rendered component */

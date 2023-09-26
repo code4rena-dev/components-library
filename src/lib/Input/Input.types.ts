@@ -1,11 +1,7 @@
 import { ChangeEvent, ReactNode } from "react";
 import { MultiValue, SingleValue } from "react-select";
 
-export enum InputVariant {
-  FIELD = "FIELD",
-  TEXTAREA = "TEXTAREA",
-  SELECT = "SELECT",
-}
+export type InputVariant = "FIELD" | "TEXTAREA" | "SELECT";
 
 export type SelectOption = {
   label: string;

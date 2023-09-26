@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { AlertProps, AlertVariant } from "./Alert.types";
+import { AlertProps } from "./Alert.types";
 import warningIcon from "../../../public/icons/warning.svg";
 import deleteIcon from "../../../public/icons/delete.svg";
 import "./Alert.scss";
@@ -35,19 +35,19 @@ export const Alert: React.FC<AlertProps> = ({
 }) => {
   const styling = clsx({
     c4alert: true,
-    "alert--info": variant === AlertVariant.INFO,
-    "alert--muted": variant === AlertVariant.MUTED,
-    "alert--warning": variant === AlertVariant.WARNING,
-    "alert--error": variant === AlertVariant.ERROR,
+    "alert--info": variant === "INFO",
+    "alert--muted": variant === "MUTED",
+    "alert--warning": variant === "WARNING",
+    "alert--error": variant === "ERROR",
   });
 
   return (
     <div id={id} className={`${styling} ${className}`} role="alert">
-      {(variant === AlertVariant.WARNING || variant === AlertVariant.ERROR) && (
+      {(variant === "WARNING" || variant === "ERROR") && (
         <div className="alert--icon">
           <img
-            alt={variant === AlertVariant.WARNING ? "Warning" : "Error"}
-            src={variant === AlertVariant.WARNING ? warningIcon : deleteIcon}
+            alt={variant === "WARNING" ? "Warning" : "Error"}
+            src={variant === "WARNING" ? warningIcon : deleteIcon}
             width={32}
             height={32}
           />
@@ -78,7 +78,6 @@ Alert.defaultProps = {
   title: "",
   redirectLabel: "",
   redirectUrl: "",
-  /* @ts-ignore value in Enum */
   variant: "INFO",
   className: "",
   id: "",

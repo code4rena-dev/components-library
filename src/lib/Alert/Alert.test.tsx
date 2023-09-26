@@ -1,6 +1,5 @@
 import React from "react";
 import { Alert } from "./Alert";
-import { AlertVariant } from "./Alert.types";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
@@ -15,7 +14,7 @@ describe("========== C4 ALERT - RUNNING TESTS ==========", () => {
     const customId = "test_id";
     render(
       <Alert
-        variant={AlertVariant.INFO}
+        variant="INFO"
         id={customId}
         className={customClass}
         {...defaultArgs}
@@ -27,38 +26,32 @@ describe("========== C4 ALERT - RUNNING TESTS ==========", () => {
   });
 
   test("Renders INFO alert", () => {
-    render(<Alert variant={AlertVariant.INFO} {...defaultArgs} />);
+    render(<Alert variant="INFO" {...defaultArgs} />);
     const alert = screen.getByRole("alert");
     expect(alert).toHaveClass("alert--info");
   });
 
   test("Renders MUTED alert", () => {
-    render(<Alert variant={AlertVariant.MUTED} {...defaultArgs} />);
+    render(<Alert variant="MUTED" {...defaultArgs} />);
     const alert = screen.getByRole("alert");
     expect(alert).toHaveClass("alert--muted");
   });
 
   test("Renders WARNING alert", () => {
-    render(<Alert variant={AlertVariant.WARNING} {...defaultArgs} />);
+    render(<Alert variant="WARNING" {...defaultArgs} />);
     const alert = screen.getByRole("alert");
     expect(alert).toHaveClass("alert--warning");
   });
 
   test("Renders ERROR alert", () => {
-    render(<Alert variant={AlertVariant.ERROR} {...defaultArgs} />);
+    render(<Alert variant="ERROR" {...defaultArgs} />);
     const alert = screen.getByRole("alert");
     expect(alert).toHaveClass("alert--error");
   });
 
   test("Renders with provided redirectUrl and default label for missing redirectLabel prop", () => {
     const redirectUrl = "https://www.code4rena.com";
-    render(
-      <Alert
-        variant={AlertVariant.INFO}
-        redirectUrl={redirectUrl}
-        {...defaultArgs}
-      />
-    );
+    render(<Alert variant="INFO" redirectUrl={redirectUrl} {...defaultArgs} />);
     const anchor = screen.getByText("Read more on this alert");
     expect(anchor).toBeTruthy();
     expect(anchor).toHaveAttribute(
@@ -73,7 +66,7 @@ describe("========== C4 ALERT - RUNNING TESTS ==========", () => {
     const redirectLabel = "Redirect Test";
     render(
       <Alert
-        variant={AlertVariant.INFO}
+        variant="INFO"
         redirectUrl={redirectUrl}
         redirectLabel={redirectLabel}
         {...defaultArgs}

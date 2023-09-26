@@ -1,10 +1,7 @@
 import { ReactNode } from "react";
 import { Status } from "../ContestStatus/ContestStatus.types";
 
-export enum ContestTileVariant {
-  LIGHT = "LIGHT",
-  DARK = "DARK",
-}
+export type ContestTileVariant = "LIGHT" | "DARK";
 
 export interface ContestTileProps {
   /** An html `id` for the contest tile's wrapping div. */
@@ -12,7 +9,7 @@ export interface ContestTileProps {
   /** Style variant to be applied to rendered component. */
   variant?: ContestTileVariant;
   /** String indicating required access for viewing contest. */
-  codeAccess: string;
+  codeAccess: "public" | "certified";
   /** Boolean indicating certification status of logged in user. Required for viewing certain contests. */
   isUserCertified: boolean;
   /** Unique numerical identifier for the current contest. */

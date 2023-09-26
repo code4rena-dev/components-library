@@ -1,10 +1,3 @@
-export enum AlertVariant {
-  INFO = "INFO",
-  MUTED = "MUTED",
-  WARNING = "WARNING",
-  ERROR = "ERROR",
-}
-
 export interface AlertProps {
   /** Small, emphasized message descriptor. */
   title?: string;
@@ -15,7 +8,7 @@ export interface AlertProps {
   /** Relative path or absolute url to be navigated to. */
   redirectUrl?: string;
   /** Style variant to be applied to rendered component. */
-  variant?: AlertVariant;
+  variant?: "INFO" | "MUTED" | "WARNING" | "ERROR";
   /** String of custom classes to extend the default styling of the component. */
   className?: string;
   /** HTML element identifier */

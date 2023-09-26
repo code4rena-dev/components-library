@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React from "react";
-import { ContestStatusProps, Status } from "./ContestStatus.types";
+import { ContestStatusProps } from "./ContestStatus.types";
 import "./ContestStatus.scss";
 
 /**
@@ -10,7 +10,7 @@ import "./ContestStatus.scss";
  * - `LIVE`: Indicates that a contest is currently live
  * - `ENDED`: Indicates that a previously live contest has ended
  *
- * @param status - Status indicator for the current contest. Enum of type {@link Status}.
+ * @param status - Status indicator for the current contest. One of type {@link Status}.
  * @param className - String of custom classes to extend the default styling of the component.
  * @param id - HTML element identifier.
  */
@@ -21,25 +21,19 @@ export const ContestStatus: React.FC<ContestStatusProps> = ({
 }) => {
   const styling = clsx({
     statusindicator: true,
-    upcoming: status === Status.UPCOMING,
-    live: status === Status.LIVE,
-    ended: status === Status.ENDED,
+    upcoming: status === "UPCOMING",
+    live: status === "LIVE",
+    ended: status === "ENDED",
   });
 
   return (
     status && (
-      <div id={id ?? undefined} className={`c4conteststatus ${className}`}>
+      <div id={id} className={`c4conteststatus ${className}`}>
         <div className={`${styling}`} />
-        {status === Status.UPCOMING && "Soon"}
-        {status === Status.LIVE && "Live"}
-        {status === Status.ENDED && "Ended"}
-        {!status && "-"}
+        {status === "UPCOMING" && "Soon"}
+        {status === "LIVE" && "Live"}
+        {status === "ENDED" && "Ended"}
       </div>
     )
   );
-};
-
-ContestStatus.defaultProps = {
-  className: "",
-  id: "",
 };

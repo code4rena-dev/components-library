@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { ButtonProps, ButtonSize, ButtonVariant } from "./Button.types";
+import { ButtonProps } from "./Button.types";
 import "./Button.scss";
 
 /**
@@ -40,15 +40,15 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const styling = clsx({
     c4button: true,
-    "button--primary": variant === ButtonVariant.PRIMARY,
-    "button--secondary": variant === ButtonVariant.SECONDARY,
-    wide: size === ButtonSize.WIDE,
+    "button--primary": variant === "PRIMARY",
+    "button--secondary": variant === "SECONDARY",
+    wide: size === "WIDE",
   });
 
   return href != null && href.length ? (
     <a
       aria-label={`${label}${external ? " (opens in new window)" : ""}`}
-      id={id ?? undefined}
+      id={id}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer noopener" : undefined}
       href={href}
@@ -62,11 +62,10 @@ export const Button: React.FC<ButtonProps> = ({
     </a>
   ) : (
     <button
-      id={id ?? undefined}
+      id={id}
       role="button"
       aria-label={label}
-      aria-disabled={disabled}
-      type={type ?? "button"}
+      type={type}
       className={`${styling} ${className}`}
       onClick={onClick}
       disabled={disabled}
@@ -82,14 +81,11 @@ export const Button: React.FC<ButtonProps> = ({
 };
 
 Button.defaultProps = {
-  /* @ts-ignore value in Enum */
   type: "button",
-  /* @ts-ignore value in Enum */
   variant: "PRIMARY",
   disabled: false,
   iconLeft: "",
   iconRight: "",
-  /* @ts-ignore value in Enum */
   size: "NARROW",
   href: "",
   external: false,

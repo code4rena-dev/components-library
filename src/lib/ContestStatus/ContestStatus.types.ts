@@ -1,8 +1,4 @@
-export enum Status {
-  UPCOMING = "UPCOMING",
-  LIVE = "LIVE",
-  ENDED = "ENDED",
-}
+export type Status = "UPCOMING" | "LIVE" | "ENDED";
 
 export interface ContestStatusProps {
   /** Status indicator for the current contest. */

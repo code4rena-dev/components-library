@@ -11,27 +11,27 @@ function getContestStatuses(
   const currentTime = new Date();
   if (isBefore(currentTime, start)) {
     return {
-      botRaceStatus: Status.UPCOMING,
-      contestStatus: Status.UPCOMING,
+      botRaceStatus: "UPCOMING",
+      contestStatus: "UPCOMING",
     };
   }
   if (isBefore(currentTime, botRaceEnd) && isAfter(currentTime, start)) {
     return {
-      botRaceStatus: Status.LIVE,
-      contestStatus: Status.LIVE,
+      botRaceStatus: "LIVE",
+      contestStatus: "LIVE",
     };
   }
 
   if (isAfter(currentTime, botRaceEnd) && isBefore(currentTime, end)) {
     return {
-      botRaceStatus: Status.ENDED,
-      contestStatus: Status.LIVE,
+      botRaceStatus: "ENDED",
+      contestStatus: "LIVE",
     };
   }
   if (isAfter(currentTime, end)) {
     return {
-      botRaceStatus: Status.ENDED,
-      contestStatus: Status.ENDED,
+      botRaceStatus: "ENDED",
+      contestStatus: "ENDED",
     };
   }
   return {
