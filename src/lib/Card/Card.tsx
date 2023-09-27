@@ -40,6 +40,7 @@ export const Card: React.FC<CardProps> = ({
         {/* CTA */}
         {cta && (
           <Button
+            className="card__cta"
             onClick={cta.onClick}
             label={cta.text}
             variant={ButtonVariant.SECONDARY}

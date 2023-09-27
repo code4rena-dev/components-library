@@ -29,11 +29,11 @@ SampleComponent.parameters = {
 };
 
 SampleComponent.args = {
-  children: <div style={{ width: "300px" }}>Team lead</div>,
+  children: <div>Team lead</div>,
   title: "MangoBurger",
-  imageSize: CardImageSize.LARGE,
+  imageSize: CardImageSize.MEDIUM,
   image: <img src="/images/default-avatar.png" />,
-  imageBorderRadius: CardImageBorderRadius.MEDIUM,
+  imageBorderRadius: CardImageBorderRadius.CIRCLE,
   cta: { text: "Follow", onClick: () => console.log("follow") },
   variants: [
     CardVariant.TRANSPARENT,

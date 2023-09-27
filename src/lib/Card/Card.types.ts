@@ -35,7 +35,7 @@ export interface CardProps extends React.PropsWithChildren {
   /** An array of links to be rendered in the footer of the card. */
   footerLinks?: ReactElement<HTMLAnchorElement>[];
   /** The size of the image displayed in the top left corner. Defaults to medium */
-  imageSize: CardImageSize;
+  imageSize?: CardImageSize;
   /** The image to be displayed in the top left corner */
   image: ReactElement<HTMLImageElement>;
   /** Border radius of the image. Defaults to circle */
