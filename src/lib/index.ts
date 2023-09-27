@@ -7,3 +7,4 @@ export * from "./EyebrowBar";
 export * from "./Input";
 export * from "./NavBar";
 export * from "./Tag";
+export * from "./Card";
