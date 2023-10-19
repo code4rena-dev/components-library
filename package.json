@@ -2,11 +2,21 @@
   "name": "@code4rena/components-library",
   "version": "1.0.0",
   "description": "Code4rena's official components library ",
-  "main": "dist/components-library.umd.js",
-  "module": "dist/components-library.mjs",
-  "types": "dist/index.d.ts",
+  "types": "./dist/lib.d.ts",
+  "exports": {
+    ".": "./dist/lib.mjs",
+    "./types": "./dist/types.mjs",
+    "./styles": "./dist/style.css"
+  },
+  "typesVersions": {
+    "*": {
+      "types": [
+        "./dist/types.d.ts"
+      ]
+    }
+  },
   "files": [
-    "dist"
+    "/dist"
   ],
   "scripts": {
     "build": "vite build && tsc",
