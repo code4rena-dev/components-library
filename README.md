@@ -1,7 +1,6 @@
 [![Jest](https://github.com/code4rena-dev/components-library/actions/workflows/test-runner.yml/badge.svg)](https://github.com/code4rena-dev/components-library/actions/workflows/test-runner.yml)
 
 # Code4rena Components Library
----
 
 ## Using Components in your project
 
@@ -36,7 +35,7 @@ import { Alert } from "@code4rena/components-library";
 ### 4. Typescript Support
 All components in this library have TypeScript support. Types for all complex component props are also named exports available through the `/types` subdirectory (see example below):
 ```
-import { ButtonSize, ButtonType, ButtonVariant } from "@code4rena/componenets-library/types";
+import { ButtonSize, ButtonType, ButtonVariant } from "@code4rena/components-library/types";
 
 <Button
     label="Sample Button"
