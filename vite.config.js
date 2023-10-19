@@ -6,12 +6,13 @@ export default defineConfig ({
     build: {
         // Tells Vite we're building library code as opposed to application code
         lib: {
-            entry: resolve(__dirname, "src/index.ts"),
+            entry: {
+                lib: resolve(__dirname, "src/lib.ts"),
+                types: resolve(__dirname, "src/types.ts")
+            },
             // Component library name
             name: "components-library",
             formats: ["es"],
-            // Output file name
-            filename: "index",
         },
         plugins: [dts({ rollupTypes: true })],
         rollupOptions: {
