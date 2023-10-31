@@ -143,6 +143,8 @@ const Countdown = ({
  * @param htmlId - An html `id` for the contest tile's wrapping div.
  * @param variant - Style variant to be applied to rendered component.
  * @param codeAccess - String indicating required access for viewing contest.
+ * @param contestType - String indicating a specific categorization for the current contest.
+ * @param isCompact - Boolean that sets the contest tile strictly in mobile status for all screen widths.
  * @param isUserCertified - Boolean indicating certification status of logged in user. Required for viewing certain contests.
  * @param contestId - Unique numerical identifier for the current contest.
  * @param sponsorImage - Image url for contest's sponsor.
@@ -162,6 +164,8 @@ export const ContestTile: React.FC<ContestTileProps> = ({
   htmlId,
   variant,
   codeAccess,
+  contestType,
+  isCompact = false,
   isUserCertified,
   contestId,
   sponsorImage,
@@ -268,138 +272,176 @@ export const ContestTile: React.FC<ContestTileProps> = ({
 
   return (
     <div id={htmlId ?? undefined} className={wrapperStyling}>
-      <div className="tile--body">
-        <header>
-          {sponsorUrl ? (
-            <a
-              href={sponsorUrl}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="tile--body--logo"
-            >
+      <div className={clsx("container--inner", isCompact && "compact")}>
+        {/* Contest tile body */}
+        <div className="tile--body">
+          <header>
+            {/* Sponsor Image */}
+            {sponsorUrl ? (
+              <a
+                href={sponsorUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="tile--body--logo"
+              >
+                <img
+                  alt="Sponsor logo"
+                  src={sponsorImage ?? "/"}
+                  width={88}
+                  height={88}
+                />
+              </a>
+            ) : (
               <img
                 alt="Sponsor logo"
+                className="tile--body--logo"
                 src={sponsorImage ?? "/"}
                 width={88}
                 height={88}
               />
-            </a>
-          ) : (
-            <img
-              alt="Sponsor logo"
-              className="tile--body--logo"
-              src={sponsorImage ?? "/"}
-              width={88}
-              height={88}
-            />
-          )}
-          <div>
-            <small className="tile--body--period">
-              {contestTimelineObject.formattedStart} -{" "}
-              {contestTimelineObject.formattedEnd}{" "}
-              {contestTimelineObject.timeZone}
-            </small>
-            <h2 className="tile--body--title">
-              <a href={`${contestUrl}#top`}>{title}</a>
-            </h2>
-            <p className="tile--body--description">
-              {description}{" "}
-              {hasBotRace &&
-                (contestTimelineObject.botRaceStatus === Status.UPCOMING ||
-                  contestTimelineObject.botRaceStatus === Status.LIVE) && (
-                  <span className="tile--body--botracestatus">
-                    <img
-                      alt="Wolf bot"
-                      src={wolfbotIcon}
-                      height={16}
-                      width={16}
-                    />
-                    {contestTimelineObject.botRaceStatus === Status.UPCOMING &&
-                      "1st hour: Bot Race"}
-                    {contestTimelineObject.botRaceStatus === Status.LIVE &&
-                      "Bot Race live"}
-                  </span>
-                )}
-            </p>
-          </div>
-        </header>
-        <p className="tile--body--amount">{amount}</p>
-      </div>
-      <footer className="tile--footer">
-        <div className="tile--footer--details">
-          <ContestStatus
-            className={`tile--footer--status ${clsx(
-              contestTimelineObject.contestStatus === Status.ENDED && "ended"
-            )}`}
-            status={contestTimelineObject.contestStatus}
-          />
-          {contestTimelineObject.contestStatus !== Status.ENDED && (
-            <p className="tile--footer--timer">
-              <Countdown
-                start={startDate}
-                end={endDate}
-                updateContestStatus={updateContestTileStatus}
-                text={
-                  contestTimelineObject.contestStatus === Status.UPCOMING
-                    ? "Starts in "
-                    : "Ends in "
-                }
+            )}
+            <div className="tile--body--contentwrapper">
+              {/* Contest availability period */}
+              <small className="tile--body--period">
+                {contestTimelineObject.formattedStart} -{" "}
+                {contestTimelineObject.formattedEnd}{" "}
+                {contestTimelineObject.timeZone}
+              </small>
+              {/* Contest title */}
+              <h2 className="tile--body--title">
+                <a href={`${contestUrl}#top`}>{title}</a>
+              </h2>
+              {/* Contest description */}
+              <p className="tile--body--description">
+                {description}
+                {hasBotRace &&
+                  (contestTimelineObject.botRaceStatus === Status.UPCOMING ||
+                    contestTimelineObject.botRaceStatus === Status.LIVE) && (
+                    <div className="tile--body--botracestatus">
+                      <img
+                        alt="Wolf bot"
+                        src={wolfbotIcon}
+                        height={16}
+                        width={16}
+                      />
+                      {contestTimelineObject.botRaceStatus ===
+                        Status.UPCOMING && "1st hour: Bot Race"}
+                      {contestTimelineObject.botRaceStatus === Status.LIVE &&
+                        "Bot Race live"}
+                    </div>
+                  )}
+              </p>
+            </div>
+            {/* Reward pool amount on mobile resolutions */}
+            <p className="tile--body--amountmobile">{amount}</p>
+          </header>
+          {/* Contest status on mobile resolutions */}
+          <div className="tile--body--statusmobile">
+            <span>
+              <ContestStatus
+                className={`tile--footer--status ${clsx(
+                  contestTimelineObject.contestStatus === Status.ENDED &&
+                    "ended"
+                )}`}
+                status={contestTimelineObject.contestStatus}
               />
-            </p>
-          )}
-        </div>
-        <div className="tile--footer--options">
-          <a
-            className="tile--footer--contestredirect"
-            aria-label="View competition"
-            href={`${contestUrl}#`}
-          >
-            {!findingsRepo || findingsRepo === "" ? "Preview" : "View"}{" "}
-            competition
-          </a>
-          {dropdownLinks.length > 0 && (
-            <Dropdown
-              triggerButton={
-                <img
-                  src={ellipsisIcon}
-                  alt="Options icon"
-                  width={32}
-                  height={32}
-                />
-              }
-              wrapperClass="tile--footer--dropdown"
-              triggerButtonClass="tile--footer--dropdown--trigger"
-              triggerAriaLabel="See more contest options"
-              hideDownArrow={true}
-              openOnHover={true}
-            >
-              {dropdownLinks?.map((link) =>
-                link.external ? (
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    aria-label={
-                      link.ariaLabel ?? `${link.label} (opens in new window)`
+              {contestTimelineObject.contestStatus !== Status.ENDED && (
+                <p className="tile--footer--timer">
+                  <Countdown
+                    start={startDate}
+                    end={endDate}
+                    updateContestStatus={updateContestTileStatus}
+                    text={
+                      contestTimelineObject.contestStatus === Status.UPCOMING
+                        ? "Starts in "
+                        : "Ends in "
                     }
-                    className="c4dropdown--button"
-                  >
-                    {link.label}
-                  </a>
-                ) : (
-                  <a
-                    href={link.href}
-                    aria-label={link.ariaLabel ?? link.label}
-                    className="c4dropdown--button"
-                  >
-                    {link.label}
-                  </a>
-                )
+                  />
+                </p>
               )}
-            </Dropdown>
-          )}
+            </span>
+            <p className="tile--footer--contesttype">{contestType}</p>
+          </div>
+          {/* Reward pool amount on desktop resolutions */}
+          <p className="tile--body--amount">{amount}</p>
         </div>
-      </footer>
+        {/* Contest tile footer */}
+        <footer className="tile--footer">
+          <div className="tile--footer--details">
+            <ContestStatus
+              className={`tile--footer--status ${clsx(
+                contestTimelineObject.contestStatus === Status.ENDED && "ended"
+              )}`}
+              status={contestTimelineObject.contestStatus}
+            />
+            {contestTimelineObject.contestStatus !== Status.ENDED && (
+              <p className="tile--footer--timer">
+                <Countdown
+                  start={startDate}
+                  end={endDate}
+                  updateContestStatus={updateContestTileStatus}
+                  text={
+                    contestTimelineObject.contestStatus === Status.UPCOMING
+                      ? "Starts in "
+                      : "Ends in "
+                  }
+                />
+              </p>
+            )}
+          </div>
+          <div className="tile--footer--options">
+            <a
+              className="tile--footer--contestredirect"
+              aria-label="View competition"
+              href={`${contestUrl}#`}
+            >
+              {!findingsRepo || findingsRepo === "" ? "Preview" : "View"}{" "}
+              competition
+            </a>
+            {dropdownLinks.length > 0 && (
+              <Dropdown
+                triggerButton={
+                  <img
+                    src={ellipsisIcon}
+                    alt="Options icon"
+                    width={32}
+                    height={32}
+                  />
+                }
+                wrapperClass="tile--footer--dropdown"
+                triggerButtonClass="tile--footer--dropdown--trigger"
+                triggerAriaLabel="See more contest options"
+                hideDownArrow={true}
+                openOnHover={true}
+              >
+                {dropdownLinks?.map((link) =>
+                  link.external ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      aria-label={
+                        link.ariaLabel ?? `${link.label} (opens in new window)`
+                      }
+                      className="c4dropdown--button"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <a
+                      href={link.href}
+                      aria-label={link.ariaLabel ?? link.label}
+                      className="c4dropdown--button"
+                    >
+                      {link.label}
+                    </a>
+                  )
+                )}
+              </Dropdown>
+            )}
+          </div>
+        </footer>
+      </div>
     </div>
   );
 };

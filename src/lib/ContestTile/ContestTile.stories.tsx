@@ -12,21 +12,32 @@ export default meta;
 type Story = StoryObj<typeof ContestTile>;
 
 export const SampleComponent: Story = (args) => (
-  <ContestTile
-    {...args}
-    startDate={new Date(args.startDate).toISOString()}
-    endDate={new Date(args.endDate).toISOString()}
-  />
+  <>
+    <ContestTile
+      {...args}
+      startDate={new Date(args.startDate).toISOString()}
+      endDate={new Date(args.endDate).toISOString()}
+    />
+    <ContestTile
+      {...args}
+      startDate={new Date(args.startDate).toISOString()}
+      endDate={new Date(args.endDate).toISOString()}
+    />
+  </>
 );
+
 SampleComponent.parameters = {
+  layout: "fullscreen",
   docs: {
     canvas: { sourceState: "shown" },
-    story: { height: "400px" },
+    story: { height: "350px" },
   },
 };
 SampleComponent.args = {
   htmlId: "",
   codeAccess: "public",
+  contestType: "Open Audit",
+  isCompact: false,
   isUserCertified: false,
   /** @ts-ignore */
   variant: "DARK",

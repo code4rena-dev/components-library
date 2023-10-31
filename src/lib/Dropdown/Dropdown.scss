@@ -5,13 +5,12 @@
     border-radius: $border-radius__m;
     border: none;
     cursor: pointer;
-    
-    
 
     &--trigger {
       display: flex;
       justify-content: center;
       align-items: center;
+      min-width: max-content;
       color: $color__white;
       background-color: $color__n-90;
       padding: $spacing__xs;

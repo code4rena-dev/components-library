@@ -62,7 +62,9 @@ export const Dropdown = ({
           "c4dropdown--listcontainer"
         )}
       >
-        <div className={"c4dropdown--list"}>{children}</div>
+        <div style={{ display: "fixed" }} className={"c4dropdown--list"}>
+          {children}
+        </div>
       </div>
     </div>
   );

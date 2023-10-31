@@ -175,6 +175,26 @@ $z-index__modal: 1000;
   }
 }
 
+// Container Queries
+// ------------------------------------------------
+@mixin containerQuery($cont) {
+  $containers: (
+    "xxs": $breakpoint__xxs,
+    "xs": $breakpoint__xs,
+    "s": $breakpoint__s,
+    "m": $breakpoint__m,
+    "l": $breakpoint__l,
+    "xl": $breakpoint__xl,
+  );
+
+  // Requires interpolation `#{}` for the value to work
+  @container (min-width: #{map-get($containers, $cont)}) {
+    @content;
+  }
+
+  
+}
+
 // Transitions
 // ------------------------------------------------
 

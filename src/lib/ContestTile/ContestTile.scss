@@ -1,276 +1,393 @@
 @import "../../styles/variables";
 
 .c4contesttile.tile--light {
-    background: linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,.05));
-    border: 1px solid hsla(0,0%,100%,.4);
-    color: $color__white;
+    /* Main component wrapper. Outter wrapper is only for declaring component as a container for container query compatibility */
+    .container--inner {
+        background: linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,.05));
+        border: 1px solid hsla(0,0%,100%,.4);
+        color: $color__white;
 
-    .tile--body {
-        a.tile--body--logo img, img.tile--body--logo {
-            border: 1px solid hsla(0,0%,100%,.4);
-        }
-
-        &--amount {
-            border-bottom: 1px solid hsla(0,0%,100%,.4);
-        }
-
-        @include breakpoint("m") {
-            &--amount {
-                border-bottom: none;
+        .tile--body {
+            a.tile--body--logo img, img.tile--body--logo {
+                border: 1px solid hsla(0,0%,100%,.4);
             }
-        }
-    }
 
-    .tile--footer {
-        border-top: 1px solid hsla(0,0%,100%,.4);
-
-        &--status {
-            border-right: 1px solid hsla(0,0%,100%,.4);
-        }
-
-        &--contestredirect {
-            border-top: 1px solid hsla(0,0%,100%,.4);
-            color: $color__white;
-
-            &:hover {
-                background: hsla(0,0%,100%,.1);
+            &--amount, &--statusmobile {
+                border-bottom: 1px solid hsla(0,0%,100%,.4) !important;
             }
-        }
-        &--dropdown {
-            border-left: 1px solid hsla(0,0%,100%,.4);
-            border-top: 1px solid hsla(0,0%,100%,.4);
 
-            &--trigger {
-                &:hover {
-                    background: hsla(0,0%,100%,.1);
+            @include containerQuery("m") {
+                &--amount {
+                    border-bottom: none !important;
                 }
             }
         }
 
-        @include breakpoint("m") {
-            &--timer {
+        .tile--footer {
+            border-top: 1px solid hsla(0,0%,100%,.4) !important;
+
+            &--status {
                 border-right: 1px solid hsla(0,0%,100%,.4);
             }
-            &--status.ended {
-                border-right: 1px solid hsla(0,0%,100%,.4);
-            }
+
             &--contestredirect {
-                border-top: none;
-                width: fit-content;
-                white-space: nowrap;
+                border-top: 1px solid hsla(0,0%,100%,.4);
+                color: $color__white;
+
+                &:hover {
+                    background: hsla(0,0%,100%,.1);
+                }
             }
             &--dropdown {
-                border-top: none;
-            } 
+                border-left: 1px solid hsla(0,0%,100%,.4);
+                border-top: 1px solid hsla(0,0%,100%,.4);
+
+                &--trigger {
+                    &:hover {
+                        background: hsla(0,0%,100%,.1);
+                    }
+                }
+            }
+
+            @include containerQuery("m") {
+                &--timer {
+                    border-right: 1px solid hsla(0,0%,100%,.4) !important;
+                }
+                &--status.ended {
+                    border-right: 1px solid hsla(0,0%,100%,.4);
+                }
+                &--contestredirect {
+                    border-top: none;
+                    width: fit-content;
+                    white-space: nowrap;
+                }
+                &--dropdown {
+                    border-top: none;
+                } 
+            }
         }
     }
 }
 
 .c4contesttile, .tile--dark {
+    container-type: inline-size;
     width: 100%;
-    background: $color__n-85;
-    border: 1px solid $color__n-60;
-    border-radius: $border-radius__base;
-    color: $color__text;
+    max-width: 1036px;
+    margin-bottom: 1.5rem;
+    
+    /* Main component wrapper. Outter wrapper is only for declaring component as a container for container query compatibility */
+    .container--inner {
+        background: $color__n-85;
+        border: 1px solid $color__n-60;
+        border-radius: $border-radius__base;
+        color: $color__text;
 
-    a, button {
-        &:focus {
-            outline: none;
-            border: 1px solid $color__white !important;
-            border-radius: $border-radius__base;
+        /* Focus state for all links & buttons */
+        a, button {
+            &:focus {
+                outline: none;
+                border: 1px solid $color__white !important;
+                border-radius: $border-radius__base;
+            }
         }
-    }
 
-    .tile--body {
-        padding-top: $spacing__s;
-        display: flex;
-        flex-direction: column-reverse;
-        gap: 0;
-
-        header {
-            padding: $spacing__m;
+        /* Main content area of the contest tile */
+        .tile--body {
+            padding-top: $spacing__s;
             display: flex;
-            flex-direction: column;
-            gap: $spacing__m;
-        }
+            flex-direction: column-reverse;
+            gap: 0;
 
-        a.tile--body--logo {
-            max-width: 90px;
-            max-height: 90px;
-            border-radius: 50%;
-            margin: auto;
-
-            img {
-                object-fit: cover;
-                border: 1px solid $color__n-60;
-                border-radius: 50%;
-                background: white;
-                min-width: 88px;
-                min-height: 88px;
-                max-width: 88px;
-                max-height: 88px;
-            }
-        }
-        img.tile--body--logo {
-            object-fit: cover;
-            border-radius: 50%;
-            background: white;
-            border: 1px solid $color__n-60;
-            min-width: 88px;
-            min-height: 88px;
-            max-width: 88px;
-            max-height: 88px;
-            margin: auto;
-        }
-        &--botracestatus {
-            display: inline-flex;
-            gap: 0.5rem;
-            align-items: center;
-            color: $color__white;
-            font-weight: 700;
-        }
-        &--period, &--description {
-            display: block;
-            text-align: center;
-        }
-        &--title {
-            margin: 0rem;
-            color: $color__white;
-            text-align: center;
-        }
-        &--description {
-            margin: $spacing__s 0rem 0rem;
-        }
-        &--amount {
-            margin: 0rem;
-            border-bottom: 1px solid $color__n-60;
-            padding: 0rem $spacing__m $spacing__s;
-            text-align: right;
-            color: $color__white;
-            font-weight: 500px;
-            font-size: $font-size__copy;
-        }
-
-        @include breakpoint("xxs") {
             header {
+                padding: $spacing__base;
+                display: flex;
                 flex-direction: row;
+                gap: $spacing__base;
+                align-items: center;
             }
 
-            a.tile--body--logo, img.tile--body--logo {
-                margin: unset;
-            }
+            /* Sponsor logo */
+            a.tile--body--logo {
+                max-width: 26px;
+                max-height: 26px;
+                border-radius: 50%;
+                width: fit-content;
 
+                img {
+                    object-fit: cover;
+                    border: 1px solid $color__n-60;
+                    border-radius: 50%;
+                    min-width: 1.5rem;
+                    min-height:1.5rem;
+                    max-width: 1.5rem;
+                    max-height: 1.5rem;
+                }
+            }
+            img.tile--body--logo {
+                object-fit: cover;
+                border-radius: 50%;
+                border: 1px solid $color__n-60;
+                min-width: 1.5rem;
+                min-height:1.5rem;
+                max-width: 1.5rem;
+                max-height: 1.5rem;
+                width: fit-content;
+            }
+            /* Text content wrapper */
+            &--contentwrapper {
+                overflow: hidden;
+            }
+            /* Bot race status indicator wrapper */
+            &--botracestatus {
+                display: flex;
+                gap: 0.5rem;
+                align-items: center;
+                color: $color__white;
+                font-weight: 700;
+            }
+            /* Body's text content, includes contest title, description,reward pool, and duration period */
             &--period, &--description, &--title {
                 text-align: left;
             }
+            &--period, &--amount {
+                display: none;
+            }
+            &--title, &--description {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            &--title {
+                margin: 0rem;
+                line-height: 154%;
+                color: $color__white;
+                font-size: $font-size__small;
+            }
+            &--description {
+                margin: 0rem;
+                display: none;
+            }
+            /* Reward pool on mobile display */
+            &--amountmobile {
+                margin: 0px;
+                margin-left: auto;
+                min-width: max-content;
+                color: $color__white;
+                font-size: $font-size__small;
+                font-weight: 500;
+            }
+            /* Special adjustment for mobile display. Updates header with status of contest instead of reward pool. */ 
+            &--statusmobile {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+                column-gap: 1.5rem;
+                row-gap: 0.5rem;
+                border-bottom: 1px solid $color__n-60;
+                padding: 0rem $spacing__base $spacing__base;
+                color: $color__white;
+                font-weight: 500px;
+                font-size: $font-size__small;
+            }
+
+            .tile--body--statusmobile > span {
+                display: flex;
+                flex-direction: row;
+                width: auto;
+                gap: 0.5rem;
+            }
+            
+            .tile--body--statusmobile > p, .tile--body--statusmobile span > * {
+                margin: 0;
+                padding: 0 !important;
+                border: none !important;
+
+                &.tile--footer--status:not(.ended) p {
+                    display: none;
+                }
+                &.tile--footer--contesttype {
+                    min-width: max-content;
+                    margin-left: auto;
+                }
+            }
         }
 
-        @include breakpoint("m") {
-            padding: $spacing__m;
-            flex-direction: row;
-            gap: $spacing__xl;
+        /* Contest tile footer displaying additional contest options & status */
+        .tile--footer {
+            display: none;
 
-            header {
-                padding: 0rem;
+            &--details {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
             }
-            &--amount {
-                border-bottom: none;
-                padding: 0rem;
+
+            &--status, &--timer, &--contestredirect {
+                padding: $spacing__s $spacing__m;
+            }
+            &--status {
+                justify-content: flex-start;
+                width: max-content;
+                border-right: 1px solid $color__n-60;
+
+                &.ended {
+                    border-right: 0px;
+                }
+            }
+            &--timer {
+                width:  100%;
+                margin: 0px;
+            }
+            &--options {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+            }
+
+            &--contestredirect {
+                text-align: center;
+                width: 100%;
+                border-top: 1px solid $color__n-60;
+                text-decoration: none;
+                color: $color__white;
+
+                &:hover {
+                    background: $color__n-80;
+                }
+            }
+            &--dropdown {
+                border-left: 1px solid $color__n-60;
+                border-top: 1px solid $color__n-60;
+                border-radius: 0px;
+
+                &--trigger {
+                    height: 100%;
+                    padding: 0rem $spacing__m;
+                    background: none;
+                    border: none;
+                    color: $color__white;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: $color__n-80;
+                    }
+                }
             }
         }
     }
 
-    .tile--footer {
-        border-top: 1px solid $color__n-60;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        height: fit-content;
-
-        &--details {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-        }
-
-        &--status, &--timer, &--contestredirect {
-            padding: $spacing__s $spacing__m;
-        }
-        &--status {
-            justify-content: flex-start;
-            width: max-content;
-            border-right: 1px solid $color__n-60;
-
-            &.ended {
-                border-right: 0px;
-            }
-        }
-        &--timer {
-            width:  100%;
-            margin: 0px;
-        }
-        &--options {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-        }
-
-        &--contestredirect {
-            text-align: center;
-            width: 100%;
-            border-top: 1px solid $color__n-60;
-            text-decoration: none;
-            color: $color__white;
-
-            &:hover {
-                background: $color__n-80;
-            }
-        }
-        &--dropdown {
-            border-left: 1px solid $color__n-60;
-            border-top: 1px solid $color__n-60;
-
-            &--trigger {
-               height: 100%;
-               padding: 0rem $spacing__m;
-               background: none;
-               border: none;
-               color: $color__white;
-               cursor: pointer;
-
-               &:hover {
-                   background: $color__n-80;
-               }
-            }
-        }
-
-        @include breakpoint("m") {
-            flex-wrap: nowrap;
-
-            &--timer {
-                border-right: 1px solid $color__n-60;
-            }
-
-            &--status.ended {
-                width: 100%;
-                border-right: 1px solid $color__n-60;
-            }
-
-            &--options {
-                width: fit-content;
-            }
-
-            &--contestredirect {
-                width: fit-content;
-                white-space: nowrap;
-                border-top: none;
-                &.certified--invisible,&.dropdown--invisible {
-                    width: fit-content;
+    @include containerQuery("xxs") {
+        .container--inner:not(.compact) {
+            .tile--body {
+                header {
+                    flex-direction: row;
+                    padding: $spacing__m;
+                    gap: $spacing__m;
+                    align-items: flex-start;
+                }
+                a.tile--body--logo {
+                    min-width: 90px;
+                    min-height: 90px;
+                    max-width: 90px;
+                    max-height: 90px;
+                }
+                a.tile--body--logo img, img.tile--body--logo {
+                    margin: unset;
+                    min-width: 88px;
+                    min-height: 88px;
+                    max-width: 88px;
+                    max-height: 88px;
+                }
+                &--title, &--description {
+                    overflow: hidden;
+                    text-overflow: unset;
+                    white-space: unset;
+                }
+                &--title {
+                    font-size: $headline-font-size__xxs;
+                }
+                &--period, &--description {
+                    display: block;
+                }
+                &--description {
+                    margin: $spacing__s 0rem 0rem;
+                }
+                &--amount {
+                    display: block;
+                    margin: 0rem;
+                    border-bottom: 1px solid $color__n-60;
+                    padding: 0rem $spacing__m $spacing__s;
+                    text-align: right;
+                    color: $color__white;
+                    font-weight: 500px;
+                    font-size: $font-size__copy;
+                }
+                &--statusmobile, &--amountmobile {
+                    display: none;
                 }
             }
-            &--dropdown {
-                border-top: none;
-            } 
+
+            .tile--footer {
+                display: flex;
+                border-top: 1px solid $color__n-60;
+                flex-wrap: wrap;
+                flex-direction: row;
+                height: fit-content;
+            }
+        }
+    }
+
+    @include containerQuery("m") {
+        .container--inner:not(.compact) {
+            .tile--body {
+                padding: $spacing__m;
+                flex-direction: row;
+                gap: $spacing__xl;
+                justify-content: space-between;
+
+                header {
+                    padding: 0rem;
+                }
+
+                &--title {
+                    font-size: $headline-font-size__s;
+                }
+
+                &--amount {
+                    border-bottom: none;
+                    padding: 0rem;
+                }
+            }
+
+            .tile--footer {
+                flex-wrap: nowrap;
+
+                &--timer {
+                    border-right: 1px solid $color__n-60;
+                }
+
+                &--status.ended {
+                    width: 100%;
+                    border-right: 1px solid $color__n-60;
+                }
+
+                &--options {
+                    width: fit-content;
+                }
+
+                &--contestredirect {
+                    width: fit-content;
+                    white-space: nowrap;
+                    border-top: none;
+                    &.certified--invisible,&.dropdown--invisible {
+                        width: fit-content;
+                    }
+                }
+                &--dropdown {
+                    border-top: none;
+                } 
+            }
         }
     }
 }

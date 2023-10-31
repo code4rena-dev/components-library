@@ -13,6 +13,10 @@ export interface ContestTileProps {
   variant?: ContestTileVariant;
   /** String indicating required access for viewing contest. */
   codeAccess: string;
+  /** String indicating a specific categorization for the current contest. */
+  contestType?: string;
+  /** Boolean that sets the contest tile strictly in mobile status for all screen widths. */
+  isCompact?: boolean;
   /** Boolean indicating certification status of logged in user. Required for viewing certain contests. */
   isUserCertified: boolean;
   /** Unique numerical identifier for the current contest. */
