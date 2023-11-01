@@ -9,6 +9,7 @@ const wrapperStyle = {
   justifyContent: "center",
   alignItems: "center",
   padding: "0rem 1rem",
+  marginTop: "2rem",
 };
 
 const preview: Preview = {

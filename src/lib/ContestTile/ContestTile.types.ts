@@ -4,6 +4,8 @@ import { Status } from "../ContestStatus/ContestStatus.types";
 export enum ContestTileVariant {
   LIGHT = "LIGHT",
   DARK = "DARK",
+  COMPACT_LIGHT = "COMPACT_LIGHT",
+  COMPACT_DARK = "COMPACT_DARK"
 }
 
 export interface ContestTileProps {
@@ -13,6 +15,8 @@ export interface ContestTileProps {
   variant?: ContestTileVariant;
   /** String indicating required access for viewing contest. */
   codeAccess: string;
+  /** String indicating a specific categorization for the current contest. */
+  contestType?: string;
   /** Boolean indicating certification status of logged in user. Required for viewing certain contests. */
   isUserCertified: boolean;
   /** Unique numerical identifier for the current contest. */
