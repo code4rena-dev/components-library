@@ -19,14 +19,16 @@ export const SampleComponent: Story = (args) => (
   />
 );
 SampleComponent.parameters = {
+  layout: "fullscreen",
   docs: {
     canvas: { sourceState: "shown" },
-    story: { height: "400px" },
+    story: { height: "450px" },
   },
 };
 SampleComponent.args = {
   htmlId: "",
   codeAccess: "public",
+  contestType: "Open Audit",
   isUserCertified: false,
   /** @ts-ignore */
   variant: "DARK",

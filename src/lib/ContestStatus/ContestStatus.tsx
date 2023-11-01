@@ -30,10 +30,10 @@ export const ContestStatus: React.FC<ContestStatusProps> = ({
     status && (
       <div id={id ?? undefined} className={`c4conteststatus ${className}`}>
         <div className={`${styling}`} />
-        {status === Status.UPCOMING && "Soon"}
-        {status === Status.LIVE && "Live"}
-        {status === Status.ENDED && "Ended"}
-        {!status && "-"}
+        {status === Status.UPCOMING && <p>Soon</p>}
+        {status === Status.LIVE && <p>Live</p>}
+        {status === Status.ENDED && <p>Ended</p>}
+        {!status && <p>-</p>}
       </div>
     )
   );
