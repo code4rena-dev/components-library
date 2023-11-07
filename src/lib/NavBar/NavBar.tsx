@@ -6,9 +6,9 @@ import walletConnectIcon from "../../../public/logos/wallet-connect-logo.svg";
 import c4LogoIcon from "../../../public/logos/c4-logo.svg";
 import registerIcon from "../../../public/icons/register.svg";
 import { Dropdown } from "../Dropdown/Dropdown";
-import Avatar from "react-avatar";
 import { ModalProps, NavBarProps, Web3ProviderType } from "./NavBar.types";
 import "./NavBar.scss";
+import { Avatar } from "../Avatar";
 
 const UserDropdown = ({
   userImage = "/",
@@ -20,7 +20,12 @@ const UserDropdown = ({
   logoutHandler: () => void;
 }) => {
   const avatar = () => (
-    <Avatar src={userImage} name={username} size="30px" round={true} />
+    <Avatar
+      imgElement={userImage ? <img src={userImage} alt={username} /> : undefined}
+      name={username}
+      size={30}
+      round={30}
+    />
   );
 
   const children = (
