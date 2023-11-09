@@ -1,4 +1,5 @@
 export * from "./Alert/Alert.types";
+export * from "./Avatar/Avatar.types";
 export * from "./Button/Button.types";
 export * from "./Card/Card.types";
 export * from "./ContestStatus/ContestStatus.types";
