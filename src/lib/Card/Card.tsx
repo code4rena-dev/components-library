@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React from "react";
+import React, { Fragment } from "react";
 import { CardImageBorderRadius, CardImageSize, CardProps } from "./Card.types";
 import { Button } from "../Button";
 import { ButtonSize, ButtonType, ButtonVariant } from "../Button/Button.types";
@@ -8,14 +8,14 @@ import "./Card.scss";
 /**
  * A stylized Code4rena card with 4 variants and optional footer, cta button, and title.
  * Requires an image tag for the top left corner and children for the body.
- * 
+ *
  * __Available variants:__
  * - `TRANSPARENT` - makes the background of the card transparent
  * - `OUTLINED` - adds border around the card
  * - `COMPACT` - displays the body below the image to allow the card to be more narrow
  * - `BOTTOM_ALIGNED` - makes the title and body bottom aligned instead of top aligned
- * 
- * @param children - Elements to be rendered inside the body of the card, passed in as children. 
+ *
+ * @param children - Elements to be rendered inside the body of the card, passed in as children.
  * @param className - String of custom classes to extend the default styling of the component.
  * @param variants - Array of style variants to be applied to the rendered component.
  * @param footerDetails - Informational content to be rendered on the left side of the footer.
@@ -78,7 +78,9 @@ export const Card: React.FC<CardProps> = ({
           )}
           {footerLinks && (
             <div className="card__footer-link-wrapper">
-              {footerLinks.map((link) => link)}
+              {footerLinks.map((link, index) => (
+                <Fragment key={index}>{link}</Fragment>
+              ))}
             </div>
           )}
         </footer>
