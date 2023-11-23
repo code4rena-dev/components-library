@@ -1,5 +1,7 @@
 export * from "./Alert";
+export * from "./Avatar";
 export * from "./Button";
+export * from "./Card";
 export * from "./ContestStatus";
 export * from "./ContestTile";
 export * from "./Dropdown";
@@ -7,4 +9,3 @@ export * from "./EyebrowBar";
 export * from "./Input";
 export * from "./NavBar";
 export * from "./Tag";
-export * from "./Card";

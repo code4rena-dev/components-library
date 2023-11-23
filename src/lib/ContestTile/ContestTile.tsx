@@ -358,7 +358,7 @@ export const ContestTile: React.FC<ContestTileProps> = ({
                 status={contestTimelineObject.contestStatus}
               />
               {contestTimelineObject.contestStatus !== Status.ENDED && (
-                <p className="tile--footer--timer">
+                <div className="tile--footer--timer">
                   <Countdown
                     start={startDate}
                     end={endDate}
@@ -369,7 +369,7 @@ export const ContestTile: React.FC<ContestTileProps> = ({
                         : "Ends in "
                     }
                   />
-                </p>
+                </div>
               )}
             </span>
             <p className="tile--body--contesttypecompact">{contestType}</p>
@@ -387,7 +387,7 @@ export const ContestTile: React.FC<ContestTileProps> = ({
               status={contestTimelineObject.contestStatus}
             />
             {contestTimelineObject.contestStatus !== Status.ENDED && (
-              <p className="tile--footer--timer">
+              <div className="tile--footer--timer">
                 <Countdown
                   start={startDate}
                   end={endDate}
@@ -398,7 +398,7 @@ export const ContestTile: React.FC<ContestTileProps> = ({
                       : "Ends in "
                   }
                 />
-              </p>
+              </div>
             )}
           </div>
           <div className="tile--footer--options">
@@ -425,9 +425,10 @@ export const ContestTile: React.FC<ContestTileProps> = ({
                 hideDownArrow={true}
                 openOnHover={true}
               >
-                {dropdownLinks?.map((link) =>
+                {dropdownLinks?.map((link, index) =>
                   link.external ? (
                     <a
+                      key={`${link.label}-${index}`}
                       href={link.href}
                       target="_blank"
                       rel="noreferrer noopener"
@@ -440,6 +441,7 @@ export const ContestTile: React.FC<ContestTileProps> = ({
                     </a>
                   ) : (
                     <a
+                      key={`${link.label}-${index}`}
                       href={link.href}
                       aria-label={link.ariaLabel ?? link.label}
                       className="c4dropdown--button"
