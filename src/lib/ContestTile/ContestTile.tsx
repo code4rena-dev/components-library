@@ -141,13 +141,11 @@ export const Countdown = ({
  * @param htmlId - An html `id` for the contest tile's wrapping div.
  * @param variant - Style variant to be applied to rendered component.
  * @param contestData - Information required for rendering a contest tile. For bug bounty tiles see `bountyData` prop.
- * @param isUserCertified - Boolean indicating certification status of logged in user. Required for viewing certain contests.
+ * @param bountyData - Information required for rendering a bounty tile. For contest tiles see `contestData` prop.
  * @param sponsorImage - Image url for contest's sponsor.
  * @param sponsorUrl - External url to the sponsor's page (Twitter, etc.).
  * @param title - Title for the current contest.
  * @param description - Description for the current contest.
- * @param startDate - Date string for the current contest's start date.
- * @param endDate - Date string for the current contest's end date.
  */
 export const ContestTile: React.FC<ContestTileProps> = ({
   htmlId,
