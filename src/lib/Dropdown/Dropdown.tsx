@@ -34,9 +34,11 @@ export const Dropdown = ({
       className={clsx("c4dropdown", wrapperClass && wrapperClass)}
     >
       <button
-        aria-label={triggerAriaLabel ?? undefined}
         onClick={() => setIsOpen(!isOpen)}
         onTouchStart={() => setIsOpen(!isOpen)}
+        aria-haspopup={true}
+        aria-expanded={isOpen}
+        aria-label={triggerAriaLabel ?? undefined}
         className={clsx(
           "c4dropdown--trigger",
           triggerButtonClass && triggerButtonClass
@@ -61,6 +63,7 @@ export const Dropdown = ({
           isOpen && "c4dropdown--open",
           "c4dropdown--listcontainer"
         )}
+        aria-hidden={!isOpen}
       >
         <div className={"c4dropdown--list"}>{children}</div>
       </div>
