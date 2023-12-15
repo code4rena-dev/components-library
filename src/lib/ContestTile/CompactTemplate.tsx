@@ -103,6 +103,7 @@ const IsContest = ({title, contestData, sponsorUrl, sponsorImage}: {
             target="_blank"
             rel="noreferrer noopener"
             className="logo"
+            onClick={(e) => e.stopPropagation()}
           >
             <img
               alt="Sponsor logo"
@@ -122,7 +123,12 @@ const IsContest = ({title, contestData, sponsorUrl, sponsorImage}: {
         )}
         <div className="content">
           <h2 className="title">
-            <a href={`${contestUrl}#top`}>{title}</a>
+            <a
+              href={contestUrl}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {title}
+            </a>
           </h2>
         </div>
         <p className="amount">{amount}</p>
@@ -147,6 +153,7 @@ const IsBounty = ({title, bountyData, sponsorUrl, sponsorImage}: {
             target="_blank"
             rel="noreferrer noopener"
             className="logo"
+            onClick={(e) => e.stopPropagation()}
           >
             <img
               alt="Sponsor logo"
@@ -165,7 +172,12 @@ const IsBounty = ({title, bountyData, sponsorUrl, sponsorImage}: {
           />
         )}
         <h2 className="title">
-          <a href={bountyUrl ? `${bountyUrl}#top` : '#'}>{title}</a>
+          <a
+            href={bountyUrl}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {title}
+          </a>
         </h2>
         <p className="type">Bug Bounty</p>
       </header>

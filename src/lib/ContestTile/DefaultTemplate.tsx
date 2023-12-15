@@ -153,7 +153,6 @@ export default function DefaultTemplate({
                     sponsorUrl={sponsorUrl}
                     sponsorImage={sponsorImage}
                     bountyData={bountyData}
-                    dropdownLinks={dropdownLinks}
                     bountyTimelineObject={bountyTimelineObject}
                     updateBountyTileStatus={updateBountyTileStatus}
                   />}
@@ -240,7 +239,7 @@ function IsContest({
     updateContestTileStatus: () => void;
     contestTimelineObject: ContestSchedule | undefined;
 }) {
-  const { contestUrl, amount, findingsRepo } = contestData;
+  const { contestUrl, amount, findingsRepo, startDate, endDate } = contestData;
 
   return (
     <Fragment>
@@ -253,13 +252,14 @@ function IsContest({
                     target="_blank"
                     rel="noreferrer noopener"
                     className="logo"
+                    onClick={(e) => e.stopPropagation()}
                   >
-                  <img
-                      alt="Sponsor logo"
-                      src={sponsorImage ?? "/"}
-                      width={88}
-                      height={88}
-                  />
+                    <img
+                        alt="Sponsor logo"
+                        src={sponsorImage ?? "/"}
+                        width={88}
+                        height={88}
+                    />
                   </a>
               ) : (
                   <img
@@ -281,7 +281,12 @@ function IsContest({
                   </small>
                   {/* Contest title */}
                   <h2 className="title">
-                    <a href={contestUrl ? `${contestData.contestUrl}#top` : '#'}>{title}</a>
+                    <a
+                      href={contestUrl}
+                      onClick={(e) => e.stopPropagation()}  
+                    >
+                      {title}
+                    </a>
                   </h2>
                   {/* Contest description */}
                   <p className="description">
@@ -313,22 +318,22 @@ function IsContest({
         <div className="details">
           {contestTimelineObject && <ContestStatus
               className={`status ${clsx(
-              contestTimelineObject.contestStatus === Status.ENDED && "ended"
+                contestTimelineObject.contestStatus === Status.ENDED && "ended"
               )}`}
               status={contestTimelineObject.contestStatus}
           />}
-          {contestTimelineObject && contestTimelineObject.contestStatus !== Status.ENDED && (
+          {contestData && contestTimelineObject && contestTimelineObject.contestStatus !== Status.ENDED && (
               <div className="timer">
-              <Countdown
-                  start={contestData.startDate}
-                  end={contestData.endDate}
-                  updateContestStatus={updateContestTileStatus}
-                  text={
-                  contestTimelineObject.contestStatus === Status.UPCOMING
-                      ? "Starts in "
-                      : "Ends in "
-                  }
-              />
+                <Countdown
+                    start={startDate}
+                    end={endDate}
+                    updateContestStatus={updateContestTileStatus}
+                    text={
+                    contestTimelineObject.contestStatus === Status.UPCOMING
+                        ? "Starts in "
+                        : "Ends in "
+                    }
+                />
               </div>
           )}
         </div>
@@ -336,7 +341,8 @@ function IsContest({
           <a
             className="contest-redirect"
             aria-label="View audit"
-            href={`${contestData.contestUrl}`}
+            href={contestUrl}
+            onClick={(e) => e.stopPropagation()}
           >
             {!findingsRepo || findingsRepo === "" ? "Preview" : "View"} audit
           </a>
@@ -353,7 +359,6 @@ function IsBounty({
   sponsorUrl,
   sponsorImage,
   bountyData,
-  dropdownLinks,
   updateBountyTileStatus,
   bountyTimelineObject
 }: {
@@ -362,12 +367,6 @@ function IsBounty({
   sponsorUrl?: string;
   sponsorImage?: string;
   bountyData: BountyTileData;
-  dropdownLinks: {
-      label: string;
-      href: string;
-      external?: boolean;
-      ariaLabel?: string;
-  }[]
   updateBountyTileStatus?: () => void;
   bountyTimelineObject?: ContestSchedule | undefined;
 }) {
@@ -385,6 +384,7 @@ function IsBounty({
                   target="_blank"
                   rel="noreferrer noopener"
                   className="logo"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <img
                       alt="Sponsor logo"
@@ -405,7 +405,12 @@ function IsBounty({
             <div className="content--wrapper">
                 {/* Contest title */}
                 <h2 className="title">
-                  <a href={bountyUrl ? `${bountyUrl}#top` : '#'}>{title}</a>
+                  <a
+                    href={bountyUrl}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {title}
+                  </a>
                 </h2>
                 {/* Contest description */}
                 <p className="description">
@@ -428,7 +433,7 @@ function IsBounty({
                 )}`}
                 status={bountyTimelineObject.contestStatus}
               />}
-              {bountyTimelineObject && bountyTimelineObject.contestStatus === Status.UPCOMING && (
+              {bountyData && bountyTimelineObject && bountyTimelineObject.contestStatus === Status.UPCOMING && (
                 <div className="timer">
                   <Countdown
                       start={startDate}
@@ -443,7 +448,8 @@ function IsBounty({
             <a
               className="contest-redirect"
               aria-label="View bounty"
-              href={`${bountyUrl}`}
+              href={bountyUrl}
+              onClick={(e) => e.stopPropagation()}
             >
               View details
             </a>
