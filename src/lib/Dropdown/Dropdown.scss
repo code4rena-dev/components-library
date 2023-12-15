@@ -6,8 +6,6 @@
     border: none;
     cursor: pointer;
     
-    
-
     &--trigger {
       display: flex;
       justify-content: center;
@@ -18,6 +16,10 @@
       border: none;
       border-radius: $border-radius__m;
       cursor: pointer;
+
+      img {
+        min-width: 32px;
+      }
 
       &:focus {
         outline: 1px solid $color__white;
@@ -63,7 +65,7 @@
       &.c4dropdown--open {
         visibility: visible;
         opacity: 1;
-        z-index: 1;
+        z-index: 87;
         transform: translateY(0);
       }
 
