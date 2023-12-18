@@ -10,7 +10,6 @@ import { Status } from "../ContestStatus/ContestStatus.types";
 import {
   formatDistanceToNow,
   formatDistanceToNowStrict,
-  isBefore,
 } from "date-fns";
 import "./ContestTile.scss";
 import CompactTemplate from "./CompactTemplate";
@@ -158,6 +157,19 @@ export const ContestTile: React.FC<ContestTileProps> = ({
   description,
 }) => {
   const isDefault = variant === ContestTileVariant.DARK || variant === ContestTileVariant.LIGHT;
+
+  useEffect(() => {
+    // Loads polyfill to support container queries in older browsers.
+    const loadContainerQueryPolyfill = () => {
+      const supportsContainerQueries = "container" in document.documentElement.style;
+      if (!supportsContainerQueries) {
+        // @ts-ignore
+        import("container-query-polyfill");
+      }
+    }
+
+    loadContainerQueryPolyfill();
+  }, []);
 
   return (isDefault 
     ? <DefaultTemplate
