@@ -93,7 +93,11 @@ const IsContest = ({title, contestData, sponsorUrl, sponsorImage}: {
               </div>
             )}  
           </span>}
-          <p className="type">{contestType}</p>
+          <p className="type">
+            {contestType === "Audit + mitigation review"
+              ? "Audit"
+              : contestType}
+          </p>
         </div>
       </header>
       <div className="content--wrapper">
