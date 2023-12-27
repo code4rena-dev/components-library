@@ -7,10 +7,7 @@ import {
 } from "./ContestTile.types";
 import { getDates } from "../../utils/time";
 import { Status } from "../ContestStatus/ContestStatus.types";
-import {
-  formatDistanceToNow,
-  formatDistanceToNowStrict,
-} from "date-fns";
+import { formatDistanceToNow, formatDistanceToNowStrict } from "date-fns";
 import "./ContestTile.scss";
 import CompactTemplate from "./CompactTemplate";
 import DefaultTemplate from "./DefaultTemplate";
@@ -147,58 +144,53 @@ export const Countdown = ({
  * @param description - Description for the current contest.
  */
 export const ContestTile: React.FC<ContestTileProps> = ({
-  htmlId,
-  variant,
+  htmlId = "",
+  variant = ContestTileVariant.DARK,
   contestData,
   bountyData,
-  sponsorImage,
-  sponsorUrl,
+  sponsorImage = undefined,
+  sponsorUrl = undefined,
   title,
   description,
 }) => {
-  const isDefault = variant === ContestTileVariant.DARK || variant === ContestTileVariant.LIGHT;
+  const isDefault =
+    variant === ContestTileVariant.DARK || variant === ContestTileVariant.LIGHT;
 
   useEffect(() => {
     // Loads polyfill to support container queries in older browsers.
     const loadContainerQueryPolyfill = () => {
-      const supportsContainerQueries = "container" in document.documentElement.style;
+      const supportsContainerQueries =
+        "container" in document.documentElement.style;
       if (!supportsContainerQueries) {
         // @ts-ignore
         import("container-query-polyfill");
       }
-    }
+    };
 
     loadContainerQueryPolyfill();
   }, []);
 
-  return (isDefault 
-    ? <DefaultTemplate
-        variant={variant}
-        htmlId={htmlId}
-        title={title}
-        description={description}
-        sponsorImage={sponsorImage}
-        sponsorUrl={sponsorUrl}
-        contestData={contestData}
-        bountyData={bountyData}  
+  return isDefault ? (
+    <DefaultTemplate
+      variant={variant}
+      htmlId={htmlId}
+      title={title}
+      description={description}
+      sponsorImage={sponsorImage}
+      sponsorUrl={sponsorUrl}
+      contestData={contestData}
+      bountyData={bountyData}
     />
-    : <CompactTemplate
-        variant={variant}
-        htmlId={htmlId}
-        title={title}
-        description={description}
-        sponsorImage={sponsorImage}
-        sponsorUrl={sponsorUrl}
-        contestData={contestData}
-        bountyData={bountyData}  
+  ) : (
+    <CompactTemplate
+      variant={variant}
+      htmlId={htmlId}
+      title={title}
+      description={description}
+      sponsorImage={sponsorImage}
+      sponsorUrl={sponsorUrl}
+      contestData={contestData}
+      bountyData={bountyData}
     />
   );
-};
-
-ContestTile.defaultProps = {
-  htmlId: "",
-  /* @ts-ignore */
-  variant: "DARK",
-  sponsorImage: undefined,
-  sponsorUrl: undefined,
 };
