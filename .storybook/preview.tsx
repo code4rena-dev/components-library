@@ -1,8 +1,8 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import type { Preview } from "@storybook/react";
 import "../src/styles/base/typography.scss";
 
-const wrapperStyle = {
+const wrapperStyle: CSSProperties = {
   display: "flex",
   gap: "10px",
   flexWrap: "wrap",
@@ -15,7 +15,6 @@ const wrapperStyle = {
 const preview: Preview = {
   decorators: [
     (Story) => (
-      /* @ts-ignore */
       <div style={wrapperStyle}>
         <Story />
       </div>

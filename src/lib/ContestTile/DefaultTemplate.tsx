@@ -19,7 +19,8 @@ export default function DefaultTemplate({
     sponsorImage,
     sponsorUrl,
     contestData,
-    bountyData
+    bountyData,
+    hideDropdown,
 }: ContestTileProps) {
     const variantClasses = clsx({
       "tile--light": variant === ContestTileVariant.LIGHT,
@@ -84,7 +85,7 @@ export default function DefaultTemplate({
       const links: DropdownLink[] = [];
 
       if (contestData && contestTimelineObject) {
-        if (contestTimelineObject.contestStatus !== Status.LIVE) {
+        if (hideDropdown || contestTimelineObject.contestStatus !== Status.LIVE) {
           setDropdownLinks(links);
           return;
         }
@@ -130,6 +131,7 @@ export default function DefaultTemplate({
       hasBotRace,
       contestTimelineObject,
       canViewContest,
+      hideDropdown,
     ]);
 
     return (
@@ -340,7 +342,7 @@ function IsContest({
         <div className="options">
           <a
             className="contest-redirect"
-            aria-label="View audit"
+            aria-label={"View " + title + " audit"}
             href={contestUrl}
             onClick={(e) => e.stopPropagation()}
           >

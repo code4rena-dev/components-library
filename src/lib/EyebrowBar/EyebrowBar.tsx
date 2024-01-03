@@ -12,11 +12,11 @@ import "./EyebrowBar.scss";
  * @param text - Main text displayed in the component.
  */
 export const EyebrowBar: React.FC<EyebrowBarProps> = ({
-  buttonLabel,
-  className,
-  external,
-  href,
-  id,
+  buttonLabel = "Learn more",
+  className = undefined,
+  external = false,
+  href = undefined,
+  id = undefined,
   text,
 }) => {
   return (
@@ -39,12 +39,4 @@ export const EyebrowBar: React.FC<EyebrowBarProps> = ({
       </p>
     </div>
   );
-};
-
-EyebrowBar.defaultProps = {
-  buttonLabel: "Learn more",
-  className: undefined,
-  external: false,
-  href: undefined,
-  id: undefined,
 };

@@ -76,17 +76,17 @@ const mappedTypes = (
  */
 export const Input: React.FC<InputProps> = ({
   inputId,
-  fieldType,
-  isMultiSelect,
-  variant,
-  required,
+  fieldType = "text",
+  isMultiSelect = false,
+  variant = InputVariant.FIELD,
+  required = false,
   label,
   helpText,
-  disabled,
+  disabled = false,
   maxLength,
   placeholder,
   selectValue,
-  forceValidation,
+  forceValidation = false,
   selectOptions,
   validator,
   value,
@@ -232,14 +232,4 @@ export const Input: React.FC<InputProps> = ({
         ))}
     </fieldset>
   );
-};
-
-Input.defaultProps = {
-  disabled: false,
-  fieldType: "text",
-  forceValidation: false,
-  isMultiSelect: false,
-  required: false,
-  // @ts-ignore
-  variant: "FIELD",
 };
