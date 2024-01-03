@@ -152,6 +152,7 @@ export const ContestTile: React.FC<ContestTileProps> = ({
   sponsorUrl = undefined,
   title,
   description,
+  hideDropdown = false,
 }) => {
   const isDefault =
     variant === ContestTileVariant.DARK || variant === ContestTileVariant.LIGHT;
@@ -180,6 +181,7 @@ export const ContestTile: React.FC<ContestTileProps> = ({
       sponsorUrl={sponsorUrl}
       contestData={contestData}
       bountyData={bountyData}
+      hideDropdown={hideDropdown}
     />
   ) : (
     <CompactTemplate
