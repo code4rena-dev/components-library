@@ -53,6 +53,8 @@ export interface ContestTileData {
   contestRepo: string;
   /** Absolute url to the contest's findings. */
   findingsRepo: string;
+  /** Absolute url to the contest's findings. */
+  botFindingsRepo?: string;
   /** Reward pool for the current contest. */
   amount: string;
   /** Callback function to be triggered on contest time/status changes. */

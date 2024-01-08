@@ -58,26 +58,35 @@ export default function DefaultTemplate({
     }, [bountyData])
 
     useEffect(() => {
-        if (bountyData && bountyData.startDate) {
-          const newTimelineObject = getDates(bountyData.startDate, "2999-01-01T00:00:00Z");
-          setBountyTimelineObject(newTimelineObject);
+      if (bountyData && bountyData.startDate) {
+        const newTimelineObject = getDates(
+          bountyData.startDate,
+          "2999-01-01T00:00:00Z"
+        );
+        setBountyTimelineObject(newTimelineObject);
+      }
+
+      if (contestData) {
+        setHasBotRace(!!contestData.botFindingsRepo);
+        if (contestData.startDate && contestData.endDate) {
+          const newTimelineObject = getDates(
+            contestData.startDate,
+            contestData.endDate
+          );
+          setContestTimelineObject(newTimelineObject);
         }
 
-        if (contestData) {
-            setHasBotRace(contestData.codeAccess === "public");
-            if (contestData.startDate && contestData.endDate) {
-              const newTimelineObject = getDates(contestData.startDate, contestData.endDate);
-              setContestTimelineObject(newTimelineObject);
-            }
-
-            if (contestData.codeAccess === "public") {
-              setCanViewContest(true);
-            } else if (contestData.codeAccess === "certified" && contestData.isUserCertified) {
-              setCanViewContest(true);
-            } else {
-              setCanViewContest(false);
-            }
+        if (contestData.codeAccess === "public") {
+          setCanViewContest(true);
+        } else if (
+          contestData.codeAccess === "certified" &&
+          contestData.isUserCertified
+        ) {
+          setCanViewContest(true);
+        } else {
+          setCanViewContest(false);
         }
+      }
     }, [contestData])
 
     useEffect(() => {
