@@ -1,4 +1,5 @@
 import React from "react";
+import { Icon } from "../Icon";
 import { Button } from "./Button";
 import { Meta, StoryObj } from "@storybook/react";
 import { ButtonSize, ButtonType, ButtonVariant } from "./Button.types";
@@ -13,7 +14,7 @@ const wrapperStyle = {
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  title: "Button",
+  title: "Components/Button",
   tags: ["autodocs"],
   argTypes: {
     variant: { control: "select" },
@@ -48,8 +49,8 @@ SampleComponent.args = {
   external: false,
   href: "",
   disabled: false,
-  iconLeft: "",
-  iconRight: "/icons/edit.svg",
+  iconLeft: undefined,
+  iconRight: <Icon name="arrow-right" size="small" color="white" />,
   size: ButtonSize.NARROW,
   className: "",
   id: "",
@@ -86,8 +87,8 @@ export const Links: Story = {
           variant={ButtonVariant.PRIMARY}
           href="#internal-test"
           label="Primary Link W/ Icons"
-          iconLeft="/icons/edit.svg"
-          iconRight="/icons/edit.svg"
+          iconLeft={<Icon name="arrow-left" size="small" color="white" /> }
+          iconRight={<Icon name="arrow-right" size="small" color="white" /> }
         />
       </div>
       {/* Secondary */}
@@ -108,8 +109,8 @@ export const Links: Story = {
           variant={ButtonVariant.SECONDARY}
           href="#internal-test"
           label="Secondary Link W/ Icons"
-          iconLeft="/icons/edit.svg"
-          iconRight="/icons/edit.svg"
+          iconLeft={<Icon name="arrow-left" size="small" color="white" /> }
+          iconRight={<Icon name="arrow-right" size="small" color="white" /> }
         />
       </div>
     </>
@@ -145,8 +146,8 @@ export const Buttons: Story = {
           variant={ButtonVariant.PRIMARY}
           onClick={() => null}
           label="Primary Button W/ Icons"
-          iconLeft="/icons/edit.svg"
-          iconRight="/icons/edit.svg"
+          iconLeft={<Icon name="arrow-left" size="small" color="white" /> }
+          iconRight={<Icon name="arrow-right" size="small" color="white" /> }
         />
       </div>
       {/* Secondary */}
@@ -161,8 +162,8 @@ export const Buttons: Story = {
           variant={ButtonVariant.SECONDARY}
           onClick={() => null}
           label="Secondary Button W/ Icons"
-          iconLeft="/icons/edit.svg"
-          iconRight="/icons/edit.svg"
+          iconLeft={<Icon name="arrow-left" size="small" color="white" /> }
+          iconRight={<Icon name="arrow-right" size="small" color="white" /> }
         />
         <Button
           variant={ButtonVariant.SECONDARY}

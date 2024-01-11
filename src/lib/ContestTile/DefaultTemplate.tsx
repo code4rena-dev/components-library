@@ -1,7 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import clsx from "clsx";
 import wolfbotIcon from "../../../public/icons/wolfbot.svg";
-import ellipsisIcon from "../../../public/icons/ellipsis.svg";
 import { BountyTileData, ContestSchedule, ContestTileData, ContestTileProps, ContestTileVariant } from "./ContestTile.types";
 import { DropdownLink, Status } from "../types";
 import { ContestStatus } from "../ContestStatus";
@@ -9,6 +8,7 @@ import { Countdown } from "./ContestTile";
 import { getDates } from "../../utils/time";
 import { isBefore } from "date-fns";
 import { Dropdown } from "../Dropdown";
+import { Icon } from "../Icon";
 
 
 export default function DefaultTemplate({
@@ -180,12 +180,7 @@ function renderDropdown(links: {
   return links.length > 0 && (
     <Dropdown
       triggerButton={
-        <img
-          src={ellipsisIcon}
-          alt="Options icon"
-          width={32}
-          height={32}
-        />
+        <Icon name="more-horizontal" size="large" color="white" />
       }
       wrapperClass="c4contesttile--dropdown"
       triggerButtonClass="c4contesttile--dropdown--trigger"

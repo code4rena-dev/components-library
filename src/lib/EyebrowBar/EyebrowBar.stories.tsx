@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof EyebrowBar> = {
   component: EyebrowBar,
-  title: "Eyebrow Bar",
+  title: "Components/Eyebrow Bar",
   tags: ["autodocs"],
 };
 export default meta;

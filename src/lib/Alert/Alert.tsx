@@ -1,9 +1,8 @@
 import React from "react";
 import clsx from "clsx";
 import { AlertProps, AlertVariant } from "./Alert.types";
-import warningIcon from "../../../public/icons/warning.svg";
-import deleteIcon from "../../../public/icons/delete.svg";
 import "./Alert.scss";
+import { Icon } from "../Icon";
 
 /**
  * A stylized Code4rena alert for displaying important messages to users on the front-end.
@@ -45,12 +44,10 @@ export const Alert: React.FC<AlertProps> = ({
     <div id={id} className={`${styling} ${className}`} role="alert">
       {(variant === AlertVariant.WARNING || variant === AlertVariant.ERROR) && (
         <div className="alert--icon">
-          <img
-            alt={variant === AlertVariant.WARNING ? "Warning" : "Error"}
-            src={variant === AlertVariant.WARNING ? warningIcon : deleteIcon}
-            width={32}
-            height={32}
-          />
+          {variant === AlertVariant.WARNING 
+            ? <Icon name="warning" size="large" color="#ffec91" />
+            : <Icon name="x" size="large" color="#ff427b" />  
+          }
         </div>
       )}
       <div className="alert--content">

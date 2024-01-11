@@ -14,7 +14,7 @@ const wrapperStyle = {
 
 const meta: Meta<typeof Input> = {
   component: Input,
-  title: "Input",
+  title: "Components/Input",
   tags: ["autodocs"],
   argTypes: {
     fieldType: {
