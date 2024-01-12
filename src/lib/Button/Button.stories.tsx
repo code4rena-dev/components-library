@@ -1,9 +1,9 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { Button } from "./Button";
 import { Meta, StoryObj } from "@storybook/react";
 import { ButtonSize, ButtonType, ButtonVariant } from "./Button.types";
 
-const wrapperStyle = {
+const wrapperStyle: CSSProperties = {
   display: "flex",
   gap: "10px",
   flexWrap: "wrap",
@@ -69,7 +69,6 @@ export const Links: Story = {
   render: (args) => (
     <>
       {/* Primary */}
-      {/* @ts-ignore */}
       <div style={wrapperStyle}>
         <Button
           variant={ButtonVariant.PRIMARY}
@@ -91,7 +90,6 @@ export const Links: Story = {
         />
       </div>
       {/* Secondary */}
-      {/* @ts-ignore */}
       <div style={wrapperStyle}>
         <Button
           variant={ButtonVariant.SECONDARY}
@@ -134,7 +132,6 @@ export const Buttons: Story = {
   render: (args) => (
     <>
       {/* Primary */}
-      {/* @ts-ignore */}
       <div style={wrapperStyle}>
         <Button
           variant={ButtonVariant.PRIMARY}
@@ -150,7 +147,6 @@ export const Buttons: Story = {
         />
       </div>
       {/* Secondary */}
-      {/* @ts-ignore */}
       <div style={wrapperStyle}>
         <Button
           variant={ButtonVariant.SECONDARY}
