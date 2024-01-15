@@ -1,0 +1,23 @@
+import { Icon } from "./Icon"
+import { Meta, Source, IconGallery, IconItem } from "@storybook/blocks";
+import { icons } from "./iconList";
+
+<Meta title="Docs/Iconography" />
+
+
+# Icon Gallery
+The gallery below displays all the available icons through the C4 components library. You can use these icons in your application by importing the **[Icon](?path=/docs/components-icon--docs)** component, as seen below:
+
+<Source language="jsx" dark={true} code={`
+    import { Icon } from "@code4rena/components-library";
+
+<Icon name="log-out" size="medium" color="black" />
+`} />
+
+<IconGallery>
+    {Object.keys(icons("24px", "black")).map((k) => {
+        return <IconItem name={k}>
+            <Icon name={k} />
+        </IconItem>
+    })}
+</IconGallery>

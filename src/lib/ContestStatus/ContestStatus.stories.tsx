@@ -5,7 +5,7 @@ import { Status } from "./ContestStatus.types";
 
 const meta: Meta<typeof ContestStatus> = {
   component: ContestStatus,
-  title: "Contest Status",
+  title: "Components/Contest Status",
   tags: ["autodocs"],
   argTypes: {
     status: { control: "select" },

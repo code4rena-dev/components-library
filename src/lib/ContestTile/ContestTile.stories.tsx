@@ -5,7 +5,7 @@ import { ContestTileVariant } from "./ContestTile.types";
 
 const meta: Meta<typeof ContestTile> = {
   component: ContestTile,
-  title: "Contest Tile",
+  title: "Components/Contest Tile",
   tags: ["autodocs"],
   argTypes: {
     contestData: {

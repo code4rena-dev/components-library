@@ -4,7 +4,7 @@ import { Avatar } from "./Avatar";
 
 const meta: Meta<typeof Avatar> = {
   component: Avatar,
-  title: "Avatar",
+  title: "Components/Avatar",
   tags: ["autodocs"],
   argTypes: {
     size: { control: "number" },

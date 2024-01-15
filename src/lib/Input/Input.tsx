@@ -106,7 +106,12 @@ export const Input: React.FC<InputProps> = ({
   const validate = (): (string | ReactNode)[] => {
     let errorMessages: (string | ReactNode)[] = [];
     if (validator) {
-      const validationErrors = validator(value);
+      let validationErrors;
+      if (variant === "SELECT" && selectValue) {
+        validationErrors = validator(selectValue)
+      } else {
+        validationErrors = validator(value);
+      }
       if (validationErrors.length > 0) {
         errorMessages = errorMessages.concat(validationErrors);
       }
@@ -155,7 +160,7 @@ export const Input: React.FC<InputProps> = ({
       ? `${inputId}--help`
       : undefined,
     placeholder: placeholder || "",
-    value: value,
+    value: value ?? "",
     autoComplete: "off",
     onBlur: validate,
     onChange: onChange,

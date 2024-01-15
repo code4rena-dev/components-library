@@ -1,10 +1,11 @@
 import React from "react";
 import { Dropdown } from "./Dropdown";
 import { Meta, StoryObj } from "@storybook/react";
+import { Icon } from "../Icon";
 
 const meta: Meta<typeof Dropdown> = {
   component: Dropdown,
-  title: "Dropdown",
+  title: "Components/Dropdown",
   tags: ["autodocs"],
 };
 export default meta;
@@ -30,7 +31,7 @@ SampleComponent.args = {
   triggerAriaLabel: "See more options",
   hideDownArrow: true,
   triggerButton: (
-    <img src="/icons/ellipsis.svg" alt="Options icon" width={32} height={32} />
+    <Icon name="more-horizontal" size="large" color="white" />
   ),
   children: (
     <>

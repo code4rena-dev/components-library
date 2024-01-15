@@ -15,8 +15,8 @@ import "./Button.scss";
  * @param type - HTML button element type.
  * @param variant - Style variant to be applied to rendered component.
  * @param disabled - Triggers disabled state of a button when enabled. Does not apply to links.
- * @param iconLeft - Relative path or absolute url to an icon/image. Renders icon to the left of label.
- * @param iconRight - Relative path or absolute url to an icon/image. Renders icon to the right of label.
+ * @param iconLeft - Icon element to be rendered to the left of button text.
+ * @param iconRight - Icon element to be rendered to the right of button text.
  * @param size - Standard button size options
  * @param href - __Transforms button into a link.__ Relative path (in-app navigation) or absolute url (external navigation) of location to navigate to.
  * @param external - Determines whether navigation should occur on the same page or in a new tab.
@@ -30,8 +30,8 @@ export const Button: React.FC<ButtonProps> = ({
   variant = ButtonVariant.PRIMARY,
   external = false,
   disabled = false,
-  iconLeft = "",
-  iconRight = "",
+  iconLeft = undefined,
+  iconRight = undefined,
   size = ButtonSize.NARROW,
   href = "",
   onClick,
@@ -54,11 +54,13 @@ export const Button: React.FC<ButtonProps> = ({
       href={href}
       className={`${styling} ${className}`}
     >
-      {/* If passing a relative/absolute path as icon */}
-      {iconLeft && <img alt="" src={iconLeft} width={16} height={16} />}
+      {/* If left icon exists */}
+      {iconLeft}
+
       {label}
-      {/* If passing a relative/absolute path as icon */}
-      {iconRight && <img alt="" src={iconRight} width={16} height={16} />}
+      
+      {/* If right icon exists */}
+      {iconRight}
     </a>
   ) : (
     <button
@@ -71,12 +73,13 @@ export const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {/* If passing a relative/absolute path as icon */}
-      {iconLeft && <img alt="" src={iconLeft} width={16} height={16} />}
+      {/* If left icon exists */}
+      {iconLeft}
 
       {label}
-      {/* If passing a relative/absolute path as icon */}
-      {iconRight && <img alt="" src={iconRight} width={16} height={16} />}
+
+      {/* If right icon exists */}
+      {iconRight}
     </button>
   );
 };
