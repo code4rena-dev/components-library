@@ -159,14 +159,14 @@ const Login = ({
 export const NavBar: React.FC<NavBarProps> = ({
   id,
   className,
-  isLoggedIn,
-  userImage,
-  username,
-  hideConnectWalletDropdown,
+  isLoggedIn = false,
+  userImage = "/",
+  username = undefined,
+  hideConnectWalletDropdown = false,
   logoutHandler,
   loginHandler,
   modalHandler,
-  navLinks,
+  navLinks = [],
 }) => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
@@ -265,12 +265,4 @@ export const NavBar: React.FC<NavBarProps> = ({
       <span id="skip-to-main" />
     </>
   );
-};
-
-NavBar.defaultProps = {
-  isLoggedIn: false,
-  hideConnectWalletDropdown: false,
-  navLinks: [],
-  username: undefined,
-  userImage: "/",
 };

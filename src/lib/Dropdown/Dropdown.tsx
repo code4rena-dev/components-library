@@ -16,12 +16,12 @@ import "./Dropdown.scss";
  */
 export const Dropdown = ({
   id,
-  wrapperClass,
-  triggerButtonClass,
-  openOnHover,
+  wrapperClass = "",
+  triggerButtonClass = "",
+  openOnHover = true,
   triggerButton,
-  triggerAriaLabel,
-  hideDownArrow,
+  triggerAriaLabel = "See more options",
+  hideDownArrow = false,
   children,
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -69,12 +69,4 @@ export const Dropdown = ({
       </div>
     </div>
   );
-};
-
-Dropdown.defaultProps = {
-  wrapperClass: "",
-  triggerButtonClass: "",
-  triggerAriaLabel: "See more options",
-  openOnHover: true,
-  hideDownArrow: false,
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { ButtonProps, ButtonSize, ButtonVariant } from "./Button.types";
+import { ButtonProps, ButtonSize, ButtonType, ButtonVariant } from "./Button.types";
 import "./Button.scss";
 
 /**
@@ -26,17 +26,17 @@ import "./Button.scss";
  */
 export const Button: React.FC<ButtonProps> = ({
   label,
-  type,
-  variant,
-  external,
-  disabled,
-  iconLeft,
-  iconRight,
-  size,
-  href,
+  type = ButtonType.BUTTON,
+  variant = ButtonVariant.PRIMARY,
+  external = false,
+  disabled = false,
+  iconLeft = undefined,
+  iconRight = undefined,
+  size = ButtonSize.NARROW,
+  href = "",
   onClick,
-  className,
-  id,
+  className = "",
+  id = "",
 }) => {
   const styling = clsx({
     c4button: true,
@@ -82,21 +82,4 @@ export const Button: React.FC<ButtonProps> = ({
       {iconRight}
     </button>
   );
-};
-
-Button.defaultProps = {
-  /* @ts-ignore value in Enum */
-  type: "button",
-  /* @ts-ignore value in Enum */
-  variant: "PRIMARY",
-  disabled: false,
-  iconLeft: undefined,
-  iconRight: undefined,
-  /* @ts-ignore value in Enum */
-  size: "NARROW",
-  href: "",
-  external: false,
-  onClick: undefined,
-  className: "",
-  id: "",
 };

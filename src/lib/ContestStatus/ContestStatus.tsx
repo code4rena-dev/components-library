@@ -16,8 +16,8 @@ import "./ContestStatus.scss";
  */
 export const ContestStatus: React.FC<ContestStatusProps> = ({
   status,
-  className,
-  id,
+  className = "",
+  id = "",
 }) => {
   const styling = clsx({
     statusindicator: true,
@@ -37,9 +37,4 @@ export const ContestStatus: React.FC<ContestStatusProps> = ({
       </div>
     )
   );
-};
-
-ContestStatus.defaultProps = {
-  className: "",
-  id: "",
 };
