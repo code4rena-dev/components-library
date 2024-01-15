@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 
 export enum ButtonVariant {
   PRIMARY = "PRIMARY",
@@ -25,10 +25,10 @@ export interface ButtonProps {
   variant?: ButtonVariant;
   /** Triggers disabled state of a button when enabled. Does not apply to links. */
   disabled?: boolean;
-  /** Relative path or absolute url to an icon/image. Renders icon to the left of label. */
-  iconLeft?: string;
-  /** Relative path or absolute url to an icon/image. Renders icon to the right of label. */
-  iconRight?: string;
+  /** Icon element to be rendered to the left of button text. */
+  iconLeft?: ReactNode;
+  /** Icon element to be rendered to the right of button text. */
+  iconRight?: ReactNode;
   /** Standard button size options */
   size?: ButtonSize;
   /** __Transforms button into a link.__ Relative path (in-app navigation) or absolute url (external navigation) of location to navigate to. */

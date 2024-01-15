@@ -1,7 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import clsx from "clsx";
 import wolfbotIcon from "../../../public/icons/wolfbot.svg";
-import ellipsisIcon from "../../../public/icons/ellipsis.svg";
 import { BountyTileData, ContestSchedule, ContestTileData, ContestTileProps, ContestTileVariant } from "./ContestTile.types";
 import { DropdownLink, Status } from "../types";
 import { ContestStatus } from "../ContestStatus";
@@ -9,6 +8,7 @@ import { Countdown } from "./ContestTile";
 import { getDates } from "../../utils/time";
 import { isBefore } from "date-fns";
 import { Dropdown } from "../Dropdown";
+import { Icon } from "../Icon";
 
 
 export default function DefaultTemplate({
@@ -19,7 +19,8 @@ export default function DefaultTemplate({
     sponsorImage,
     sponsorUrl,
     contestData,
-    bountyData
+    bountyData,
+    hideDropdown,
 }: ContestTileProps) {
     const variantClasses = clsx({
       "tile--light": variant === ContestTileVariant.LIGHT,
@@ -93,7 +94,7 @@ export default function DefaultTemplate({
       const links: DropdownLink[] = [];
 
       if (contestData && contestTimelineObject) {
-        if (contestTimelineObject.contestStatus !== Status.LIVE) {
+        if (hideDropdown || contestTimelineObject.contestStatus !== Status.LIVE) {
           setDropdownLinks(links);
           return;
         }
@@ -139,6 +140,7 @@ export default function DefaultTemplate({
       hasBotRace,
       contestTimelineObject,
       canViewContest,
+      hideDropdown,
     ]);
 
     return (
@@ -180,12 +182,7 @@ function renderDropdown(links: {
   return links.length > 0 && (
     <Dropdown
       triggerButton={
-        <img
-          src={ellipsisIcon}
-          alt="Options icon"
-          width={32}
-          height={32}
-        />
+        <Icon name="more-horizontal" size="large" color="white" />
       }
       wrapperClass="c4contesttile--dropdown"
       triggerButtonClass="c4contesttile--dropdown--trigger"
@@ -349,7 +346,7 @@ function IsContest({
         <div className="options">
           <a
             className="contest-redirect"
-            aria-label="View audit"
+            aria-label={"View " + title + " audit"}
             href={contestUrl}
             onClick={(e) => e.stopPropagation()}
           >

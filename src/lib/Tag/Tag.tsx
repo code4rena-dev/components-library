@@ -22,12 +22,12 @@ import "./Tag.scss";
  * @param id - HTML element identifier.
  */
 export const Tag: React.FC<TagProps> = ({
-  variant,
-  size,
-  iconLeft,
+  variant = TagVariant.DEFAULT,
+  size = TagSize.NARROW,
+  iconLeft = "",
   label,
-  className,
-  id,
+  className = "",
+  id = "",
 }) => {
   const styling = clsx({
     c4tag: true,
@@ -46,14 +46,4 @@ export const Tag: React.FC<TagProps> = ({
       {label}
     </div>
   );
-};
-
-Tag.defaultProps = {
-  /* @ts-ignore value in Enum */
-  variant: "DEFAULT",
-  /* @ts-ignore value in Enum */
-  size: "NARROW",
-  iconLeft: "",
-  className: "",
-  id: "",
 };

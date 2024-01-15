@@ -5,7 +5,7 @@ import { TagSize, TagVariant } from "./Tag.types";
 
 const meta: Meta<typeof Tag> = {
   component: Tag,
-  title: "Tag",
+  title: "Components/Tag",
   tags: ["autodocs"],
   argTypes: {
     variant: { control: "select" },

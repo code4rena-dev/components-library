@@ -76,17 +76,17 @@ const mappedTypes = (
  */
 export const Input: React.FC<InputProps> = ({
   inputId,
-  fieldType,
-  isMultiSelect,
-  variant,
-  required,
+  fieldType = "text",
+  isMultiSelect = false,
+  variant = InputVariant.FIELD,
+  required = false,
   label,
   helpText,
-  disabled,
+  disabled = false,
   maxLength,
   placeholder,
   selectValue,
-  forceValidation,
+  forceValidation = false,
   selectOptions,
   validator,
   value,
@@ -106,7 +106,12 @@ export const Input: React.FC<InputProps> = ({
   const validate = (): (string | ReactNode)[] => {
     let errorMessages: (string | ReactNode)[] = [];
     if (validator) {
-      const validationErrors = validator(value);
+      let validationErrors;
+      if (variant === "SELECT" && selectValue) {
+        validationErrors = validator(selectValue)
+      } else {
+        validationErrors = validator(value);
+      }
       if (validationErrors.length > 0) {
         errorMessages = errorMessages.concat(validationErrors);
       }
@@ -155,7 +160,7 @@ export const Input: React.FC<InputProps> = ({
       ? `${inputId}--help`
       : undefined,
     placeholder: placeholder || "",
-    value: value,
+    value: value ?? "",
     autoComplete: "off",
     onBlur: validate,
     onChange: onChange,
@@ -232,14 +237,4 @@ export const Input: React.FC<InputProps> = ({
         ))}
     </fieldset>
   );
-};
-
-Input.defaultProps = {
-  disabled: false,
-  fieldType: "text",
-  forceValidation: false,
-  isMultiSelect: false,
-  required: false,
-  // @ts-ignore
-  variant: "FIELD",
 };

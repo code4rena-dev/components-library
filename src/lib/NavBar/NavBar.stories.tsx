@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof NavBar> = {
   component: NavBar,
-  title: "Navigation Bar",
+  title: "Components/Navigation Bar",
   tags: ["autodocs"],
   argTypes: {
     loginHandler: { control: "function" },

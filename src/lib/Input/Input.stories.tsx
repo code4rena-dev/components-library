@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { CSSProperties, useState } from "react";
 import { Input } from "./Input";
 import { Meta, StoryObj } from "@storybook/react";
 import { useArgs } from "@storybook/preview-api";
 import { InputVariant } from "./Input.types";
 
-const wrapperStyle = {
+const wrapperStyle: CSSProperties = {
   display: "flex",
   gap: "10px",
   flexWrap: "wrap",
@@ -14,7 +14,7 @@ const wrapperStyle = {
 
 const meta: Meta<typeof Input> = {
   component: Input,
-  title: "Input",
+  title: "Components/Input",
   tags: ["autodocs"],
   argTypes: {
     fieldType: {
@@ -114,7 +114,6 @@ SampleComponent.args = {
  */
 export const InputField: Story = (storyArgs) => (
   <>
-    {/* @ts-ignore */}
     <div style={wrapperStyle}>
       {/* No value input */}
       <Input
@@ -169,7 +168,6 @@ InputField.parameters = {
  */
 export const TextArea: Story = (storyArgs) => (
   <>
-    {/* @ts-ignore */}
     <div style={wrapperStyle}>
       {/* No value input */}
       <Input
@@ -225,7 +223,6 @@ TextArea.parameters = {
  */
 export const Select: Story = (storyArgs) => (
   <>
-    {/* @ts-ignore */}
     <div style={wrapperStyle}>
       {/* No value select */}
       <Input

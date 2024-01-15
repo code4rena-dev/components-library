@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import clsx from "clsx";
-import signoutIcon from "../../../public/icons/sign-out.svg";
 import metamaskIcon from "../../../public/logos/meta-mask-logo.svg";
 import walletConnectIcon from "../../../public/logos/wallet-connect-logo.svg";
 import c4LogoIcon from "../../../public/logos/c4-logo.svg";
-import registerIcon from "../../../public/icons/register.svg";
 import { Dropdown } from "../Dropdown/Dropdown";
 import { ModalProps, NavBarProps, Web3ProviderType } from "./NavBar.types";
 import "./NavBar.scss";
 import { Avatar } from "../Avatar";
+import { Icon } from "../Icon";
 
 const UserDropdown = ({
   userImage = "/",
@@ -41,13 +40,7 @@ const UserDropdown = ({
         onClick={logoutHandler}
         className="c4dropdown--button"
       >
-        <img
-          src={signoutIcon}
-          alt="Logout icon"
-          style={{ transform: "rotateY(180deg)" }}
-          width={20}
-          height={20}
-        />
+        <Icon name="log-out" size="medium" color="white" />
         Logout
       </button>
     </div>
@@ -91,10 +84,10 @@ const Login = ({
       >
         <img
           src={metamaskIcon}
-          alt="logout icon"
+          alt="metamask login"
           className={"login__icon"}
-          width={20}
-          height={20}
+          width={24}
+          height={24}
         />
         MetaMask
       </button>
@@ -106,10 +99,10 @@ const Login = ({
       >
         <img
           src={walletConnectIcon}
-          alt="logout icon"
+          alt="wallet connect"
           className={"login__icon"}
-          width={20}
-          height={20}
+          width={24}
+          height={24}
         />
         WalletConnect
       </button>
@@ -119,7 +112,7 @@ const Login = ({
         type="button"
         onClick={openLoginModal}
       >
-        <img src={signoutIcon} alt="login icon" width={20} height={20} />
+        <Icon className="button--login" name="log-out" size="medium" color="white" />
         Log in
       </button>
       <a
@@ -127,7 +120,7 @@ const Login = ({
         href="/register"
         className="c4dropdown--button"
       >
-        <img src={registerIcon} alt="register icon" width={20} height={20} />
+        <Icon name="plus" size="medium" color="white" />
         Register
       </a>
     </>
@@ -166,14 +159,14 @@ const Login = ({
 export const NavBar: React.FC<NavBarProps> = ({
   id,
   className,
-  isLoggedIn,
-  userImage,
-  username,
-  hideConnectWalletDropdown,
+  isLoggedIn = false,
+  userImage = "/",
+  username = undefined,
+  hideConnectWalletDropdown = false,
   logoutHandler,
   loginHandler,
   modalHandler,
-  navLinks,
+  navLinks = [],
 }) => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
@@ -272,12 +265,4 @@ export const NavBar: React.FC<NavBarProps> = ({
       <span id="skip-to-main" />
     </>
   );
-};
-
-NavBar.defaultProps = {
-  isLoggedIn: false,
-  hideConnectWalletDropdown: false,
-  navLinks: [],
-  username: undefined,
-  userImage: "/",
 };

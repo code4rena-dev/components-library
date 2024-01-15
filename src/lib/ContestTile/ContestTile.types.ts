@@ -25,6 +25,8 @@ export interface ContestTileProps {
   title: string;
   /** Description for the current event. */
   description: string;
+  /** Whether to hide the dropdown links. */
+  hideDropdown?: boolean;
 }
 
 export interface BountyTileData {

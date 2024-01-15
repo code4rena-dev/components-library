@@ -80,7 +80,7 @@ export interface InputProps {
   /** Value determining the type of input field to be rendered. */
   variant: InputVariant;
   /** A custom function for running additional validation on an input value. Should return an array of error messages (if any). */
-  validator?: (value: string) => (string | ReactNode)[];
+  validator?: (value: string | number | undefined) => (string | ReactNode)[];
   /** Current value of input field as tracked by state. This does not apply to the SELECT field variant (please see the `selectValue` parameter). */
-  value: string;
+  value?: string;
 }
