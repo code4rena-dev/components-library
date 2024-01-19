@@ -2,6 +2,14 @@
 
 # Code4rena Components Library
 
+## Testing Components Locally
+To test the changes you make to your components in a more applicable scenario than storybook, you can install your local repository in any project as if it were already a published package in NPM. You can do so by following the steps below:
+
+1) run `npm run build` on the components library project
+2) run `npm install <path_to_local_components_library_folder>` from the project in which you want to test the library
+
+The install command is a one-time-operation. If you make further changes to the library after running the command, all you need to do is run `npm run build` again to see the changes propagated in your other project.
+
 ## Using Components in your project
 
 ### 1. Installing the library
