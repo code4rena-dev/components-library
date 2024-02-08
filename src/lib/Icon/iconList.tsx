@@ -209,7 +209,7 @@ export const icons = (size: string, color: string, className?: string): Record<s
                 </g>
             </g>
         </svg>,
-    "more-vertical": <svg className={className} width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    "more-vertical": <svg className={className} width={size} height={size} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="more-vertical">
                 <g>
                     <path fill={color} d="M12.5 4.75C12.5 5.7165 11.7165 6.5 10.75 6.5C9.7835 6.5 9 5.7165 9 4.75C9 3.7835 9.7835 3 10.75 3C11.7165 3 12.5 3.7835 12.5 4.75Z" />
