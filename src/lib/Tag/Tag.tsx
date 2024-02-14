@@ -17,7 +17,7 @@ import "./Tag.scss";
  * @param variant - Style variant to be applied to rendered component.
  * @param label - Label to be attached to the tag.
  * @param size - Standard button size options.
- * @param iconLeft - Relative path/absolute url to an icon/image or a components-libirary Icon. Renders icon to the left of label.
+ * @param iconLeft - Relative path/absolute url to an icon/image or a components-library Icon. Renders icon to the left of label.
  * @param className - String of custom classes to extend the default styling of the component.
  * @param id - HTML element identifier.
  */
