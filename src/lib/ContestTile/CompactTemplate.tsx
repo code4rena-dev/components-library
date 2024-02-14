@@ -234,15 +234,15 @@ const IsBounty = ({title, isDarkTile = true, bountyData, sponsorUrl, sponsorImag
         <p className="amount">{amount}</p>
       </div>
       {(ecosystem || languages?.length > 0) && <div className="tags">
-        {bountyData.ecosystem && <Tag
+        {ecosystem && <Tag
           variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
-          label={bountyData.ecosystem}
+          label={ecosystem}
           iconLeft={ecosystemLogoName ? <Icon name={ecosystemLogoName} size="small" color="white" /> : undefined}
           size={TagSize.NARROW}
         />}
-        {bountyData.languages
-          && bountyData.languages.length > 0
-          && bountyData.languages.map((language) => <Tag
+        {languages
+          && languages.length > 0
+          && languages.map((language) => <Tag
           variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
           label={language}
           size={TagSize.NARROW} />

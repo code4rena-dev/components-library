@@ -321,15 +321,15 @@ function IsContest({
                             size={TagSize.NARROW}
                           />
                         )}
-                        {contestData.ecosystem && <Tag 
+                        {ecosystem && <Tag 
                           variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
-                          label={contestData.ecosystem}
+                          label={ecosystem}
                           iconLeft={ecosystemLogoName ? <Icon name={ecosystemLogoName} size="medium" color="white" /> : undefined}
                           size={TagSize.NARROW}
                         />}
-                        {contestData.languages
-                          && contestData.languages.length > 0
-                          && contestData.languages.map((language) => <Tag
+                        {languages
+                          && languages.length > 0
+                          && languages.map((language) => <Tag
                           variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
                           label={language}
                           size={TagSize.NARROW} />
@@ -450,15 +450,15 @@ function IsBounty({
               <p className="description">
                 {description}
                 {(ecosystem || languages?.length > 0) && <div className="tags">
-                  {bountyData.ecosystem && <Tag 
+                  {ecosystem && <Tag 
                     variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
-                    label={bountyData.ecosystem}
+                    label={ecosystem}
                     iconLeft={ecosystemLogoName ? <Icon name={ecosystemLogoName} size="medium" color="white" /> : undefined}
                     size={TagSize.NARROW}
                   />}
-                  {bountyData.languages
-                    && bountyData.languages.length > 0
-                    && bountyData.languages.map((language) => <Tag
+                  {languages
+                    && languages.length > 0
+                    && languages.map((language) => <Tag
                     variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
                     label={language}
                     size={TagSize.NARROW} />
