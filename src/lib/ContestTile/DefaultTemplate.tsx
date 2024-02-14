@@ -2,13 +2,14 @@ import React, { Fragment, useCallback, useEffect, useState } from "react";
 import clsx from "clsx";
 import wolfbotIcon from "../../../public/icons/wolfbot.svg";
 import { BountyTileData, ContestSchedule, ContestTileData, ContestTileProps, ContestTileVariant } from "./ContestTile.types";
-import { DropdownLink, Status } from "../types";
+import { DropdownLink, Status, TagSize, TagVariant } from "../types";
 import { ContestStatus } from "../ContestStatus";
 import { Countdown } from "./ContestTile";
 import { getDates } from "../../utils/time";
 import { isBefore } from "date-fns";
 import { Dropdown } from "../Dropdown";
 import { Icon } from "../Icon";
+import { Tag } from "../Tag";
 
 
 export default function DefaultTemplate({
@@ -26,6 +27,7 @@ export default function DefaultTemplate({
       "tile--light": variant === ContestTileVariant.LIGHT,
       "tile--dark": variant === ContestTileVariant.DARK,
     });
+    const isDarkTile = variant === ContestTileVariant.DARK || variant === ContestTileVariant.COMPACT_DARK
     const [hasBotRace, setHasBotRace] = useState(false);
     const [canViewContest, setCanViewContest] = useState(false);
     const [dropdownLinks, setDropdownLinks] = useState<DropdownLink[]>([]);
@@ -148,6 +150,7 @@ export default function DefaultTemplate({
           <div id={htmlId ?? undefined} className={clsx('c4contesttile', variantClasses)}>
               <div className="container--inner default-content">
                   {contestData && <IsContest
+                      isDarkTile={isDarkTile}
                       title={title}
                       description={description}
                       sponsorUrl={sponsorUrl}
@@ -159,6 +162,7 @@ export default function DefaultTemplate({
                       updateContestTileStatus={updateContestTileStatus}
                   />}
                   {bountyData && <IsBounty
+                    isDarkTile={isDarkTile}
                     title={title}
                     description={description}
                     sponsorUrl={sponsorUrl}
@@ -227,6 +231,7 @@ function IsContest({
     contestData,
     hasBotRace,
     dropdownLinks,
+    isDarkTile = true,
     updateContestTileStatus,
     contestTimelineObject
 }: {
@@ -236,6 +241,7 @@ function IsContest({
     sponsorImage?: string;
     hasBotRace: boolean;
     contestData: ContestTileData;
+    isDarkTile: boolean;
     dropdownLinks: {
         label: string;
         href: string;
@@ -245,7 +251,11 @@ function IsContest({
     updateContestTileStatus: () => void;
     contestTimelineObject: ContestSchedule | undefined;
 }) {
-  const { contestUrl, amount, findingsRepo, startDate, endDate } = contestData;
+  const { contestUrl, amount, findingsRepo, startDate, endDate, ecosystem, languages } = contestData;
+  let ecosystemLogoName: string = "";
+  if (ecosystem && (ecosystem === "Polkadot" || ecosystem === "Ethereum")) {
+    ecosystemLogoName = `logo-${ecosystem.toLowerCase()}`
+  }
 
   return (
     <Fragment>
@@ -296,23 +306,35 @@ function IsContest({
                   </h2>
                   {/* Contest description */}
                   <p className="description">
-                     {description}{" "}
-                     {hasBotRace && contestTimelineObject &&
-                        (contestTimelineObject.botRaceStatus === Status.UPCOMING ||
-                        contestTimelineObject.botRaceStatus === Status.LIVE) && (
-                        <span className="bot-race-status">
-                            <img
-                              alt="Wolf bot"
-                              src={wolfbotIcon}
-                              height={16}
-                              width={16}
-                            />
-                            {contestTimelineObject.botRaceStatus ===
-                            Status.UPCOMING && "1st hour: Bot Race"}
-                            {contestTimelineObject.botRaceStatus === Status.LIVE &&
-                            "Bot Race live"}
-                        </span>
-                      )}
+                      {description}{" "}
+                      {((hasBotRace && contestTimelineObject && (contestTimelineObject.botRaceStatus === Status.UPCOMING ||
+                          contestTimelineObject.botRaceStatus === Status.LIVE))
+                          || ecosystem
+                          || languages?.length > 0) && <div className="tags">
+                        {hasBotRace && contestTimelineObject &&
+                          (contestTimelineObject.botRaceStatus === Status.UPCOMING ||
+                          contestTimelineObject.botRaceStatus === Status.LIVE) && (
+                          <Tag
+                            variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
+                            label={contestTimelineObject.botRaceStatus === Status.LIVE ? "Bot Race live" : "1st hour: Bot Race"}
+                            iconLeft={wolfbotIcon}
+                            size={TagSize.NARROW}
+                          />
+                        )}
+                        {contestData.ecosystem && <Tag 
+                          variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
+                          label={contestData.ecosystem}
+                          iconLeft={ecosystemLogoName ? <Icon name={ecosystemLogoName} size="medium" color="white" /> : undefined}
+                          size={TagSize.NARROW}
+                        />}
+                        {contestData.languages
+                          && contestData.languages.length > 0
+                          && contestData.languages.map((language) => <Tag
+                          variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
+                          label={language}
+                          size={TagSize.NARROW} />
+                        )}
+                      </div>}
                   </p>
               </div>
           </header>
@@ -365,6 +387,7 @@ function IsBounty({
   sponsorUrl,
   sponsorImage,
   bountyData,
+  isDarkTile = true,
   updateBountyTileStatus,
   bountyTimelineObject
 }: {
@@ -373,94 +396,114 @@ function IsBounty({
   sponsorUrl?: string;
   sponsorImage?: string;
   bountyData: BountyTileData;
+  isDarkTile: boolean;
   updateBountyTileStatus?: () => void;
   bountyTimelineObject?: ContestSchedule | undefined;
 }) {
-  const { bountyUrl, amount, startDate } = bountyData;
+  const { bountyUrl, amount, startDate, ecosystem, languages } = bountyData;
   const endDate = "2999-01-01T00:00:00Z"
+  let ecosystemLogoName: string = "";
+  if (ecosystem && (ecosystem === "Polkadot" || ecosystem === "Ethereum")) {
+    ecosystemLogoName = `logo-${ecosystem.toLowerCase()}`
+  }
 
-    return (
-      <Fragment>
-        <div className="body--bounty">
-          <header>
-            {/* Sponsor Image */}
-            {sponsorUrl ? (
+  return (
+    <Fragment>
+      <div className="body--bounty">
+        <header>
+          {/* Sponsor Image */}
+          {sponsorUrl ? (
+              <a
+                href={sponsorUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="logo"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img
+                    alt="Sponsor logo"
+                    src={sponsorImage ?? "/"}
+                    width={88}
+                    height={88}
+                />
+              </a>
+          ) : (
+              <img
+                alt="Sponsor logo"
+                className="logo"
+                src={sponsorImage ?? "/"}
+                width={88}
+                height={88}
+              />
+          )}
+          <div className="content--wrapper">
+              {/* Contest title */}
+              <h2 className="title">
                 <a
-                  href={sponsorUrl}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="logo"
+                  href={bountyUrl}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <img
-                      alt="Sponsor logo"
-                      src={sponsorImage ?? "/"}
-                      width={88}
-                      height={88}
-                  />
+                  {title}
                 </a>
-            ) : (
-                <img
-                  alt="Sponsor logo"
-                  className="logo"
-                  src={sponsorImage ?? "/"}
-                  width={88}
-                  height={88}
-                />
-            )}
-            <div className="content--wrapper">
-                {/* Contest title */}
-                <h2 className="title">
-                  <a
-                    href={bountyUrl}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {title}
-                  </a>
-                </h2>
-                {/* Contest description */}
-                <p className="description">
-                  {description}
-                </p>
-            </div>
-          </header>
-          {/* Reward pool amount */}
-          <div className="bounty-award">
-            <p className="amount">{amount}</p>
-            <p>Max award</p>
+              </h2>
+              {/* Contest description */}
+              <p className="description">
+                {description}
+                {(ecosystem || languages?.length > 0) && <div className="tags">
+                  {bountyData.ecosystem && <Tag 
+                    variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
+                    label={bountyData.ecosystem}
+                    iconLeft={ecosystemLogoName ? <Icon name={ecosystemLogoName} size="medium" color="white" /> : undefined}
+                    size={TagSize.NARROW}
+                  />}
+                  {bountyData.languages
+                    && bountyData.languages.length > 0
+                    && bountyData.languages.map((language) => <Tag
+                    variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
+                    label={language}
+                    size={TagSize.NARROW} />
+                  )}
+                </div>}
+              </p>
           </div>
+        </header>
+        {/* Reward pool amount */}
+        <div className="bounty-award">
+          <p className="amount">{amount}</p>
+          <p>Max award</p>
         </div>
-        {/* Contest tile footer */}
-        <footer className={clsx("footer--bounty", bountyTimelineObject && bountyTimelineObject.contestStatus === Status.LIVE && "live")}>
-          <div className="details">
-              {bountyTimelineObject && <ContestStatus
-                className={`status ${clsx(
-                  bountyTimelineObject.contestStatus !== Status.UPCOMING && "bounty"
-                )}`}
-                status={bountyTimelineObject.contestStatus}
-              />}
-              {bountyData && bountyTimelineObject && bountyTimelineObject.contestStatus === Status.UPCOMING && (
-                <div className="timer">
-                  <Countdown
-                      start={startDate}
-                      end={endDate}
-                      updateContestStatus={updateBountyTileStatus}
-                      text="Starts in "
-                  />
-                </div>
-              )}
-          </div>
-          <div className="options">
-            <a
-              className="contest-redirect"
-              aria-label="View bounty"
-              href={bountyUrl}
-              onClick={(e) => e.stopPropagation()}
-            >
-              View details
-            </a>
-          </div>
-        </footer>
-      </Fragment>
-    )
+      </div>
+      {/* Contest tile footer */}
+      <footer className={clsx("footer--bounty", bountyTimelineObject && bountyTimelineObject.contestStatus === Status.LIVE && "live")}>
+        <div className="details">
+            {bountyTimelineObject && <ContestStatus
+              className={`status ${clsx(
+                bountyTimelineObject.contestStatus !== Status.UPCOMING && "bounty"
+              )}`}
+              status={bountyTimelineObject.contestStatus}
+            />}
+            {bountyData && bountyTimelineObject && bountyTimelineObject.contestStatus === Status.UPCOMING && (
+              <div className="timer">
+                <Countdown
+                    start={startDate}
+                    end={endDate}
+                    updateContestStatus={updateBountyTileStatus}
+                    text="Starts in "
+                />
+              </div>
+            )}
+        </div>
+        <div className="options">
+          <a
+            className="contest-redirect"
+            aria-label="View bounty"
+            href={bountyUrl}
+            onClick={(e) => e.stopPropagation()}
+          >
+            View details
+          </a>
+        </div>
+      </footer>
+    </Fragment>
+  )
 }

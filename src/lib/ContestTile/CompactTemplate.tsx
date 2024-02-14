@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import clsx from "clsx";
 import { BountyTileData, ContestSchedule, ContestTileData, ContestTileProps, ContestTileVariant } from "./ContestTile.types";
-import { Status } from '../types';
+import { Status, TagSize, TagVariant } from '../types';
 import { ContestStatus } from '../ContestStatus';
 import { Countdown } from './ContestTile';
 import { getDates } from '../../utils/time';
+import { Tag } from '../Tag';
+import { Icon } from '../Icon';
+import wolfbotIcon from "../../../public/icons/wolfbot.svg";
 
 export default function CompactTemplate({
   variant,
@@ -19,6 +22,7 @@ export default function CompactTemplate({
       "compact--light": variant === ContestTileVariant.COMPACT_LIGHT,
       "compact--dark": variant === ContestTileVariant.COMPACT_DARK,
     });
+    const isDarkTile = variant === ContestTileVariant.DARK || variant === ContestTileVariant.COMPACT_DARK;
 
     const tileClasses = clsx({
       c4contesttile: true,
@@ -29,11 +33,13 @@ export default function CompactTemplate({
       <div id={htmlId ?? undefined} className={clsx(variantClasses, tileClasses)}>
         <div className="container--inner compact-content">
           {contestData && <IsContest
+            isDarkTile={isDarkTile}
             title={title}
             contestData={contestData}
             sponsorUrl={sponsorUrl}
             sponsorImage={sponsorImage} />}
           {bountyData && <IsBounty
+            isDarkTile={isDarkTile}
             title={title}
             bountyData={bountyData}
             sponsorUrl={sponsorUrl}
@@ -45,14 +51,20 @@ export default function CompactTemplate({
 }
 
 
-const IsContest = ({title, contestData, sponsorUrl, sponsorImage}: {
+const IsContest = ({title, isDarkTile = true, contestData, sponsorUrl, sponsorImage}: {
   title: string;
+  isDarkTile: boolean;
   contestData: ContestTileData;
   sponsorUrl: string | undefined;
   sponsorImage: string | undefined;
 }) => {
-  const { startDate, endDate, amount, contestUrl, contestType } = contestData;
+  const { startDate, endDate, amount, contestUrl, contestType, ecosystem, languages } = contestData;
   const [contestTimelineObject, setContestTimelineObject] = useState<ContestSchedule | undefined>();
+  const [hasBotRace, setHasBotRace] = useState(contestData ? !!contestData.botFindingsRepo : false);
+  let ecosystemLogoName: string = "";
+  if (ecosystem && (ecosystem === "Polkadot" || ecosystem === "Ethereum")) {
+    ecosystemLogoName = `logo-${ecosystem.toLowerCase()}`
+  }
 
   const updateContestTileStatus = useCallback(() => {
     if (contestData) {
@@ -137,16 +149,48 @@ const IsContest = ({title, contestData, sponsorUrl, sponsorImage}: {
         </div>
         <p className="amount">{amount}</p>
       </div>
+      {((hasBotRace && contestTimelineObject && (contestTimelineObject.botRaceStatus === Status.UPCOMING ||
+          contestTimelineObject.botRaceStatus === Status.LIVE)) || ecosystem || languages?.length > 0) && <div className="tags">
+        {hasBotRace && contestTimelineObject &&
+          (contestTimelineObject.botRaceStatus === Status.UPCOMING ||
+          contestTimelineObject.botRaceStatus === Status.LIVE) && (
+          <Tag
+            variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
+            label={contestTimelineObject.botRaceStatus === Status.LIVE ? "Bot Race live" : "1st hour: Bot Race"}
+            iconLeft={wolfbotIcon}
+            size={TagSize.NARROW}
+          />
+        )}
+        {ecosystem && <Tag
+          variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
+          label={ecosystem}
+          iconLeft={ecosystemLogoName ? <Icon name={ecosystemLogoName} size="small" color="white" /> : undefined}
+          size={TagSize.NARROW}
+        />}
+        {languages
+          && languages.length > 0
+          && languages.map((language) => <Tag
+            variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
+            label={language}
+            size={TagSize.NARROW}
+          />
+        )}
+      </div>}
     </div>
 )}
 
-const IsBounty = ({title, bountyData, sponsorUrl, sponsorImage}: {
+const IsBounty = ({title, isDarkTile = true, bountyData, sponsorUrl, sponsorImage}: {
   title: string;
+  isDarkTile: boolean;
   bountyData: BountyTileData;
   sponsorUrl: string | undefined;
   sponsorImage: string | undefined;
 }) => {
-  const { amount, bountyUrl } = bountyData;
+  const { amount, bountyUrl, ecosystem, languages } = bountyData;
+  let ecosystemLogoName: string = "";
+  if (ecosystem && (ecosystem === "Polkadot" || ecosystem === "Ethereum")) {
+    ecosystemLogoName = `logo-${ecosystem.toLowerCase()}`
+  }
 
   return (
     <div className="body--bounty">
@@ -189,5 +233,20 @@ const IsBounty = ({title, bountyData, sponsorUrl, sponsorImage}: {
         <strong>Max Bounty</strong>
         <p className="amount">{amount}</p>
       </div>
+      {(ecosystem || languages?.length > 0) && <div className="tags">
+        {bountyData.ecosystem && <Tag
+          variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
+          label={bountyData.ecosystem}
+          iconLeft={ecosystemLogoName ? <Icon name={ecosystemLogoName} size="small" color="white" /> : undefined}
+          size={TagSize.NARROW}
+        />}
+        {bountyData.languages
+          && bountyData.languages.length > 0
+          && bountyData.languages.map((language) => <Tag
+          variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
+          label={language}
+          size={TagSize.NARROW} />
+        )}
+      </div>}
     </div>
 )}

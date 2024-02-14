@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { ContestTile } from "./ContestTile";
 import { Meta, StoryObj } from "@storybook/react";
-import { ContestTileVariant } from "./ContestTile.types";
+import { CodingLanguage, ContestEcosystem, ContestTileVariant } from "./ContestTile.types";
 
 const meta: Meta<typeof ContestTile> = {
   component: ContestTile,
@@ -39,9 +39,12 @@ const defaultArgs = {
     contestType: "Open Audit",
     isUserCertified: false,
     contestId: 321,
+    ecosystem: "Ethereum" as ContestEcosystem,
+    languages: ["Rust"] as CodingLanguage[],
     contestUrl: "https://code4rena.com/audits/2023-07-axelar-network#top",
     contestRepo: "https://github.com/code-423n4/2023-07-axelar",
     findingsRepo: "https://github.com/code-423n4/2023-07-axelar",
+    botFindingsRepo: "https://github.com/code-423n4/2023-07-axelar",
     amount: "$80,000 USDC",
     startDate: "2030-07-12T18:00:00Z",
     endDate: "2030-07-21T18:00:00.000Z",
@@ -162,6 +165,8 @@ BountyTile.args = {
     startDate: "2023-07-12T18:00:00Z",
     repoUrl: "https://github.com/code-423n4/2023-07-axelar",
     bountyUrl: "https://code4rena.com/audits/2023-07-axelar-network#top",
+    ecosystem: "Polkadot" as ContestEcosystem,
+    languages: ["Rust"] as CodingLanguage[],
   },
   variant: ContestTileVariant.LIGHT,
   sponsorImage: "/logos/apple-touch-icon.png",

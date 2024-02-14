@@ -17,7 +17,7 @@ import "./Tag.scss";
  * @param variant - Style variant to be applied to rendered component.
  * @param label - Label to be attached to the tag.
  * @param size - Standard button size options.
- * @param iconLeft - Relative path or absolute url to an icon/image. Renders icon to the left of label.
+ * @param iconLeft - Relative path/absolute url to an icon/image or a components-libirary Icon. Renders icon to the left of label.
  * @param className - String of custom classes to extend the default styling of the component.
  * @param id - HTML element identifier.
  */
@@ -42,8 +42,12 @@ export const Tag: React.FC<TagProps> = ({
 
   return (
     <div id={id ?? undefined} className={`${styling} ${className}`}>
-      {iconLeft && <img alt="" src={iconLeft} width={16} height={16} />}
-      {label}
+      {iconLeft && typeof iconLeft === "string" && <img alt="" src={iconLeft} width={16} height={16} />}
+      {iconLeft && typeof iconLeft !== "string" && <div className="icon">
+        {iconLeft}
+      </div>}
+      {iconLeft && <div className="separator" />}
+      <p className={iconLeft ? "has-icon" : undefined}>{label}</p>
     </div>
   );
 };
