@@ -8,6 +8,10 @@ export enum ContestTileVariant {
   COMPACT_DARK = "COMPACT_DARK"
 }
 
+export type ContestEcosystem = "Algorand" | "Aptos" | "Blast" | "Cosmos" | "Ethereum" | "EVM" | "NEAR" | "Polkadot" | "Scroll" | "Sei" | "Solana" | "StarkNet" | "Stellar" | "Sui" | "Other";
+
+export type CodingLanguage = "Cairo" | "GO" | "HUFF" | "Ink" | "Move" | "Noir" | "Other" | "Rain" | "Rust" | "Rust evm" | "Solidity" | "Vyper" | "Yui";
+
 export interface ContestTileProps {
   /** An html `id` for the contest tile's wrapping div. */
   htmlId?: string;
@@ -38,6 +42,10 @@ export interface BountyTileData {
   bountyUrl: string;
   /** Absolute url to the bounty's source code. */
   repoUrl: string;
+  /** Ecosystem being deployed to for the current contest. */
+  ecosystem: ContestEcosystem;
+  /** Coding language for the current contest. */
+  languages: CodingLanguage[];
   /** Callback function to be triggered on bounty time/status changes. */
   updateBountyStatus?: () => void;
 }
@@ -57,6 +65,10 @@ export interface ContestTileData {
   findingsRepo: string;
   /** Absolute url to the contest's findings. */
   botFindingsRepo?: string;
+  /** Ecosystem being deployed to for the current contest. */
+  ecosystem: ContestEcosystem;
+  /** Coding language for the current contest. */
+  languages: CodingLanguage[];
   /** Reward pool for the current contest. */
   amount: string;
   /** Callback function to be triggered on contest time/status changes. */

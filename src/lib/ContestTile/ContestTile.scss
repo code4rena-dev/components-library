@@ -437,6 +437,39 @@
                     }
                 }
 
+                .tags {
+                    padding: 0.24rem 0.5rem 0.5rem;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 0.5rem;
+                    flex-wrap: wrap;
+
+                    img {
+                        width: 0.75rem !important;
+                        height: 0.75rem !important;
+                    }
+
+                    .icon {
+                        svg {
+                            min-width: 1.125rem;
+                            min-height: 1.125rem;
+                            width: 1.125rem;
+                            height: 1.125rem;
+                        }
+                    }
+
+
+                    .separator {
+                        height: 26px;
+                    }
+
+                    p {
+                        padding-top: 5px;
+                        padding-bottom: 5px; 
+                        font-size: 0.75rem !important;
+                    }
+                }
+
                 .amount {
                     margin: 0px;
                     margin-left: auto;
@@ -506,22 +539,21 @@
                                 display: block;
                                 text-align: center;
                             }
-    
+                            
+                            .tags {
+                                margin-top: 0.5rem;
+                                display: flex;
+                                flex-direction: row;
+                                gap: 0.5rem;
+                                flex-wrap: wrap;
+                                justify-content: center;
+                            }
+
                             .title {
                                 margin: 0rem;
                                 color: $color__white;
                                 text-align: center;
                                 font-size: $headline-font-size__xxs;
-                            }
-    
-                            .bot-race-status {
-                                display: flex;
-                                gap: 0.5rem;
-                                margin-top: 0.25rem;
-                                align-items: center;
-                                justify-content: center;
-                                color: $color__white;
-                                font-weight: 700;
                             }
     
                             .description {
@@ -587,7 +619,7 @@
                                     text-align: left;
                                 }
 
-                                .bot-race-status {
+                                .tags {
                                     justify-content: flex-start;
                                 }
                             }
