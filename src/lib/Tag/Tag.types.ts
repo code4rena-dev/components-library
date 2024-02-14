@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export enum TagVariant {
   WHITE = "WHITE",
   DEFAULT = "DEFAULT",
@@ -18,7 +20,7 @@ export interface TagProps {
   /** Standard button size options */
   size?: TagSize;
   /** Relative path or absolute url to an icon/image. Renders icon to the left of label */
-  iconLeft?: string;
+  iconLeft?: string | ReactNode;
   /** Label to be attached to the tag */
   label: string;
   /** String of custom classes to extend the default styling of the component. */
