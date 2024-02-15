@@ -62,8 +62,13 @@ const IsContest = ({title, isDarkTile = true, contestData, sponsorUrl, sponsorIm
   const [contestTimelineObject, setContestTimelineObject] = useState<ContestSchedule | undefined>();
   const [hasBotRace, setHasBotRace] = useState(contestData ? !!contestData.botFindingsRepo : false);
   let ecosystemLogoName: string = "";
-  if (ecosystem && (ecosystem === "Polkadot" || ecosystem === "Ethereum")) {
-    ecosystemLogoName = `logo-${ecosystem.toLowerCase()}`
+  const evmTypes = new Set([
+    "EVM", "Ethereum", "Arbitrum", "Avax", "BSC", "Optimism", "Polygon", "zkSync"
+  ]);
+  if (ecosystem && (ecosystem === "Polkadot")) {
+    ecosystemLogoName = 'logo-polkadot'
+  } else if (evmTypes.has(ecosystem ?? "")) {
+    ecosystemLogoName = 'logo-ethereum';
   }
 
   const updateContestTileStatus = useCallback(() => {
@@ -188,8 +193,13 @@ const IsBounty = ({title, isDarkTile = true, bountyData, sponsorUrl, sponsorImag
 }) => {
   const { amount, bountyUrl, ecosystem, languages } = bountyData;
   let ecosystemLogoName: string = "";
-  if (ecosystem && (ecosystem === "Polkadot" || ecosystem === "Ethereum")) {
-    ecosystemLogoName = `logo-${ecosystem.toLowerCase()}`
+  const evmTypes = new Set([
+    "EVM", "Ethereum", "Arbitrum", "Avax", "BSC", "Optimism", "Polygon", "zkSync"
+  ]);
+  if (ecosystem && (ecosystem === "Polkadot")) {
+    ecosystemLogoName = 'logo-polkadot'
+  } else if (evmTypes.has(ecosystem ?? "")) {
+    ecosystemLogoName = 'logo-ethereum';
   }
 
   return (
