@@ -150,7 +150,7 @@ const IsContest = ({title, isDarkTile = true, contestData, sponsorUrl, sponsorIm
         <p className="amount">{amount}</p>
       </div>
       {((hasBotRace && contestTimelineObject && (contestTimelineObject.botRaceStatus === Status.UPCOMING ||
-          contestTimelineObject.botRaceStatus === Status.LIVE)) || ecosystem || languages?.length > 0) && <div className="tags">
+          contestTimelineObject.botRaceStatus === Status.LIVE)) || ecosystem || (languages && languages.length > 0)) && <div className="tags">
         {hasBotRace && contestTimelineObject &&
           (contestTimelineObject.botRaceStatus === Status.UPCOMING ||
           contestTimelineObject.botRaceStatus === Status.LIVE) && (
@@ -233,7 +233,7 @@ const IsBounty = ({title, isDarkTile = true, bountyData, sponsorUrl, sponsorImag
         <strong>Max Bounty</strong>
         <p className="amount">{amount}</p>
       </div>
-      {(ecosystem || languages?.length > 0) && <div className="tags">
+      {(ecosystem || (languages && languages.length > 0)) && <div className="tags">
         {ecosystem && <Tag
           variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
           label={ecosystem}

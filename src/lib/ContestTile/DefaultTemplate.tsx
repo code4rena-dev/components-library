@@ -310,7 +310,7 @@ function IsContest({
                       {((hasBotRace && contestTimelineObject && (contestTimelineObject.botRaceStatus === Status.UPCOMING ||
                           contestTimelineObject.botRaceStatus === Status.LIVE))
                           || ecosystem
-                          || languages?.length > 0) && <div className="tags">
+                          || (languages && languages.length > 0)) && <div className="tags">
                         {hasBotRace && contestTimelineObject &&
                           (contestTimelineObject.botRaceStatus === Status.UPCOMING ||
                           contestTimelineObject.botRaceStatus === Status.LIVE) && (
@@ -449,7 +449,7 @@ function IsBounty({
               {/* Contest description */}
               <p className="description">
                 {description}
-                {(ecosystem || languages?.length > 0) && <div className="tags">
+                {(ecosystem || (languages && languages.length > 0)) && <div className="tags">
                   {ecosystem && <Tag 
                     variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
                     label={ecosystem}
