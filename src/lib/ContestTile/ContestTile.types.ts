@@ -43,9 +43,9 @@ export interface BountyTileData {
   /** Absolute url to the bounty's source code. */
   repoUrl: string;
   /** Ecosystem being deployed to for the current contest. */
-  ecosystem: ContestEcosystem;
+  ecosystem?: ContestEcosystem;
   /** Coding language for the current contest. */
-  languages: CodingLanguage[];
+  languages?: CodingLanguage[];
   /** Callback function to be triggered on bounty time/status changes. */
   updateBountyStatus?: () => void;
 }
@@ -66,9 +66,9 @@ export interface ContestTileData {
   /** Absolute url to the contest's findings. */
   botFindingsRepo?: string;
   /** Ecosystem being deployed to for the current contest. */
-  ecosystem: ContestEcosystem;
+  ecosystem?: ContestEcosystem;
   /** Coding language for the current contest. */
-  languages: CodingLanguage[];
+  languages?: CodingLanguage[];
   /** Reward pool for the current contest. */
   amount: string;
   /** Callback function to be triggered on contest time/status changes. */
