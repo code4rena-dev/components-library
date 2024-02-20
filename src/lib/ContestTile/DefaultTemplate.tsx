@@ -253,13 +253,8 @@ function IsContest({
 }) {
   const { contestUrl, amount, findingsRepo, startDate, endDate, ecosystem, languages } = contestData;
   let ecosystemLogoName: string = "";
-  const evmTypes = new Set([
-    "EVM", "Ethereum", "Arbitrum", "Avax", "BSC", "Optimism", "Polygon", "zkSync"
-  ]);
   if (ecosystem && (ecosystem === "Polkadot")) {
     ecosystemLogoName = 'logo-polkadot'
-  } else if (evmTypes.has(ecosystem ?? "")) {
-    ecosystemLogoName = 'logo-ethereum';
   }
 
   return (
@@ -408,13 +403,8 @@ function IsBounty({
   const { bountyUrl, amount, startDate, ecosystem, languages } = bountyData;
   const endDate = "2999-01-01T00:00:00Z"
   let ecosystemLogoName: string = "";
-  const evmTypes = new Set([
-    "EVM", "Ethereum", "Arbitrum", "Avax", "BSC", "Optimism", "Polygon", "zkSync"
-  ]);
   if (ecosystem && (ecosystem === "Polkadot")) {
     ecosystemLogoName = 'logo-polkadot'
-  } else if (evmTypes.has(ecosystem ?? "")) {
-    ecosystemLogoName = 'logo-ethereum';
   }
 
   return (

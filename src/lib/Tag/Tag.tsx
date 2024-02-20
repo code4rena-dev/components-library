@@ -24,7 +24,7 @@ import "./Tag.scss";
 export const Tag: React.FC<TagProps> = ({
   variant = TagVariant.DEFAULT,
   size = TagSize.NARROW,
-  iconLeft = "",
+  iconLeft = undefined,
   label,
   className = "",
   id = "",

@@ -1,5 +1,6 @@
 import React from "react";
 import { Tag } from "./Tag";
+import { Icon } from "../Icon";
 import { Meta, StoryObj } from "@storybook/react";
 import { TagSize, TagVariant } from "./Tag.types";
 
@@ -10,6 +11,15 @@ const meta: Meta<typeof Tag> = {
   argTypes: {
     variant: { control: "select" },
     size: { control: "select" },
+    iconLeft: { 
+      control: "select",
+      options: ["None", "Image Url", "Icon"],
+      mapping: {
+        "None": undefined,
+        "Image Url": '/icons/wolfbot.svg',
+        "Icon": <Icon name="lock" size="medium" color="white" />
+      },
+    }
   },
 };
 export default meta;
@@ -25,8 +35,8 @@ SampleComponent.parameters = {
 SampleComponent.args = {
   variant: TagVariant.DEFAULT,
   label: "Private",
-  iconLeft: "/icons/lock.svg",
   size: TagSize.NARROW,
   className: "",
   id: "",
+  iconLeft: undefined
 };

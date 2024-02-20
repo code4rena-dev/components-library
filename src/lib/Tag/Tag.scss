@@ -9,7 +9,7 @@
     letter-spacing: 0.5px;
     display: flex;
     flex-direction: row;
-    gap: $spacing__xs;
+    gap: $spacing__s;
     align-items: center;
     color: $color__white;
     border-radius: 2.25rem;
@@ -31,6 +31,7 @@
 
     .icon {
         padding-left: 0.5rem;
+        margin-right: -0.25rem;
         
         svg {
             display: block;
