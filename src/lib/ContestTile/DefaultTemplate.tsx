@@ -253,8 +253,16 @@ function IsContest({
 }) {
   const { contestUrl, amount, findingsRepo, startDate, endDate, ecosystem, languages } = contestData;
   let ecosystemLogoName: string = "";
-  if (ecosystem && (ecosystem === "Polkadot")) {
-    ecosystemLogoName = 'logo-polkadot'
+  if (ecosystem) {
+    switch (ecosystem) {
+      case "Polkadot":
+      case "Blast":
+        ecosystemLogoName = `logo-${ecosystem.toLowerCase()}`;
+        break;
+      default:
+        ecosystemLogoName = "";
+        break;
+    }
   }
 
   return (
@@ -403,8 +411,16 @@ function IsBounty({
   const { bountyUrl, amount, startDate, ecosystem, languages } = bountyData;
   const endDate = "2999-01-01T00:00:00Z"
   let ecosystemLogoName: string = "";
-  if (ecosystem && (ecosystem === "Polkadot")) {
-    ecosystemLogoName = 'logo-polkadot'
+  if (ecosystem) {
+    switch (ecosystem) {
+      case "Polkadot":
+      case "Blast":
+        ecosystemLogoName = `logo-${ecosystem.toLowerCase()}`;
+        break;
+      default:
+        ecosystemLogoName = "";
+        break;
+    }
   }
 
   return (

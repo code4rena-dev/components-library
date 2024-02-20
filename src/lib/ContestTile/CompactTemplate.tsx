@@ -62,8 +62,16 @@ const IsContest = ({title, isDarkTile = true, contestData, sponsorUrl, sponsorIm
   const [contestTimelineObject, setContestTimelineObject] = useState<ContestSchedule | undefined>();
   const [hasBotRace, setHasBotRace] = useState(contestData ? !!contestData.botFindingsRepo : false);
   let ecosystemLogoName: string = "";
-  if (ecosystem && (ecosystem === "Polkadot")) {
-    ecosystemLogoName = 'logo-polkadot'
+  if (ecosystem) {
+    switch (ecosystem) {
+      case "Polkadot":
+      case "Blast":
+        ecosystemLogoName = `logo-${ecosystem.toLowerCase()}`;
+        break;
+      default:
+        ecosystemLogoName = "";
+        break;
+    }
   }
 
   const updateContestTileStatus = useCallback(() => {
@@ -188,10 +196,18 @@ const IsBounty = ({title, isDarkTile = true, bountyData, sponsorUrl, sponsorImag
 }) => {
   const { amount, bountyUrl, ecosystem, languages } = bountyData;
   let ecosystemLogoName: string = "";
-  if (ecosystem && (ecosystem === "Polkadot")) {
-    ecosystemLogoName = 'logo-polkadot'
+  if (ecosystem) {
+    switch (ecosystem) {
+      case "Polkadot":
+      case "Blast":
+        ecosystemLogoName = `logo-${ecosystem.toLowerCase()}`;
+        break;
+      default:
+        ecosystemLogoName = "";
+        break;
+    }
   }
-
+  
   return (
     <div className="body--bounty">
       <header>
