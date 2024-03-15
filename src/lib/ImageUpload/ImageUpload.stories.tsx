@@ -12,7 +12,7 @@ export default meta;
 type Story = StoryObj<typeof ImageUpload>;
 
 export const SampleComponent: Story = (args) => (
-    <div>
+    <div style={{ minWidth: '300px', maxWidth: '420px' }}>
         <ImageUpload {...args} />
     </div>
 )
@@ -25,6 +25,5 @@ SampleComponent.parameters = {
 SampleComponent.args = {
     id: "c4_img_uploader",
     accept: "image/png, image/jpeg",
-    maxSize: 2,
-    multiSelect: false,
+    maxSize: 2
 }

@@ -14,13 +14,13 @@ class DataTransfer {
     /**
      * You can't construct a FileList, so we have to steal one.
      */
-    const fileList = foo.files;
+    const fileList = foo.files as FileList;
     const arr: File[] = [];
 
     /**
      * Bolt on DataTransferItemList things so we can manipulate and reuse it.
      */
-    const fileListProxy = new Proxy(fileList!, {
+    const fileListProxy = new Proxy(fileList, {
       get(target, prop, receiver) {
         if (prop === 'add') {
           return (x: File) => {

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, DragEvent, useCallback, useRef, useState } from "react";
+import React, { ChangeEvent, DragEvent, useCallback, useEffect, useRef, useState } from "react";
 
 import "./ImageUpload.scss";
 import { Icon } from "../Icon";
@@ -23,15 +23,15 @@ import { ImageUploadProps } from "./ImageUpload.types";
  *  - image/webp
  * @param id - String HTML identifier for the input field.
  * @param maxSize - The max allowed size for file uploads (in Megabytes).
- * @param multiSelect - Boolean indicator to determine whether multi file upload should be accepted or not.
  * @param onImageSelected - Optional function for controlled handling of uploads. Triggered on every change to uploader.
+ * @param hasUploaded - Boolean indicator to trigger image upload cleanup once the upload process has finalized on the frontend.
  */
 export const ImageUpload = ({
     accept = "image/png, image/jpeg",
     id,
     maxSize = 2,
-    multiSelect = false,
-    onImageSelected
+    onImageSelected,
+    hasUploaded = false
 }: ImageUploadProps) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const labelRef = useRef<HTMLLabelElement>(null);
@@ -41,6 +41,19 @@ export const ImageUpload = ({
     const [previews, setPreviews] = useState<string[]>();
     const [error, setError] = useState<string>();
 
+    /**
+     * Cleans up input field and all related state.
+     */
+    const clearInput = () => {
+        setPreviews([]);
+        setUploadedImages([]);
+        if (onImageSelected) {
+            onImageSelected(undefined);
+        }
+        if (inputRef.current) {
+            inputRef.current.files = null;
+        }
+    }
 
     /**
      * Confirms whether a file is valid or not by checking the file type
@@ -79,14 +92,7 @@ export const ImageUpload = ({
         setError(undefined);
 
         if (!files || files.length === 0) {
-            setPreviews([]);
-            setUploadedImages([]);
-            if (onImageSelected) {
-                onImageSelected(multiSelect ? [] : undefined);
-            }
-            if (inputRef.current) {
-                inputRef.current.files = null;
-            }
+            clearInput();
         } else {
             Array.from(files).forEach((file) => {
                 const valid = isValidFile(file, acceptedFiles, declinedFiles, acceptedPreviews);
@@ -96,7 +102,7 @@ export const ImageUpload = ({
             })
             
             if (onImageSelected) {
-                onImageSelected(multiSelect ? acceptedFiles : acceptedFiles[0]);
+                onImageSelected(acceptedFiles[0]);
             }
             setUploadedImages(acceptedFiles);
             setPreviews(acceptedPreviews);
@@ -107,7 +113,7 @@ export const ImageUpload = ({
             if (declinedFiles.length > 0) {
                 setError(`${declinedFiles.length > 1
                     ? `${declinedFiles.length} files`
-                    : '1 file'} could not be uploaded.`)
+                    : 'File'} could not be loaded. Check for the correct file type and size (max size: ${maxSize}MB)`);
             }
         }
     }
@@ -118,7 +124,7 @@ export const ImageUpload = ({
      * 
      * @param e - Drag event information.
      */
-    const onDrop = (e: DragEvent<HTMLLabelElement>) => {
+    const onDrop = (e: DragEvent<HTMLInputElement>) => {
         e.preventDefault();
         setDragActive(false);
         setError(undefined);
@@ -127,28 +133,17 @@ export const ImageUpload = ({
         const acceptedPreviews: string[] = [];
         const dt = new DataTransfer();
 
-
-        if (e.dataTransfer.items) {
-            [...e.dataTransfer.items].forEach((item) => {
-                if (item.kind === "file") {
-                    const asFile = item.getAsFile();
-                    const valid = isValidFile(asFile, acceptedFiles, declinedFiles, acceptedPreviews);
+        if (e.dataTransfer.files) {
+            for (const file of Object.values(e.dataTransfer.files)) {
+                    const valid = isValidFile(file, acceptedFiles, declinedFiles, acceptedPreviews);
                     if (valid) {
-                        dt.items.add(asFile!);
+                        dt.items.add(file);
                     }
-                }
-            })
-        } else {
-            [...e.dataTransfer.files].forEach((file) => {
-                const valid = isValidFile(file, acceptedFiles, declinedFiles, acceptedPreviews);
-                if (valid) {
-                    dt.items.add(file);
-                }
-            });
+            }
         }
 
         if (onImageSelected) {
-            onImageSelected(multiSelect ? acceptedFiles : acceptedFiles[0]);
+            onImageSelected(acceptedFiles[0]);
         }
         setUploadedImages(acceptedFiles);
         setPreviews(acceptedPreviews);
@@ -159,7 +154,7 @@ export const ImageUpload = ({
         if (declinedFiles.length > 0) {
             setError(`${declinedFiles.length > 1
                 ? `${declinedFiles.length} files`
-                : '1 file'} could not be uploaded.`)
+                : 'File'} could not be loaded. Check for the correct file type and size (max size: ${maxSize}MB)`);
         }
     }
 
@@ -169,7 +164,7 @@ export const ImageUpload = ({
      * 
      * @param e - Drag event information
      */
-    const onDragOver = (e: DragEvent<HTMLLabelElement>) => {
+    const onDragOver = (e: DragEvent<HTMLInputElement>) => {
         e.preventDefault();
         
         if (!dragActive) {
@@ -183,13 +178,36 @@ export const ImageUpload = ({
      * 
      * @param e - Drag event information
      */
-    const onDragLeave = (e: DragEvent<HTMLLabelElement>) => {
+    const onDragLeave = (e: DragEvent<HTMLInputElement>) => {
         if (dragActive) {
             setDragActive(false);
         }
     }
 
-    return <>
+    useEffect(() => {
+        if (hasUploaded) {
+            clearInput();
+        }
+    }, [hasUploaded])
+
+    return <div className="c4imgupload--wrapper">
+        {previews && previews.length > 0 && <div className="c4imgupload--preview">
+            <div className="preview">
+                <img
+                    className="img"
+                    alt="Uploaded file preview"
+                    src={previews[0]}
+                />
+                <div className="cutout">
+                    <div className="left" />
+                    <div className="center" />
+                    <div className="right" />
+                </div>
+            </div>
+            {uploadedImages && uploadedImages.length > 0 && <div className="file-name">
+                <p>{uploadedImages[0].name}</p>
+            </div>}
+        </div>}
         <div className='c4imgupload'>
             <div
                 className={clsx(
@@ -197,44 +215,31 @@ export const ImageUpload = ({
                     dragActive && 'active'
                 )}
             />
-            <div className='c4imgupload--wrapper'>
-                <label
-                    ref={labelRef}
-                    htmlFor={id}
-                    className='c4imgupload--label'
+            <div className={clsx(
+                'c4imgupload--container',
+                dragActive && 'active'
+            )}>
+                <input
                     onDrop={onDrop}
                     onDragOver={onDragOver}
                     onDragLeave={onDragLeave}
-                />
-                <input
                     id={id}
                     name={id}
                     alt="Image uploader input"
                     ref={inputRef}
                     className='c4imgupload--input'
-                    multiple={multiSelect}
+                    multiple={false}
                     type="file"
                     accept={accept}
                     onClick={() => setError(undefined)}
                     onChange={onImageChanged}
                 />
-                {uploadedImages.length && previews?.length
-                    ? <img
-                        className="c4imgupload--img"
-                        alt="Uploaded file preview"
-                        src={previews[0]}
-                        width={96}
-                        height={96}
-                    />
-                    : <Icon name="image" size="large" />}
-                <p className="c4imgupload--caption">
-                    {uploadedImages.length
-                        ? `${uploadedImages.length} ${uploadedImages.length > 1 ? 'files' : 'file'} selected`
-                        : 'Drag and drop or click to select a file...'}
+                <Icon name="image" size="large" />
+                <p data-testid="upload-caption" className="c4imgupload--caption">
+                    Drag and drop here or <strong>select file</strong>.
                 </p> 
-                <p className="c4imgupload--maxsize">Max file size: {maxSize}MB</p>
             </div>
         </div>
         {error && <p className="c4imgupload--error">{error}</p>}
-    </>
+    </div>
 }

@@ -14,8 +14,8 @@ export interface ImageUploadProps {
     id: string;
     /** The max allowed size for file uploads (in Megabytes). */
     maxSize?: number;
-    /** Boolean indicator to determine whether multi file upload should be accepted or not. */
-    multiSelect?: boolean;
     /** Optional function for controlled handling of uploads. Triggered on every change to uploader. */
-    onImageSelected?: (data: File[] | File | undefined) => void;
+    onImageSelected?: (data: File | undefined) => void;
+    /** Boolean indicator to trigger image upload cleanup once the upload process has finalized on the frontend. */
+    hasUploaded?: boolean;
 }

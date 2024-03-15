@@ -1,6 +1,6 @@
 import React from "react";
 import { ImageUpload } from "./ImageUpload";
-import { render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import MockDataTransfer from "./_MockDataTransfer";
 import "@testing-library/jest-dom";
@@ -14,32 +14,8 @@ const defaultArgs = {
     maxSize: 2
 };
 
-/**
- * Monkeypatch JSDOM file input to allow modification (this is a thing in the browser but
- * not in JSDOM for some reason.)
- */
-const fileCache = new WeakMap();
-
-Object.defineProperty(HTMLInputElement.prototype, 'files', {
-//   set(fileList) {
-//     // use the input itself as the map key to avoid collisions
-//     fileCache.set(this, fileList);
-
-    // the first time we set install a new set of getter/setter that point to the cache
-    // Object.defineProperty(this, 'files', {
-      get() {
-        return fileCache.get(this);
-      },
-      set(value) {
-        fileCache.set(this, value);
-      },
-    // });
-//   },
-});
-
 // @ts-expect-error MockDataTransfer is a minimal mock
 global.DataTransfer = MockDataTransfer;
-
 Object.defineProperty(URL, 'createObjectURL', {
     value: jest.fn((file) => `http://localhost/${Buffer.from(file.name).toString('base64')}`),
 });
@@ -52,26 +28,119 @@ describe("========== C4 IMAGE UPLOAD - RUNNING TESTS ==========", () => {
         expect(input).toHaveAttribute('accept', defaultArgs.accept);
     });
 
-    test("Displays correct size limit to user", () => {
-        const maxSize = 10;
-        render(<ImageUpload {...defaultArgs} maxSize={maxSize} />);
-        const sizeHelperMessage = screen.getByText(`Max file size: ${maxSize}MB`);
-        expect(sizeHelperMessage).not.toBeNull();
+    test("Triggers correct onChange event logic on valid uploads", async () => {
+        const fileCache = new WeakMap();
+        const user = userEvent.setup();
+        render(<ImageUpload {...defaultArgs} accept="image/jpeg" />);
+        const input: HTMLInputElement = screen.getByAltText(defaultAltText);
+        const file = new File(['(⌐□_□)'], "test.jpeg", { type: "image/jpeg" });
+        
+        Object.defineProperty(input, 'files', {
+            configurable: true,
+            get() {
+                return fileCache.get(this);
+            },
+            set(fileList) {
+                fileCache.set(this, fileList);
+            }
+        });
+        
+        // Test for file upload logic
+        await act(() => user.upload(input, file));
+        expect(input.files).toHaveLength(1);
+        // Test for no file upload logic
+        await act(() => user.upload(input, []));
+        expect(input.files).toHaveLength(0);
+        const caption = screen.getByTestId('upload-caption');
+        expect(caption).not.toBeNull();
+    })
+
+    test("Triggers correct onChange event logic on invalid uploads", async () => {
+        const fileCache = new WeakMap();
+        const user = userEvent.setup();
+        render(<ImageUpload {...defaultArgs} maxSize={0} />);
+        const input: HTMLInputElement = screen.getByAltText(defaultAltText);
+        const file = new File(['(⌐□_□)'], "test.jpeg", { type: "image/jpeg" });
+
+        Object.defineProperty(input, 'files', {
+            configurable: true,
+            get() {
+                return fileCache.get(this);
+            },
+            set(fileList) {
+                fileCache.set(this, fileList);
+            }
+        });
+
+        // Test for error message on invalid file upload
+        await act(() => user.upload(input, file));
+        expect(input.files).toHaveLength(1);
+        const error = screen.getByText("File could not be loaded. Check for the correct file type and size (max size: 0MB)");
+        expect(error).not.toBeNull();
     });
 
-    // test("Triggers correct onChange event logic", async () => {
-    //     const user = userEvent.setup();
-    //     render(<ImageUpload {...defaultArgs} />);
-    //     const file = new File(['(⌐□_□)'], "test.jpeg", { type: "image/jpeg" });
-    //     const input: HTMLInputElement = screen.getByAltText(defaultAltText);
-        
-    //     await userEvent.upload(input, file);
-    //     console.log(input.files);
-    //     input = screen.getByAltText(defaultAltText);
-    //     console.log(input.files)
-    //     const caption = screen.getByText("1 file selected");
-    //     expect(caption).not.toBeNull();
-    // })
+    test("Triggers correct drag and drop event logic on valid uploads", async () => {
+        const fileCache = new WeakMap();
+        const onImageSelected = jest.fn();
+        render(<ImageUpload {...defaultArgs} onImageSelected={onImageSelected} />);
+        const input: HTMLInputElement = screen.getByAltText(defaultAltText);
+        const file = new File(['(⌐□_□)'], "test.jpeg", { type: "image/jpeg" });
 
+        Object.defineProperty(input, 'files', {
+            configurable: true,
+            get() {
+                return fileCache.get(this);
+            },
+            set(fileList) {
+                fileCache.set(this, fileList);
+            }
+        });
 
+        // FireEvent to test dataTransfer with items prop
+        // Only .drop event is necessary, however other drag events
+        // are for uncovered lines of code, to ensure functions are properly triggered.
+        fireEvent.dragOver(input);
+        fireEvent.dragLeave(input);
+        fireEvent.dragOver(input);
+        fireEvent.dragEnd(input);
+        fireEvent.drop(input, {
+            dataTransfer: {
+                files: [file]
+            }
+        });
+
+        // Way to check if drop function has been called, as the onImageSelected prop is called inside it.
+        expect(input.files).not.toBeNull();
+        expect(input.files?.length).toBe(1);
+        expect(onImageSelected).toHaveBeenCalled();
+    });
+
+    test("Triggers correct drag and drop event logic on invalid uploads", async () => {
+        const fileCache = new WeakMap();
+        const onImageSelected = jest.fn();
+        // Set accepted type to png only but provide a jpeg to make it invalid
+        render(<ImageUpload {...defaultArgs} accept="image/png" />);
+        const input: HTMLInputElement = screen.getByAltText(defaultAltText);
+        const file = new File(['(⌐□_□)'], "test.jpeg", { type: "image/jpeg" });
+
+        Object.defineProperty(input, 'files', {
+            configurable: true,
+            get() {
+                return fileCache.get(this);
+            },
+            set(fileList) {
+                fileCache.set(this, fileList);
+            }
+        });
+
+        // FireEvent to test dataTransfer with items prop
+        fireEvent.drop(input, {
+            dataTransfer: {
+                files: [file]
+            }
+        });
+
+        // If file is invalid, input.files will be null
+        expect(input.files).toBeNull();
+    });
 });
