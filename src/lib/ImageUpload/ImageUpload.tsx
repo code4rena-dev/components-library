@@ -1,4 +1,4 @@
-import React, { ChangeEvent, DragEvent, useCallback, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, DragEvent, useEffect, useRef, useState } from "react";
 
 import "./ImageUpload.scss";
 import { Icon } from "../Icon";
@@ -34,7 +34,6 @@ export const ImageUpload = ({
     hasUploaded = false
 }: ImageUploadProps) => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const labelRef = useRef<HTMLLabelElement>(null);
     const maxSizeInBytes = maxSize * 1024 * 1024;
     const [dragActive, setDragActive] = useState(false);
     const [uploadedImages, setUploadedImages] = useState<File[]>([]);
@@ -51,7 +50,14 @@ export const ImageUpload = ({
             onImageSelected(undefined);
         }
         if (inputRef.current) {
-            inputRef.current.files = null;
+            /**
+             * Simply assigning inputRef.current.files to null
+             * was causing an issue where uploading the same image that was cleared
+             * was not working. To resolve it, we're passing an empty file list
+             * instead.
+             */
+            const dt = new DataTransfer();
+            inputRef.current.files = dt.files;
         }
     }
 
@@ -206,6 +212,13 @@ export const ImageUpload = ({
             </div>
             {uploadedImages && uploadedImages.length > 0 && <div className="file-name">
                 <p>{uploadedImages[0].name}</p>
+                <button
+                    type="button"
+                    aria-label="Remove upload"
+                    onClick={clearInput}
+                >
+                    <Icon color="#ff427b" name="x" size="medium" />
+                </button>
             </div>}
         </div>}
         <div className='c4imgupload'>

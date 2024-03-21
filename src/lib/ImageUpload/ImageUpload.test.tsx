@@ -117,7 +117,6 @@ describe("========== C4 IMAGE UPLOAD - RUNNING TESTS ==========", () => {
 
     test("Triggers correct drag and drop event logic on invalid uploads", async () => {
         const fileCache = new WeakMap();
-        const onImageSelected = jest.fn();
         // Set accepted type to png only but provide a jpeg to make it invalid
         render(<ImageUpload {...defaultArgs} accept="image/png" />);
         const input: HTMLInputElement = screen.getByAltText(defaultAltText);

@@ -45,7 +45,12 @@
         }
 
         .file-name {
-            padding: 0.5rem 2rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            padding: 0.5rem 1.5rem;
             background: $color__n-90;
             border: 1px solid $color__n-60;
             border-top: 0;
@@ -58,6 +63,15 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
+            }
+
+            button {
+                padding: 0;
+                background: transparent;
+                border: 0;
+                height: 24px;
+                width: 24px;
+                cursor: pointer;
             }
         }
     }
