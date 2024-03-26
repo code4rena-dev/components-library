@@ -338,6 +338,7 @@ function IsContest({
                         {languages
                           && languages.length > 0
                           && languages.map((language) => <Tag
+                          key={language}
                           variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
                           label={language}
                           size={TagSize.NARROW} />
@@ -475,6 +476,7 @@ function IsBounty({
                   {languages
                     && languages.length > 0
                     && languages.map((language) => <Tag
+                    key={language}
                     variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
                     label={language}
                     size={TagSize.NARROW} />

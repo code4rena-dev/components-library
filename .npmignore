@@ -6,3 +6,5 @@ jest.config.ts
 .storybook
 .github
 *DS_Store
+*.stories.tsx
+*.test.tsx

@@ -13,7 +13,7 @@ export const icons = (size: string, color: string, className?: string): Record<s
                 <path fill={color} fillRule="evenodd" clipRule="evenodd" d="M10.6803 4.2636C11.0317 3.91213 11.6016 3.91213 11.953 4.2636L18.3697 10.6803C18.5385 10.8491 18.6333 11.078 18.6333 11.3167C18.6333 11.5554 18.5385 11.7843 18.3697 11.9531L11.953 18.3697C11.6016 18.7212 11.0317 18.7212 10.6803 18.3697C10.3288 18.0183 10.3288 17.4484 10.6803 17.0969L15.5605 12.2167H4.89998C4.40293 12.2167 3.99998 11.8137 3.99998 11.3167C3.99998 10.8196 4.40293 10.4167 4.89998 10.4167H15.5605L10.6803 5.5364C10.3288 5.18492 10.3288 4.61508 10.6803 4.2636Z" />
             </g>
         </svg>,
-    "bell": <svg width={size} height={size} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    "bell": <svg className={className} width={size} height={size} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path stroke={color} d="M15.1333 8.33333C15.1333 7.18406 14.6768 6.08186 13.8641 5.2692C13.0515 4.45655 11.9493 4 10.8 4C9.65072 4 8.54852 4.45655 7.73586 5.2692C6.9232 6.08186 6.46665 7.18406 6.46665 8.33333C6.46665 13.3889 4.29999 14.8333 4.29999 14.8333H17.3C17.3 14.8333 15.1333 13.3889 15.1333 8.33333Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             <path stroke={color} d="M12.0495 17.7223C11.9225 17.9412 11.7402 18.1229 11.521 18.2492C11.3017 18.3755 11.0531 18.442 10.8 18.442C10.547 18.442 10.2983 18.3755 10.0791 18.2492C9.85979 18.1229 9.67754 17.9412 9.55057 17.7223" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>,
@@ -110,13 +110,13 @@ export const icons = (size: string, color: string, className?: string): Record<s
                 </g>
             </g>
         </svg>,
-    "eye-closed": <svg width={size} height={size} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    "eye-closed": <svg className={className} width={size} height={size} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill={color} fillRule="evenodd" clipRule="evenodd" d="M15.0171 11.662C15.4634 11.3367 16.0889 11.4348 16.4142 11.8812L18.6831 14.9943C19.0084 15.4407 18.9103 16.0662 18.464 16.3915C18.0177 16.7168 17.3921 16.6186 17.0669 16.1723L14.7979 13.0591C14.4726 12.6128 14.5708 11.9873 15.0171 11.662Z" />
             <path fill={color} fillRule="evenodd" clipRule="evenodd" d="M11 12.75C11.5523 12.75 12 13.1977 12 13.75V16.9583C12 17.5106 11.5523 17.9583 11 17.9583C10.4477 17.9583 10 17.5106 10 16.9583V13.75C10 13.1977 10.4477 12.75 11 12.75Z" />
             <path fill={color} fillRule="evenodd" clipRule="evenodd" d="M6.9772 11.6699C7.42352 11.9952 7.52164 12.6207 7.19635 13.067L4.93314 16.1723C4.60785 16.6186 3.98234 16.7168 3.53601 16.3915C3.08969 16.0662 2.99157 15.4407 3.31686 14.9943L5.58007 11.889C5.90536 11.4427 6.53087 11.3446 6.9772 11.6699Z" />
             <path fill={color} fillRule="evenodd" clipRule="evenodd" d="M2.33964 7.33808C2.84328 7.11144 3.43529 7.336 3.66192 7.83964C6.60814 14.3868 15.3919 14.3868 18.3381 7.83964C18.5647 7.336 19.1567 7.11144 19.6604 7.33808C20.164 7.56472 20.3886 8.15673 20.1619 8.66037C16.5081 16.7799 5.49186 16.7799 1.83808 8.66037C1.61144 8.15673 1.836 7.56472 2.33964 7.33808Z" />
         </svg>,
-    "eye-open": <svg width={size} height={size} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    "eye-open": <svg className={className} width={size} height={size} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill={color} fillRule="evenodd" clipRule="evenodd" d="M18.3381 11.4104C15.3919 4.86321 6.60814 4.86321 3.66192 11.4104C3.43529 11.914 2.84328 12.1386 2.33964 11.9119C1.836 11.6853 1.61144 11.0933 1.83808 10.5896C5.49186 2.47012 16.5081 2.47012 20.1619 10.5896C20.3886 11.0933 20.164 11.6853 19.6604 11.9119C19.1567 12.1386 18.5647 11.914 18.3381 11.4104Z" />
             <path fill={color} fillRule="evenodd" clipRule="evenodd" d="M3.66192 10.5896C6.60814 17.1368 15.3919 17.1368 18.3381 10.5896C18.5647 10.086 19.1567 9.86144 19.6604 10.0881C20.164 10.3147 20.3886 10.9067 20.1619 11.4104C16.5081 19.5299 5.49186 19.5299 1.83808 11.4104C1.61144 10.9067 1.836 10.3147 2.33964 10.0881C2.84328 9.86144 3.43528 10.086 3.66192 10.5896Z" />
             <path fill={color} fillRule="evenodd" clipRule="evenodd" d="M11 9.25C10.0335 9.25 9.25 10.0335 9.25 11C9.25 11.9665 10.0335 12.75 11 12.75C11.9665 12.75 12.75 11.9665 12.75 11C12.75 10.0335 11.9665 9.25 11 9.25ZM7.25 11C7.25 8.92889 8.92889 7.25 11 7.25C13.0711 7.25 14.75 8.92889 14.75 11C14.75 13.0711 13.0711 14.75 11 14.75C8.92889 14.75 7.25 13.0711 7.25 11Z" />
@@ -134,7 +134,7 @@ export const icons = (size: string, color: string, className?: string): Record<s
                 </g>
             </g>
         </svg>,
-    "grab-vertical": <svg width={size} height={size} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    "grab-vertical": <svg className={className} width={size} height={size} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle fill={color} cx="13.75" cy="5.08325" r="1.75" />
             <circle fill={color} cx="13.75" cy="11.0833" r="1.75" />
             <circle fill={color} cx="13.75" cy="17.0833" r="1.75" />

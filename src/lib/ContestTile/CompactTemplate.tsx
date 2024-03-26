@@ -178,6 +178,7 @@ const IsContest = ({title, isDarkTile = true, contestData, sponsorUrl, sponsorIm
         {languages
           && languages.length > 0
           && languages.map((language) => <Tag
+            key={language}
             variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
             label={language}
             size={TagSize.NARROW}
@@ -259,6 +260,7 @@ const IsBounty = ({title, isDarkTile = true, bountyData, sponsorUrl, sponsorImag
         {languages
           && languages.length > 0
           && languages.map((language) => <Tag
+          key={language}
           variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
           label={language}
           size={TagSize.NARROW} />

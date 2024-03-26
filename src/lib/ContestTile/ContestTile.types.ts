@@ -10,7 +10,7 @@ export enum ContestTileVariant {
 
 export type ContestEcosystem = "Algorand" | "Aptos" | "Blast" | "Cosmos" | "EVM" | "NEAR" | "Polkadot" | "Scroll" | "Sei" | "Solana" | "StarkNet" | "Stellar" | "Sui" | "Other";
 
-export type CodingLanguage = "Cairo" | "GO" | "HUFF" | "Ink" | "Move" | "Noir" | "Other" | "Rain" | "Rust" | "Rust evm" | "Solidity" | "Vyper" | "Yui";
+export type CodingLanguage = "Cairo" | "GO" | "HUFF" | "Ink" | "Move" | "Noir" | "Other" | "Rain" | "Rust" | "Rust evm" | "Solidity" | "Vyper" | "Yul";
 
 export interface ContestTileProps {
   /** An html `id` for the contest tile's wrapping div. */
