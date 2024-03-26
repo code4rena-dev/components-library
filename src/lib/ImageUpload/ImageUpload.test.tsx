@@ -4,12 +4,13 @@ import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import MockDataTransfer from "./_MockDataTransfer";
 import "@testing-library/jest-dom";
+import { ImageType } from "./ImageUpload.types";
 
 
 const defaultAltText = "Image uploader input";
 const defaultArgs = {
     id: 'test-uploader',
-    accept: 'image/jpeg',
+    accept: [ImageType.jpeg],
     multiSelect: false,
     maxSize: 2
 };
@@ -25,13 +26,13 @@ describe("========== C4 IMAGE UPLOAD - RUNNING TESTS ==========", () => {
         render(<ImageUpload {...defaultArgs} />);
         const input: HTMLInputElement = screen.getByAltText(defaultAltText);
         expect(input).toHaveAttribute('id', defaultArgs.id);
-        expect(input).toHaveAttribute('accept', defaultArgs.accept);
+        expect(input).toHaveAttribute('accept', defaultArgs.accept.join(", "));
     });
 
     test("Triggers correct onChange event logic on valid uploads", async () => {
         const fileCache = new WeakMap();
         const user = userEvent.setup();
-        render(<ImageUpload {...defaultArgs} accept="image/jpeg" />);
+        render(<ImageUpload {...defaultArgs} accept={[ImageType.jpeg]} />);
         const input: HTMLInputElement = screen.getByAltText(defaultAltText);
         const file = new File(['(⌐□_□)'], "test.jpeg", { type: "image/jpeg" });
         
@@ -118,7 +119,7 @@ describe("========== C4 IMAGE UPLOAD - RUNNING TESTS ==========", () => {
     test("Triggers correct drag and drop event logic on invalid uploads", async () => {
         const fileCache = new WeakMap();
         // Set accepted type to png only but provide a jpeg to make it invalid
-        render(<ImageUpload {...defaultArgs} accept="image/png" />);
+        render(<ImageUpload {...defaultArgs} accept={[ImageType.png]} />);
         const input: HTMLInputElement = screen.getByAltText(defaultAltText);
         const file = new File(['(⌐□_□)'], "test.jpeg", { type: "image/jpeg" });
 

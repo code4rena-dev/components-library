@@ -1,15 +1,12 @@
 export interface ImageUploadProps {
     /**
-     * String value indicating all the accepted file types (separated by a comma). Options include:
-     *  - image/apng
-     *  - image/avif
+     * List of image types as provided by the `ImageType` enum. Available options include:
      *  - image/gif
      *  - image/jpeg
      *  - image/png
-     *  - image/svg+xml
      *  - image/webp
      */
-    accept?: string;
+    accept?: ImageType[];
     /** String HTML identifier for the input field. */
     id: string;
     /** The max allowed size for file uploads (in Megabytes). */
@@ -18,4 +15,11 @@ export interface ImageUploadProps {
     onImageSelected?: (data: File | undefined) => void;
     /** Boolean indicator to trigger image upload cleanup once the upload process has finalized on the frontend. */
     hasUploaded?: boolean;
+}
+
+export enum ImageType {
+    gif = "image/gif",
+    jpeg = "image/jpeg",
+    png = "image/png",
+    webp = "image/webp"
 }

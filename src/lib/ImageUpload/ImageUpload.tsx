@@ -3,23 +3,19 @@ import React, { ChangeEvent, DragEvent, useEffect, useRef, useState } from "reac
 import "./ImageUpload.scss";
 import { Icon } from "../Icon";
 import clsx from "clsx";
-import { ImageUploadProps } from "./ImageUpload.types";
+import { ImageType, ImageUploadProps } from "./ImageUpload.types";
 
 /**
- * A custom image upload input component with support for drag & drop
- * as well as multi-file upload by providing the `multiSelect` prop.
+ * A custom image upload input component with support for drag & drop.
  * 
  * By default, this component can be used as an uncontrolled input and all uploaded files
  * can be retrieved on form submission. For further control however, you can pass an optional function
  * to the `onImageSelected` prop.
  * 
- * @param accept - String value indicating all the accepted file types (separated by a comma). Options include:
- *  - image/apng
- *  - image/avif
+ * @param accept - List of image types as provided by the `ImageType` enum. Available options include:
  *  - image/gif
  *  - image/jpeg
  *  - image/png
- *  - image/svg+xml
  *  - image/webp
  * @param id - String HTML identifier for the input field.
  * @param maxSize - The max allowed size for file uploads (in Megabytes).
@@ -27,13 +23,14 @@ import { ImageUploadProps } from "./ImageUpload.types";
  * @param hasUploaded - Boolean indicator to trigger image upload cleanup once the upload process has finalized on the frontend.
  */
 export const ImageUpload = ({
-    accept = "image/png, image/jpeg",
+    accept = [ImageType.png, ImageType.jpeg],
     id,
     maxSize = 2,
     onImageSelected,
     hasUploaded = false
 }: ImageUploadProps) => {
     const inputRef = useRef<HTMLInputElement>(null);
+    const acceptToStr = accept.join(", ")
     const maxSizeInBytes = maxSize * 1024 * 1024;
     const [dragActive, setDragActive] = useState(false);
     const [uploadedImages, setUploadedImages] = useState<File[]>([]);
@@ -71,9 +68,10 @@ export const ImageUpload = ({
      * @param acceptedPreviews - Array of previously generated preview urls for each accepted file.
      */
     const isValidFile = (file: File | null, acceptedFiles: File[], declinedFiles: File[], acceptedPreviews: string[]) => {
+        const acceptedTypes = new Set(accept);
         if (file == null) return false;
 
-        if (!accept.includes(file.type) || file.size > maxSizeInBytes) {
+        if (!acceptedTypes.has(file.type as ImageType) || file.size > maxSizeInBytes) {
             declinedFiles.push(file);
             return false;
         } else {
@@ -243,7 +241,7 @@ export const ImageUpload = ({
                     className='c4imgupload--input'
                     multiple={false}
                     type="file"
-                    accept={accept}
+                    accept={acceptToStr}
                     onClick={() => setError(undefined)}
                     onChange={onImageChanged}
                 />

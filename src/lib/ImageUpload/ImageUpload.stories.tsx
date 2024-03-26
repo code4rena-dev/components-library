@@ -1,6 +1,7 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ImageUpload } from "./ImageUpload"
+import { ImageType } from "./ImageUpload.types";
 
 const meta: Meta<typeof ImageUpload> = {
     component: ImageUpload,
@@ -24,6 +25,6 @@ SampleComponent.parameters = {
 };
 SampleComponent.args = {
     id: "c4_img_uploader",
-    accept: "image/png, image/jpeg",
+    accept: [ImageType.png, ImageType.jpeg],
     maxSize: 2
 }
