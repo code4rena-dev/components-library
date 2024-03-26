@@ -7,6 +7,7 @@ export * from "./ContestTile";
 export * from "./Dropdown";
 export * from "./EyebrowBar";
 export * from "./Icon";
+export * from "./ImageUpload";
 export * from "./Input";
 export * from "./NavBar";
 export * from "./Tag";
