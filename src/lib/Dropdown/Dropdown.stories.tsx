@@ -24,7 +24,7 @@ SampleComponent.parameters = {
   },
 };
 SampleComponent.args = {
-  id: "",
+  id: "storybook-dropdown",
   wrapperClass: "",
   triggerButtonClass: "",
   openOnHover: true,
