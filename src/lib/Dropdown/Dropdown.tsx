@@ -39,10 +39,12 @@ export const Dropdown = ({
   useEffect(() => {
     if (!openOnHover && id != null && id.length > 0) {
         window.addEventListener('click', onClickObserver);
+    } else {
+      window.removeEventListener('click', onClickObserver);
     }
 
     return () => window.removeEventListener('click', onClickObserver);
-  }, []);
+  }, [openOnHover]);
 
   return (
     <div
