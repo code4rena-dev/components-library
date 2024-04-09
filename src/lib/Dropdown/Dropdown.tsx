@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactNode, useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import clsx from "clsx";
 import { DropdownProps } from "./Dropdown.types";
 import "./Dropdown.scss";
@@ -46,7 +46,7 @@ export const Dropdown = ({
 
   return (
     <div
-      id={id}
+      id={id ?? undefined}
       onMouseEnter={openOnHover ? () => setIsOpen(true) : undefined}
       onMouseLeave={openOnHover ? () => setIsOpen(false) : undefined}
       className={clsx(
