@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import clsx from "clsx";
 import { DropdownProps } from "./Dropdown.types";
 import "./Dropdown.scss";
@@ -26,12 +26,35 @@ export const Dropdown = ({
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
+
+  const onClickObserver = useCallback((e: Event) => {
+    const dropdownElement = document.querySelector(`#${id} .c4dropdown--listcontainer`);
+    const dropdownTrigger = document.querySelector(`#${id} .c4dropdown--trigger`);
+
+    if (!dropdownElement?.contains(e.target as Node) && !dropdownTrigger?.contains(e.target as Node)) {
+      setIsOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!openOnHover && id != null && id.length > 0) {
+        window.addEventListener('click', onClickObserver);
+    } else {
+      window.removeEventListener('click', onClickObserver);
+    }
+
+    return () => window.removeEventListener('click', onClickObserver);
+  }, [openOnHover]);
+
   return (
     <div
-      id={id ? id : undefined}
+      id={id ?? undefined}
       onMouseEnter={openOnHover ? () => setIsOpen(true) : undefined}
       onMouseLeave={openOnHover ? () => setIsOpen(false) : undefined}
-      className={clsx("c4dropdown", wrapperClass && wrapperClass)}
+      className={clsx(
+        "c4dropdown",
+        wrapperClass && wrapperClass
+      )}
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
