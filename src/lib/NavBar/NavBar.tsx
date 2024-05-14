@@ -156,7 +156,7 @@ const Login = ({
  * @param hideConnectWalletDropdown - Boolean determining whether the login/logout dropdown should be visible/hidden.
  * @param navLinks - List of links to be rendered in the navigation bar. Array of object type `NavigationLink` which accepts the properties `label: string`, `href: string`, `external: boolean`.
  */
-export const NavBar: React.FC<NavBarProps> = ({
+export const NavBar = ({
   id,
   className,
   isLoggedIn = false,
@@ -167,7 +167,7 @@ export const NavBar: React.FC<NavBarProps> = ({
   loginHandler,
   modalHandler,
   navLinks = [],
-}) => {
+}: NavBarProps) => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const hideMobileNav = () => {

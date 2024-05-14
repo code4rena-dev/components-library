@@ -31,7 +31,7 @@ export type InputArgs = {
 export type CustomArgs = {
   isMulti?: boolean;
   selectOptions: SelectOption[];
-  selectValue?: string | number;
+  selectValue?: string | number | MultiValue<SelectOption>;
   handleChange: (
     option:
       | SingleValue<string | number | SelectOption>
@@ -76,11 +76,11 @@ export interface InputProps {
   /** (SELECT variant only) An array of options to be displayed in the select field dropdown. Option should be of the form `{ label: string, value: string }`. */
   selectOptions?: SelectOption[];
   /** (SELECT variant only) - Current value of select field tracked by state. */
-  selectValue?: string | number;
+  selectValue?: string | number | MultiValue<SelectOption>;
   /** Value determining the type of input field to be rendered. */
   variant: InputVariant;
   /** A custom function for running additional validation on an input value. Should return an array of error messages (if any). */
-  validator?: (value: string | number | undefined) => (string | ReactNode)[];
+  validator?: (value: string | number | MultiValue<SelectOption> | undefined) => (string | ReactNode)[];
   /** Current value of input field as tracked by state. This does not apply to the SELECT field variant (please see the `selectValue` parameter). */
   value?: string;
 }

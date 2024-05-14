@@ -59,12 +59,12 @@ const generateColor = (str: string) => {
  * @param size - The size of the avatar in pixels.
  * @param round - The border-radius of the avatar in pixels. Use this to make the avatar round.
  */
-export const Avatar: React.FC<AvatarProps> = ({
+export const Avatar = ({
   imgElement,
   name,
   size,
   round,
-}) => {
+}: AvatarProps) => {
   const clonedImgElement = imgElement
     ? cloneElement(imgElement, {
         className: "avatar__image",

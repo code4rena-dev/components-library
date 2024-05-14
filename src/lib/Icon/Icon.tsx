@@ -17,12 +17,12 @@ const getIcon = (name: string, size: string, color: string, className?: string) 
  * @param color - Color value to decorate the icon with.
  * @param className - Custom classes to be attached to the icon.
  */
-export const Icon: React.FC<IconProps> = ({
+export const Icon = ({
     name,
     size = "medium",
     color = "black",
     className
-}) => {
+}: IconProps) => {
     let sizeInPx = "24px";
 
     switch (size) {

@@ -1,6 +1,6 @@
 {
   "name": "@code4rena/components-library",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Code4rena's official components library ",
   "types": "./dist/lib.d.ts",
   "exports": {

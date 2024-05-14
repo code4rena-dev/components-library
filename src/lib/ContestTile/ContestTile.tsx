@@ -143,7 +143,7 @@ export const Countdown = ({
  * @param title - Title for the current contest.
  * @param description - Description for the current contest.
  */
-export const ContestTile: React.FC<ContestTileProps> = ({
+export const ContestTile = ({
   htmlId = "",
   variant = ContestTileVariant.DARK,
   contestData,
@@ -153,7 +153,7 @@ export const ContestTile: React.FC<ContestTileProps> = ({
   title,
   description,
   hideDropdown = false,
-}) => {
+}: ContestTileProps) => {
   const isDefault =
     variant === ContestTileVariant.DARK || variant === ContestTileVariant.LIGHT;
 

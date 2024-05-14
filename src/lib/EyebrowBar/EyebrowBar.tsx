@@ -11,14 +11,14 @@ import "./EyebrowBar.scss";
  * @param id - HTML element identifier.
  * @param text - Main text displayed in the component.
  */
-export const EyebrowBar: React.FC<EyebrowBarProps> = ({
+export const EyebrowBar = ({
   buttonLabel = "Learn more",
   className = undefined,
   external = false,
   href = undefined,
   id = undefined,
   text,
-}) => {
+}: EyebrowBarProps) => {
   return (
     <div id={id} className={`eyebrowbar ${className ?? ""}`}>
       <p className="eyebrowbar--content">

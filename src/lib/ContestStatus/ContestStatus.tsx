@@ -14,11 +14,11 @@ import "./ContestStatus.scss";
  * @param className - String of custom classes to extend the default styling of the component.
  * @param id - HTML element identifier.
  */
-export const ContestStatus: React.FC<ContestStatusProps> = ({
+export const ContestStatus = ({
   status,
   className = "",
   id = "",
-}) => {
+}: ContestStatusProps) => {
   const styling = clsx({
     statusindicator: true,
     upcoming: status === Status.UPCOMING,

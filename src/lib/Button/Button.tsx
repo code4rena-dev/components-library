@@ -24,7 +24,7 @@ import "./Button.scss";
  * @param className - String of custom classes to extend the default styling of the component.
  * @param id - HTML element identifier.
  */
-export const Button: React.FC<ButtonProps> = ({
+export const Button = ({
   label,
   type = ButtonType.BUTTON,
   variant = ButtonVariant.PRIMARY,
@@ -37,7 +37,7 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
   className = "",
   id = "",
-}) => {
+}: ButtonProps) => {
   const styling = clsx({
     c4button: true,
     "button--primary": variant === ButtonVariant.PRIMARY,
