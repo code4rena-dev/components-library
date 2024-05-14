@@ -1,0 +1,66 @@
+@import "../../styles//variables";
+
+.c4pagination {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    .c4pagination--btn {
+        outline: none;
+        padding: 0.25rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        min-width: 2rem;
+        background: $color__n-90;
+        color: $color__white;
+        cursor: pointer;
+        display: none;
+
+        &.selected {
+            display: flex;
+            background: $color__blurple-60;
+            color: $color__white;
+
+            &:hover:not(:disabled) {
+                border-color: $color__white;
+            }
+        }
+
+        &:first-of-type {
+            padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+        }
+
+        &:last-of-type {
+            padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+        }
+
+        &:first-of-type,
+        &:last-of-type {
+            display: flex;
+
+            svg path {
+                fill: $color__white;
+            }
+
+            &:disabled {
+                cursor: not-allowed;
+                color: $color__n-20;
+
+                svg path {
+                    fill: $color__n-20;
+                }
+            }
+        }
+
+        &:hover:not(:disabled) {
+            border-color: $color__white;
+        }
+    }
+}
