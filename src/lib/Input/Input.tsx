@@ -74,7 +74,7 @@ const mappedTypes = (
  * @param validator - A custom function for running additional validation on an input value. Should return an array of error messages (if any).
  * @param value - Current value of input field as tracked by state. This does not apply to the SELECT field variant (please see the `selectValue` parameter).
  */
-export const Input: React.FC<InputProps> = ({
+export const Input = ({
   inputId,
   fieldType = "text",
   isMultiSelect = false,
@@ -91,7 +91,7 @@ export const Input: React.FC<InputProps> = ({
   validator,
   value,
   onChange,
-}) => {
+}: InputProps) => {
   const fieldTypeClassName = clsx({
     c4input: true,
     "c4input--field": variant === InputVariant.FIELD,

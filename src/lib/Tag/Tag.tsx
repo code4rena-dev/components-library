@@ -21,14 +21,14 @@ import "./Tag.scss";
  * @param className - String of custom classes to extend the default styling of the component.
  * @param id - HTML element identifier.
  */
-export const Tag: React.FC<TagProps> = ({
+export const Tag = ({
   variant = TagVariant.DEFAULT,
   size = TagSize.NARROW,
   iconLeft = undefined,
   label,
   className = "",
   id = "",
-}) => {
+}: TagProps) => {
   const styling = clsx({
     c4tag: true,
     "tag--white": variant === TagVariant.WHITE,
