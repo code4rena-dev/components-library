@@ -23,7 +23,7 @@ import { Icon } from "../Icon";
  * @param className - String of custom classes to extend the default styling of the component.
  * @param id - HTML element identifier
  */
-export const Alert: React.FC<AlertProps> = ({
+export const Alert = ({
   title = "",
   message,
   redirectLabel = "",
@@ -31,7 +31,7 @@ export const Alert: React.FC<AlertProps> = ({
   variant = AlertVariant.INFO,
   className = "",
   id = "",
-}) => {
+}: AlertProps) => {
   const styling = clsx({
     c4alert: true,
     "alert--info": variant === AlertVariant.INFO,

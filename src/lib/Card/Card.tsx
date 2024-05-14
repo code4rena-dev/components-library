@@ -26,7 +26,7 @@ import "./Card.scss";
  * @param title - The title to be rendered at the top of the card body. Can be string or react node.
  * @param cta - A call to action button rendered in the top right corner. Includes text and an onClick handler.
  */
-export const Card: React.FC<CardProps> = ({
+export const Card = ({
   children,
   className,
   variants,
@@ -37,7 +37,7 @@ export const Card: React.FC<CardProps> = ({
   imageBorderRadius = CardImageBorderRadius.CIRCLE,
   title,
   cta,
-}) => {
+}: CardProps) => {
   return (
     <div
       className={clsx(
