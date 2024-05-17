@@ -313,7 +313,7 @@ function IsContest({
                     </a>
                   </h2>
                   {/* Contest description */}
-                  <p className="description">
+                  <div className="description">
                       {description}{" "}
                       {((hasBotRace && contestTimelineObject && (contestTimelineObject.botRaceStatus === Status.UPCOMING ||
                           contestTimelineObject.botRaceStatus === Status.LIVE))
@@ -344,7 +344,7 @@ function IsContest({
                           size={TagSize.NARROW} />
                         )}
                       </div>}
-                  </p>
+                  </div>
               </div>
           </header>
           {/* Reward pool amount */}
@@ -464,7 +464,7 @@ function IsBounty({
                 </a>
               </h2>
               {/* Contest description */}
-              <p className="description">
+              <div className="description">
                 {description}
                 {(ecosystem || (languages && languages.length > 0)) && <div className="tags">
                   {ecosystem && <Tag 
@@ -482,7 +482,7 @@ function IsBounty({
                     size={TagSize.NARROW} />
                   )}
                 </div>}
-              </p>
+              </div>
           </div>
         </header>
         {/* Reward pool amount */}
