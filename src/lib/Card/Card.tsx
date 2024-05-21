@@ -74,7 +74,7 @@ export const Card = ({
       {(footerDetails || footerLinks) && (
         <footer className="card__footer">
           {footerDetails && (
-            <p className="card__footer-details">{footerDetails}</p>
+            <div className="card__footer-details">{footerDetails}</div>
           )}
           {footerLinks && (
             <div className="card__footer-link-wrapper">
