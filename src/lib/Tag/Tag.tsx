@@ -42,7 +42,7 @@ export const Tag = ({
 
   return (
     <div id={id ?? undefined} className={`${styling} ${className}`}>
-      {iconLeft && typeof iconLeft === "string" && <img alt="" src={iconLeft} width={16} height={16} />}
+      {iconLeft && typeof iconLeft === "string" && <img alt="left-icon" src={iconLeft} width={16} height={16} />}
       {iconLeft && typeof iconLeft !== "string" && <div className="icon">
         {iconLeft}
       </div>}

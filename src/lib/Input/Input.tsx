@@ -117,8 +117,6 @@ export const Input = ({
       }
     }
     if (required) {
-      console.log(selectValue);
-
       if (variant !== InputVariant.SELECT && (value === "" || value == null)) {
         errorMessages.push("This field is required");
       } else if (
