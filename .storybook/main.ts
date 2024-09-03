@@ -31,13 +31,13 @@ const config: StorybookConfig = {
         ...config.resolve,
         alias: {
           ...config.resolve.alias,
-          "/fonts": path.resolve(__dirname, "../public/fonts"),
+          "./fonts": path.resolve(__dirname, "../src/lib/fonts"),
         },
       };
     } else {
       config.resolve = {
         alias: {
-          "/fonts": path.resolve(__dirname, "../public/fonts"),
+          "./fonts": path.resolve(__dirname, "../src/lib/fonts"),
         },
       };
     }
