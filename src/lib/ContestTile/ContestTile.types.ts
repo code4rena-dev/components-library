@@ -12,6 +12,12 @@ export type ContestEcosystem = "Algorand" | "Aptos" | "Blast" | "Cosmos" | "EVM"
 
 export type CodingLanguage = "Cairo" | "GO" | "HUFF" | "Ink" | "Move" | "Noir" | "Other" | "Rain" | "Rust" | "Rust evm" | "Solidity" | "Vyper" | "Yul";
 
+export interface ContestCohort {
+  resumeTime: string | null;
+  pauseTime: string | null;
+  name: string;
+}
+
 export interface ContestTileProps {
   /** An html `id` for the contest tile's wrapping div. */
   htmlId?: string;
@@ -53,6 +59,8 @@ export interface BountyTileData {
 export interface ContestTileData {
   /** String indicating required access for viewing contest. */
   codeAccess: string;
+  /** Array of cohorts for Rolling Triage audits. Empty for normal audits */
+  cohorts: ContestCohort[];
   /** String indicating a specific categorization for the current contest. */
   contestType?: string;
   /** Unique numerical identifier for the current contest. */
@@ -86,6 +94,10 @@ export interface ContestSchedule {
   botRaceStatus?: Status;
   start: Date;
   end: Date;
+  /** The time the current cohort will pause. */
+  pause: Date | null;
+  /** The time the current cohort will resume. */
+  resume: Date | null;
   botRaceEnd: Date;
   formattedStart: string;
   formattedEnd: string;

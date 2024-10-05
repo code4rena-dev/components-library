@@ -57,7 +57,7 @@ export const Countdown = ({
   }
 
   const countDown = useCallback(() => {
-    const newTimer = getDates(start, end);
+    const newTimer = getDates(start, end, []);
     const target = getCountdownTarget(newTimer);
     // Get total number of seconds remaining
     const totalSeconds = formatDistanceToNowStrict(target, {
@@ -78,7 +78,7 @@ export const Countdown = ({
   useEffect(() => {
     const timer = setInterval(
       () => {
-        const newTimer = getDates(start, end);
+        const newTimer = getDates(start, end, []);
         if (
           contestTimer &&
           (contestTimer.contestStatus !== newTimer.contestStatus ||
@@ -122,6 +122,35 @@ export const Countdown = ({
       <span>{formattedCountdown}</span>
     </div>
   );
+};
+
+export const ContestCountdown = ({
+  schedule,
+  updateContestStatus
+}: {
+  schedule: ContestSchedule,
+  updateContestStatus: CountdownProps["updateContestStatus"]
+}) => {
+  let text = "Ends in ";
+  let start = schedule.start.toISOString();
+  let end = schedule.end.toISOString();
+  if (schedule.contestStatus === Status.UPCOMING) {
+    text = "Starts in ";
+  } else if (schedule.contestStatus === Status.LIVE) {
+    if (schedule.resume && +schedule.resume >= Date.now()) {
+      text = "Cohort resumes in ";
+      start = schedule.resume.toISOString();
+    } else if (schedule.pause && +schedule.pause >= Date.now()) {
+      text = "Cohort pauses in ";
+      end = schedule.pause.toISOString();
+    }
+  }
+  return Countdown({
+    start,
+    end,
+    text,
+    updateContestStatus,
+  });
 };
 
 /**

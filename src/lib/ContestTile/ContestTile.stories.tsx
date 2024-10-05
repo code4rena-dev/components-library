@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { addDays, subDays } from "date-fns";
 import { ContestTile } from "./ContestTile";
 import { Meta, StoryObj } from "@storybook/react";
 import { CodingLanguage, ContestEcosystem, ContestTileVariant } from "./ContestTile.types";
@@ -36,6 +37,7 @@ const defaultArgs = {
   htmlId: "",
   contestData: {
     codeAccess: "public",
+    cohorts: [],
     contestType: "Open Audit",
     isUserCertified: false,
     contestId: 321,
@@ -75,7 +77,81 @@ export const ContestTileUpcoming: Story = (args) => {
   </Fragment>
 };
 
+export const ContestTileUpcomingRollingTriage: Story = (args) => {
+  const isDark = args.variant === ContestTileVariant.DARK || args.variant === ContestTileVariant.COMPACT_DARK;
+
+  return <Fragment>
+    <ContestTile
+      {...args}
+      variant={isDark ? ContestTileVariant.DARK : ContestTileVariant.LIGHT}
+      startDate={new Date(args.contestData.startDate).toISOString()}
+      endDate={new Date(args.contestData.endDate).toISOString()}
+    />
+    <ContestTile
+      {...args}
+      variant={isDark ? ContestTileVariant.COMPACT_DARK : ContestTileVariant.COMPACT_LIGHT }
+      startDate={new Date(args.contestData.startDate).toISOString()}
+      endDate={new Date(args.contestData.endDate).toISOString()}
+    />
+  </Fragment>
+};
+
 export const ContestTileLive: Story = (args) => {
+  const isDark = args.variant === ContestTileVariant.DARK || args.variant === ContestTileVariant.COMPACT_DARK;
+
+  return <Fragment>
+    <ContestTile
+      {...args}
+      variant={isDark ? ContestTileVariant.DARK : ContestTileVariant.LIGHT}
+      startDate={new Date(args.contestData.startDate).toISOString()}
+      endDate={new Date(args.contestData.endDate).toISOString()}
+    />
+    <ContestTile
+      {...args}
+      variant={isDark ? ContestTileVariant.COMPACT_DARK : ContestTileVariant.COMPACT_LIGHT }
+      startDate={new Date(args.contestData.startDate).toISOString()}
+      endDate={new Date(args.contestData.endDate).toISOString()}
+    />
+  </Fragment>
+};
+
+export const ContestTileLiveCohort1: Story = (args) => {
+  const isDark = args.variant === ContestTileVariant.DARK || args.variant === ContestTileVariant.COMPACT_DARK;
+
+  return <Fragment>
+    <ContestTile
+      {...args}
+      variant={isDark ? ContestTileVariant.DARK : ContestTileVariant.LIGHT}
+      startDate={new Date(args.contestData.startDate).toISOString()}
+      endDate={new Date(args.contestData.endDate).toISOString()}
+    />
+    <ContestTile
+      {...args}
+      variant={isDark ? ContestTileVariant.COMPACT_DARK : ContestTileVariant.COMPACT_LIGHT }
+      startDate={new Date(args.contestData.startDate).toISOString()}
+      endDate={new Date(args.contestData.endDate).toISOString()}
+    />
+  </Fragment>
+};
+export const ContestTileLivePreCohort2: Story = (args) => {
+  const isDark = args.variant === ContestTileVariant.DARK || args.variant === ContestTileVariant.COMPACT_DARK;
+
+  return <Fragment>
+    <ContestTile
+      {...args}
+      variant={isDark ? ContestTileVariant.DARK : ContestTileVariant.LIGHT}
+      startDate={new Date(args.contestData.startDate).toISOString()}
+      endDate={new Date(args.contestData.endDate).toISOString()}
+    />
+    <ContestTile
+      {...args}
+      variant={isDark ? ContestTileVariant.COMPACT_DARK : ContestTileVariant.COMPACT_LIGHT }
+      startDate={new Date(args.contestData.startDate).toISOString()}
+      endDate={new Date(args.contestData.endDate).toISOString()}
+    />
+  </Fragment>
+};
+export const ContestTileLiveCohort3: Story = (args) => {
   const isDark = args.variant === ContestTileVariant.DARK || args.variant === ContestTileVariant.COMPACT_DARK;
 
   return <Fragment>
@@ -127,7 +203,11 @@ export const BountyTile: Story = (args) => {
 }
 
 ContestTileUpcoming.parameters = parameters;
+ContestTileUpcomingRollingTriage.parameters = parameters;
 ContestTileLive.parameters = parameters;
+ContestTileLiveCohort1.parameters = parameters;
+ContestTileLivePreCohort2.parameters = parameters;
+ContestTileLiveCohort3.parameters = parameters;
 ContestTileEnded.parameters = parameters;
 BountyTile.parameters = parameters;
 
@@ -139,6 +219,28 @@ ContestTileUpcoming.args = {
     endDate: "2030-07-21T18:00:00.000Z"
   }
 };
+ContestTileUpcomingRollingTriage.args = {
+  ...defaultArgs,
+  contestData: {
+    ...defaultArgs.contestData,
+    cohorts: [{
+      name: "cohort-1",
+      pauseTime: addDays(Date.now(), 6).toISOString(),
+      resumeTime: null
+    }, {
+      name: "cohort-2",
+      pauseTime: addDays(Date.now(), 13).toISOString(),
+      resumeTime: addDays(Date.now(), 9).toISOString(),
+    }, {
+      name: "cohort-3",
+      pauseTime: null,
+      resumeTime: addDays(Date.now(), 16).toISOString(),
+    }],
+    startDate: addDays(Date.now(), 3).toISOString(),
+    endDate: addDays(Date.now(), 20).toISOString(),
+  }
+};
+
 
 ContestTileLive.args = {
   ...defaultArgs,
@@ -146,6 +248,69 @@ ContestTileLive.args = {
     ...defaultArgs.contestData,
     startDate: "2023-07-12T18:00:00Z",
     endDate: "2030-07-21T18:00:00.000Z"
+  }
+};
+ContestTileLiveCohort1.args = {
+  ...defaultArgs,
+  contestData: {
+    ...defaultArgs.contestData,
+    cohorts: [{
+      name: "cohort-1",
+      pauseTime: addDays(Date.now(), 4).toISOString(),
+      resumeTime: null
+    }, {
+      name: "cohort-2",
+      pauseTime: addDays(Date.now(), 11).toISOString(),
+      resumeTime: addDays(Date.now(), 7).toISOString(),
+    }, {
+      name: "cohort-3",
+      pauseTime: null,
+      resumeTime: addDays(Date.now(), 14).toISOString(),
+    }],
+    startDate: subDays(Date.now(), 1).toISOString(),
+    endDate: addDays(Date.now(), 18).toISOString(),
+  }
+};
+ContestTileLivePreCohort2.args = {
+  ...defaultArgs,
+  contestData: {
+    ...defaultArgs.contestData,
+    cohorts: [{
+      name: "cohort-1",
+      pauseTime: subDays(Date.now(), 1).toISOString(),
+      resumeTime: null
+    }, {
+      name: "cohort-2",
+      pauseTime: addDays(Date.now(), 6).toISOString(),
+      resumeTime: addDays(Date.now(), 2).toISOString(),
+    }, {
+      name: "cohort-3",
+      pauseTime: null,
+      resumeTime: addDays(Date.now(), 9).toISOString(),
+    }],
+    startDate: subDays(Date.now(), 6).toISOString(),
+    endDate: addDays(Date.now(), 16).toISOString(),
+  }
+};
+ContestTileLiveCohort3.args = {
+  ...defaultArgs,
+  contestData: {
+    ...defaultArgs.contestData,
+    cohorts: [{
+      name: "cohort-1",
+      pauseTime: subDays(Date.now(), 11).toISOString(),
+      resumeTime: null
+    }, {
+      name: "cohort-2",
+      pauseTime: subDays(Date.now(), 4).toISOString(),
+      resumeTime: subDays(Date.now(), 8).toISOString(),
+    }, {
+      name: "cohort-3",
+      pauseTime: null,
+      resumeTime: subDays(Date.now(), 1).toISOString(),
+    }],
+    startDate: subDays(Date.now(), 16).toISOString(),
+    endDate: addDays(Date.now(), 6).toISOString(),
   }
 };
 

@@ -4,7 +4,7 @@ import wolfbotIcon from "../../../public/icons/wolfbot.svg";
 import { BountyTileData, ContestSchedule, ContestTileData, ContestTileProps, ContestTileVariant } from "./ContestTile.types";
 import { DropdownLink, Status, TagSize, TagVariant } from "../types";
 import { ContestStatus } from "../ContestStatus";
-import { Countdown } from "./ContestTile";
+import { ContestCountdown, Countdown } from "./ContestTile";
 import { getDates } from "../../utils/time";
 import { isBefore } from "date-fns";
 import { Dropdown } from "../Dropdown";
@@ -41,7 +41,7 @@ export default function DefaultTemplate({
               updateContestStatus();
           }
           if (contestData.startDate) {
-            const newTimelineObject = getDates(contestData.startDate, contestData.endDate);
+            const newTimelineObject = getDates(contestData.startDate, contestData.endDate, contestData.cohorts);
             setContestTimelineObject(newTimelineObject);
           }
       }
@@ -54,7 +54,7 @@ export default function DefaultTemplate({
           updateBountyStatus();
         }
         if (bountyData.startDate) {
-          const newTimelineObject = getDates(bountyData.startDate, "2999-01-01T00:00:00Z");
+          const newTimelineObject = getDates(bountyData.startDate, "2999-01-01T00:00:00Z", []);
           setBountyTimelineObject(newTimelineObject);
         }
       }
@@ -64,7 +64,8 @@ export default function DefaultTemplate({
       if (bountyData && bountyData.startDate) {
         const newTimelineObject = getDates(
           bountyData.startDate,
-          "2999-01-01T00:00:00Z"
+          "2999-01-01T00:00:00Z",
+          []
         );
         setBountyTimelineObject(newTimelineObject);
       }
@@ -74,7 +75,8 @@ export default function DefaultTemplate({
         if (contestData.startDate && contestData.endDate) {
           const newTimelineObject = getDates(
             contestData.startDate,
-            contestData.endDate
+            contestData.endDate,
+            contestData.cohorts
           );
           setContestTimelineObject(newTimelineObject);
         }
@@ -307,7 +309,7 @@ function IsContest({
                   <h2 className="title">
                     <a
                       href={contestUrl}
-                      onClick={(e) => e.stopPropagation()}  
+                      onClick={(e) => e.stopPropagation()}
                     >
                       {title}
                     </a>
@@ -329,7 +331,7 @@ function IsContest({
                             size={TagSize.NARROW}
                           />
                         )}
-                        {ecosystem && <Tag 
+                        {ecosystem && <Tag
                           variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
                           label={ecosystem}
                           iconLeft={ecosystemLogoName ? <Icon name={ecosystemLogoName} size="medium" color="white" /> : undefined}
@@ -361,15 +363,9 @@ function IsContest({
           />}
           {contestData && contestTimelineObject && contestTimelineObject.contestStatus !== Status.ENDED && (
               <div className="timer">
-                <Countdown
-                    start={startDate}
-                    end={endDate}
+                <ContestCountdown
+                    schedule={contestTimelineObject}
                     updateContestStatus={updateContestTileStatus}
-                    text={
-                    contestTimelineObject.contestStatus === Status.UPCOMING
-                        ? "Starts in "
-                        : "Ends in "
-                    }
                 />
               </div>
           )}
@@ -467,7 +463,7 @@ function IsBounty({
               <div className="description">
                 {description}
                 {(ecosystem || (languages && languages.length > 0)) && <div className="tags">
-                  {ecosystem && <Tag 
+                  {ecosystem && <Tag
                     variant={isDarkTile ? TagVariant.DEFAULT : TagVariant.WHITE_OUTLINE}
                     label={ecosystem}
                     iconLeft={ecosystemLogoName ? <Icon name={ecosystemLogoName} size="medium" color="white" /> : undefined}
