@@ -138,7 +138,7 @@ export const ContestCountdown = ({
     text = "Starts in ";
   } else if (schedule.contestStatus === Status.LIVE) {
     if (schedule.resume && +schedule.resume >= Date.now()) {
-      text = "Cohort resumes in ";
+      text = "Cohort tentatively resumes in ";
       start = schedule.resume.toISOString();
     } else if (schedule.pause && +schedule.pause >= Date.now()) {
       text = "Cohort pauses in ";
