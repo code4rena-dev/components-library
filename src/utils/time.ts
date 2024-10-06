@@ -1,6 +1,7 @@
 import { addHours, format, formatDistance, isAfter, isBefore, isEqual } from "date-fns";
-import { ContestCohort, ContestSchedule } from "../lib/ContestTile/ContestTile.types";
-import { Status } from "../lib/ContestStatus/ContestStatus.types";
+import { BaseContestSchedule, ContestCohort, ContestSchedule } from "../lib/ContestTile/ContestTile.types";
+import { AuditStatus, Status } from "../lib/ContestStatus/ContestStatus.types";
+import { ContestTileData } from "../lib/ContestTile/ContestTile.types";
 import { DateTime } from "luxon";
 
 function getContestStatuses(
@@ -56,7 +57,24 @@ const getCurrentCohortDates = (cohorts: ContestCohort[]) => {
   }
 };
 
-const getDates = (start: string, end: string, cohorts: ContestCohort[]): ContestSchedule => {
+const getContestSchedule = (
+  contest: Pick<ContestTileData, "cohorts" | "endDate" | "startDate" | "status">
+): ContestSchedule => {
+  const schedule = getDates(contest.startDate, contest.endDate);
+  const currentCohort = getCurrentCohortDates(contest.cohorts);
+
+  return {
+    ...schedule,
+    pause: currentCohort.pauseDate && new Date(currentCohort.pauseDate),
+    resume: currentCohort.resumeDate && new Date(currentCohort.resumeDate),
+    status: contest.status,
+  };
+}
+
+const getDates = (
+  start: string,
+  end: string
+): BaseContestSchedule => {
   const startDate = new Date(start);
   const endDate = new Date(end);
   const timeZone = DateTime.local().toFormat("ZZZZ");
@@ -68,15 +86,11 @@ const getDates = (start: string, end: string, cohorts: ContestCohort[]): Contest
     botRaceEnd
   );
 
-  const currentCohort = getCurrentCohortDates(cohorts);
-
   return {
     contestStatus,
     botRaceStatus,
     start: startDate,
     end: endDate,
-    pause: currentCohort.pauseDate && new Date(currentCohort.pauseDate),
-    resume: currentCohort.resumeDate && new Date(currentCohort.resumeDate),
     botRaceEnd,
     formattedEnd: format(endDate, "d MMM h:mm a"),
     formattedStart: format(startDate, "d MMM h:mm a"),
@@ -86,4 +100,4 @@ const getDates = (start: string, end: string, cohorts: ContestCohort[]): Contest
   };
 };
 
-export { getDates, getCurrentCohortDates };
+export { getDates, getContestSchedule, getCurrentCohortDates };

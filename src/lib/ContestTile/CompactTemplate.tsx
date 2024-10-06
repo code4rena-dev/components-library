@@ -4,7 +4,7 @@ import { BountyTileData, ContestSchedule, ContestTileData, ContestTileProps, Con
 import { Status, TagSize, TagVariant } from '../types';
 import { ContestStatus } from '../ContestStatus';
 import { ContestCountdown } from './ContestTile';
-import { getDates } from '../../utils/time';
+import { getContestSchedule } from '../../utils/time';
 import { Tag } from '../Tag';
 import { Icon } from '../Icon';
 import wolfbotIcon from "../../../public/icons/wolfbot.svg";
@@ -82,7 +82,7 @@ const IsContest = ({title, isDarkTile = true, contestData, sponsorUrl, sponsorIm
       }
 
       if (startDate && endDate) {
-        const newTimelineObject = getDates(contestData.startDate, contestData.endDate, contestData.cohorts);
+        const newTimelineObject = getContestSchedule(contestData);
         setContestTimelineObject(newTimelineObject);
       }
     }
@@ -90,7 +90,7 @@ const IsContest = ({title, isDarkTile = true, contestData, sponsorUrl, sponsorIm
 
   useEffect(() => {
     if (contestData && startDate && endDate) {
-      const newTimelineObject = getDates(startDate, endDate, contestData.cohorts);
+      const newTimelineObject = getContestSchedule(contestData);
       setContestTimelineObject(newTimelineObject);
     }
   }, [contestData])

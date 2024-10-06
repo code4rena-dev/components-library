@@ -6,7 +6,7 @@ import {
   CountdownProps,
 } from "./ContestTile.types";
 import { getDates } from "../../utils/time";
-import { Status } from "../ContestStatus/ContestStatus.types";
+import { AuditStatus, Status } from "../ContestStatus/ContestStatus.types";
 import { formatDistanceToNow, formatDistanceToNowStrict } from "date-fns";
 import "./ContestTile.scss";
 import CompactTemplate from "./CompactTemplate";
@@ -28,9 +28,9 @@ export const Countdown = ({
 }: CountdownProps) => {
   const secondsInDay = 86400;
   const [lessThan24h, setLessThan24h] = useState(false);
-  const [contestTimer, setContestTimer] = useState<ContestSchedule>();
+  const [contestTimer, setContestTimer] = useState<Pick<ContestSchedule, "contestStatus" | "botRaceStatus">>();
 
-  const getCountdownTarget = (schedule: ContestSchedule): Date => {
+  const getCountdownTarget = (schedule: Pick<ContestSchedule, "contestStatus" | "end" | "start">): Date => {
     if (schedule.contestStatus === Status.LIVE) {
       return schedule.end;
     }
@@ -57,7 +57,7 @@ export const Countdown = ({
   }
 
   const countDown = useCallback(() => {
-    const newTimer = getDates(start, end, []);
+    const newTimer = getDates(start, end);
     const target = getCountdownTarget(newTimer);
     // Get total number of seconds remaining
     const totalSeconds = formatDistanceToNowStrict(target, {
@@ -78,7 +78,7 @@ export const Countdown = ({
   useEffect(() => {
     const timer = setInterval(
       () => {
-        const newTimer = getDates(start, end, []);
+        const newTimer = getDates(start, end);
         if (
           contestTimer &&
           (contestTimer.contestStatus !== newTimer.contestStatus ||
@@ -137,11 +137,18 @@ export const ContestCountdown = ({
   if (schedule.contestStatus === Status.UPCOMING) {
     text = "Starts in ";
   } else if (schedule.contestStatus === Status.LIVE) {
-    if (schedule.resume && +schedule.resume >= Date.now()) {
-      text = "Cohort tentatively resumes in ";
+    if (schedule.status === AuditStatus.Paused && schedule.resume && +schedule.resume >= Date.now()) {
+      text = "Next cohort starts in ";
       start = schedule.resume.toISOString();
-    } else if (schedule.pause && +schedule.pause >= Date.now()) {
-      text = "Cohort pauses in ";
+    } else if (schedule.status === AuditStatus.Paused && schedule.resume && +schedule.resume <= Date.now()) {
+      // The resume time has elapsed, give a generic time for now
+      return (
+        <div className="countdown">
+          {"Next cohort starts soon"}
+        </div>
+      );
+    } else if (schedule.status === AuditStatus.Active && schedule.pause && +schedule.pause >= Date.now()) {
+      text = "Current cohort ends in ";
       end = schedule.pause.toISOString();
     }
   }

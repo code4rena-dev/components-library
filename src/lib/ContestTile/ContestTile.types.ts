@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Status } from "../ContestStatus/ContestStatus.types";
+import { Status, AuditStatus } from "../ContestStatus/ContestStatus.types";
 
 export enum ContestTileVariant {
   LIGHT = "LIGHT",
@@ -87,23 +87,29 @@ export interface ContestTileData {
   endDate: string;
   /** Boolean indicating certification status of logged in user. Required for viewing certain contests. */
   isUserCertified: boolean;
+  status: AuditStatus;
 }
 
-export interface ContestSchedule {
+export interface BaseContestSchedule {
   contestStatus?: Status;
   botRaceStatus?: Status;
   start: Date;
   end: Date;
-  /** The time the current cohort will pause. */
-  pause: Date | null;
-  /** The time the current cohort will resume. */
-  resume: Date | null;
   botRaceEnd: Date;
   formattedStart: string;
   formattedEnd: string;
   timeZone: string;
   formattedBotRaceEnd: string;
   formattedDuration: string;
+}
+
+export interface ContestSchedule extends BaseContestSchedule {
+  status: AuditStatus;
+  end: Date;
+  /** The time the current cohort will pause. */
+  pause: Date | null;
+  /** The time the current cohort will resume. */
+  resume: Date | null;
 }
 
 export interface CountdownProps {

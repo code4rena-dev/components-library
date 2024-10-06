@@ -3,6 +3,7 @@ import { addDays, subDays } from "date-fns";
 import { ContestTile } from "./ContestTile";
 import { Meta, StoryObj } from "@storybook/react";
 import { CodingLanguage, ContestEcosystem, ContestTileVariant } from "./ContestTile.types";
+import { AuditStatus } from "../types";
 
 const meta: Meta<typeof ContestTile> = {
   component: ContestTile,
@@ -151,7 +152,7 @@ export const ContestTileLivePreCohort2: Story = (args) => {
     />
   </Fragment>
 };
-export const ContestTileLiveCohort3: Story = (args) => {
+export const ContestTileLiveAwaitingCohort3: Story = (args) => {
   const isDark = args.variant === ContestTileVariant.DARK || args.variant === ContestTileVariant.COMPACT_DARK;
 
   return <Fragment>
@@ -207,7 +208,7 @@ ContestTileUpcomingRollingTriage.parameters = parameters;
 ContestTileLive.parameters = parameters;
 ContestTileLiveCohort1.parameters = parameters;
 ContestTileLivePreCohort2.parameters = parameters;
-ContestTileLiveCohort3.parameters = parameters;
+ContestTileLiveAwaitingCohort3.parameters = parameters;
 ContestTileEnded.parameters = parameters;
 BountyTile.parameters = parameters;
 
@@ -216,7 +217,8 @@ ContestTileUpcoming.args = {
   contestData: {
     ...defaultArgs.contestData,
     startDate: "2030-07-12T18:00:00Z",
-    endDate: "2030-07-21T18:00:00.000Z"
+    endDate: "2030-07-21T18:00:00.000Z",
+    status: AuditStatus.PreAudit,
   }
 };
 ContestTileUpcomingRollingTriage.args = {
@@ -238,6 +240,7 @@ ContestTileUpcomingRollingTriage.args = {
     }],
     startDate: addDays(Date.now(), 3).toISOString(),
     endDate: addDays(Date.now(), 20).toISOString(),
+    status: AuditStatus.PreAudit,
   }
 };
 
@@ -247,7 +250,8 @@ ContestTileLive.args = {
   contestData: {
     ...defaultArgs.contestData,
     startDate: "2023-07-12T18:00:00Z",
-    endDate: "2030-07-21T18:00:00.000Z"
+    endDate: "2030-07-21T18:00:00.000Z",
+    status: AuditStatus.Active,
   }
 };
 ContestTileLiveCohort1.args = {
@@ -269,6 +273,7 @@ ContestTileLiveCohort1.args = {
     }],
     startDate: subDays(Date.now(), 1).toISOString(),
     endDate: addDays(Date.now(), 18).toISOString(),
+    status: AuditStatus.Active,
   }
 };
 ContestTileLivePreCohort2.args = {
@@ -290,9 +295,10 @@ ContestTileLivePreCohort2.args = {
     }],
     startDate: subDays(Date.now(), 6).toISOString(),
     endDate: addDays(Date.now(), 16).toISOString(),
+    status: AuditStatus.Paused,
   }
 };
-ContestTileLiveCohort3.args = {
+ContestTileLiveAwaitingCohort3.args = {
   ...defaultArgs,
   contestData: {
     ...defaultArgs.contestData,
@@ -311,6 +317,7 @@ ContestTileLiveCohort3.args = {
     }],
     startDate: subDays(Date.now(), 16).toISOString(),
     endDate: addDays(Date.now(), 6).toISOString(),
+    status: AuditStatus.Paused,
   }
 };
 
@@ -319,7 +326,8 @@ ContestTileEnded.args = {
   contestData: {
     ...defaultArgs.contestData,
     startDate: "2023-07-12T18:00:00Z",
-    endDate: "2023-07-21T18:00:00Z"
+    endDate: "2023-07-21T18:00:00Z",
+    status: AuditStatus.Review,
   }
 };
 

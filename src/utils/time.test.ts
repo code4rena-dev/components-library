@@ -1,8 +1,8 @@
 import { describe, expect, test } from "@jest/globals";
 import { addHours, format } from "date-fns";
 import { DateTime } from "luxon";
-import { getCurrentCohortDates, getDates } from "./time";
-import { ContestCohort, Status } from "../types";
+import { getContestSchedule, getCurrentCohortDates } from "./time";
+import { AuditStatus, ContestCohort, Status } from "../types";
 
 describe("utils/time", () => {
   describe("getCurrentCohortDates", () => {
@@ -131,7 +131,12 @@ describe("utils/time", () => {
       const start = new Date(Date.now() + 1000);
       const end = new Date(Date.now() + 6000);
 
-      const dates = getDates(start.toISOString(), end.toISOString(), cohorts);
+      const dates = getContestSchedule({
+        startDate: start.toISOString(),
+        endDate: end.toISOString(),
+        cohorts,
+        status: AuditStatus.PreAudit
+      });
       const expectedBotRaceEnd = addHours(start, 1);
       expect(dates).toStrictEqual({
         botRaceEnd: expectedBotRaceEnd,
@@ -145,6 +150,7 @@ describe("utils/time", () => {
         pause: new Date(cohorts[0].pauseTime!),
         resume: null,
         start: start,
+        status: AuditStatus.PreAudit,
         timeZone: DateTime.local().toFormat("ZZZZ")
       });
     });
@@ -153,7 +159,12 @@ describe("utils/time", () => {
       const start = new Date(Date.now() + 1000);
       const end = new Date(Date.now() + 6000);
 
-      const dates = getDates(start.toISOString(), end.toISOString(), cohorts);
+      const dates = getContestSchedule({
+        startDate: start.toISOString(),
+        endDate: end.toISOString(),
+        cohorts,
+        status: AuditStatus.PreAudit
+      });
       const expectedBotRaceEnd = addHours(start, 1);
       expect(dates).toStrictEqual({
         botRaceEnd: expectedBotRaceEnd,
@@ -167,6 +178,7 @@ describe("utils/time", () => {
         pause: null,
         resume: null,
         start: start,
+        status: AuditStatus.PreAudit,
         timeZone: DateTime.local().toFormat("ZZZZ")
       });
     });
@@ -187,7 +199,12 @@ describe("utils/time", () => {
       const start = new Date(Date.now());
       const end = new Date(Date.now() + 5000);
 
-      const dates = getDates(start.toISOString(), end.toISOString(), cohorts);
+      const dates = getContestSchedule({
+        startDate: start.toISOString(),
+        endDate: end.toISOString(),
+        cohorts,
+        status: AuditStatus.Active
+      });
       const expectedBotRaceEnd = addHours(start, 1);
       expect(dates).toStrictEqual({
         botRaceEnd: expectedBotRaceEnd,
@@ -201,6 +218,7 @@ describe("utils/time", () => {
         pause: new Date(cohorts[0].pauseTime!),
         resume: null,
         start: start,
+        status: AuditStatus.Active,
         timeZone: DateTime.local().toFormat("ZZZZ")
       });
     });
@@ -221,7 +239,12 @@ describe("utils/time", () => {
       const start = new Date(Date.now() - 2000);
       const end = new Date(Date.now() + 4000);
 
-      const dates = getDates(start.toISOString(), end.toISOString(), cohorts);
+      const dates = getContestSchedule({
+        startDate: start.toISOString(),
+        endDate: end.toISOString(),
+        cohorts,
+        status: AuditStatus.Paused
+      });
       const expectedBotRaceEnd = addHours(start, 1);
       expect(dates).toStrictEqual({
         botRaceEnd: expectedBotRaceEnd,
@@ -235,6 +258,7 @@ describe("utils/time", () => {
         pause: new Date(cohorts[1].pauseTime!),
         resume: new Date(cohorts[1].resumeTime!),
         start: start,
+        status: AuditStatus.Paused,
         timeZone: DateTime.local().toFormat("ZZZZ")
       });
     });
@@ -256,7 +280,12 @@ describe("utils/time", () => {
       const start = new Date(Date.now() - 3000);
       const end = new Date(Date.now() + 3000);
 
-      const dates = getDates(start.toISOString(), end.toISOString(), cohorts);
+      const dates = getContestSchedule({
+        startDate: start.toISOString(),
+        endDate: end.toISOString(),
+        cohorts,
+        status: AuditStatus.Active
+      });
       const expectedBotRaceEnd = addHours(start, 1);
       expect(dates).toStrictEqual({
         botRaceEnd: expectedBotRaceEnd,
@@ -270,6 +299,7 @@ describe("utils/time", () => {
         pause: new Date(cohorts[1].pauseTime!),
         resume: new Date(cohorts[1].resumeTime!),
         start: start,
+        status: AuditStatus.Active,
         timeZone: DateTime.local().toFormat("ZZZZ")
       });
     });
@@ -291,7 +321,12 @@ describe("utils/time", () => {
       const start = new Date(Date.now() - 5000);
       const end = new Date(Date.now() + 1000);
 
-      const dates = getDates(start.toISOString(), end.toISOString(), cohorts);
+      const dates = getContestSchedule({
+        startDate: start.toISOString(),
+        endDate: end.toISOString(),
+        cohorts,
+        status: AuditStatus.Active
+      });
       const expectedBotRaceEnd = addHours(start, 1);
       expect(dates).toStrictEqual({
         botRaceEnd: expectedBotRaceEnd,
@@ -305,6 +340,7 @@ describe("utils/time", () => {
         pause: null,
         resume: new Date(cohorts[2].resumeTime!),
         start: start,
+        status: AuditStatus.Active,
         timeZone: DateTime.local().toFormat("ZZZZ")
       });
     });
@@ -326,7 +362,12 @@ describe("utils/time", () => {
       const start = new Date(Date.now() - 6000);
       const end = new Date(Date.now() - 1000);
 
-      const dates = getDates(start.toISOString(), end.toISOString(), cohorts);
+      const dates = getContestSchedule({
+        startDate: start.toISOString(),
+        endDate: end.toISOString(),
+        cohorts,
+        status: AuditStatus.Review
+      });
       const expectedBotRaceEnd = addHours(start, 1);
       expect(dates).toStrictEqual({
         botRaceEnd: expectedBotRaceEnd,
@@ -340,6 +381,7 @@ describe("utils/time", () => {
         pause: null,
         resume: new Date(cohorts[2].resumeTime!),
         start: start,
+        status: AuditStatus.Review,
         timeZone: DateTime.local().toFormat("ZZZZ")
       });
     });

@@ -1,11 +1,11 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import clsx from "clsx";
 import wolfbotIcon from "../../../public/icons/wolfbot.svg";
-import { BountyTileData, ContestSchedule, ContestTileData, ContestTileProps, ContestTileVariant } from "./ContestTile.types";
+import { BaseContestSchedule, BountyTileData, ContestSchedule, ContestTileData, ContestTileProps, ContestTileVariant } from "./ContestTile.types";
 import { DropdownLink, Status, TagSize, TagVariant } from "../types";
 import { ContestStatus } from "../ContestStatus";
 import { ContestCountdown, Countdown } from "./ContestTile";
-import { getDates } from "../../utils/time";
+import { getDates, getContestSchedule } from "../../utils/time";
 import { isBefore } from "date-fns";
 import { Dropdown } from "../Dropdown";
 import { Icon } from "../Icon";
@@ -32,7 +32,7 @@ export default function DefaultTemplate({
     const [canViewContest, setCanViewContest] = useState(false);
     const [dropdownLinks, setDropdownLinks] = useState<DropdownLink[]>([]);
     const [contestTimelineObject, setContestTimelineObject] = useState<ContestSchedule | undefined>();
-    const [bountyTimelineObject, setBountyTimelineObject] = useState<ContestSchedule | undefined>();
+    const [bountyTimelineObject, setBountyTimelineObject] = useState<BaseContestSchedule | undefined>();
 
     const updateContestTileStatus = useCallback(() => {
       if (contestData) {
@@ -41,7 +41,7 @@ export default function DefaultTemplate({
               updateContestStatus();
           }
           if (contestData.startDate) {
-            const newTimelineObject = getDates(contestData.startDate, contestData.endDate, contestData.cohorts);
+            const newTimelineObject = getContestSchedule(contestData);
             setContestTimelineObject(newTimelineObject);
           }
       }
@@ -54,7 +54,7 @@ export default function DefaultTemplate({
           updateBountyStatus();
         }
         if (bountyData.startDate) {
-          const newTimelineObject = getDates(bountyData.startDate, "2999-01-01T00:00:00Z", []);
+          const newTimelineObject = getDates(bountyData.startDate, "2999-01-01T00:00:00Z");
           setBountyTimelineObject(newTimelineObject);
         }
       }
@@ -64,8 +64,7 @@ export default function DefaultTemplate({
       if (bountyData && bountyData.startDate) {
         const newTimelineObject = getDates(
           bountyData.startDate,
-          "2999-01-01T00:00:00Z",
-          []
+          "2999-01-01T00:00:00Z"
         );
         setBountyTimelineObject(newTimelineObject);
       }
@@ -73,10 +72,8 @@ export default function DefaultTemplate({
       if (contestData) {
         setHasBotRace(!!contestData.botFindingsRepo);
         if (contestData.startDate && contestData.endDate) {
-          const newTimelineObject = getDates(
-            contestData.startDate,
-            contestData.endDate,
-            contestData.cohorts
+          const newTimelineObject = getContestSchedule(
+            contestData
           );
           setContestTimelineObject(newTimelineObject);
         }
@@ -403,7 +400,7 @@ function IsBounty({
   bountyData: BountyTileData;
   isDarkTile: boolean;
   updateBountyTileStatus?: () => void;
-  bountyTimelineObject?: ContestSchedule | undefined;
+  bountyTimelineObject?: BaseContestSchedule | undefined;
 }) {
   const { bountyUrl, amount, startDate, ecosystem, languages } = bountyData;
   const endDate = "2999-01-01T00:00:00Z"
