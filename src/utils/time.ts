@@ -1,6 +1,6 @@
 import { addHours, format, formatDistance, isAfter, isBefore, isEqual } from "date-fns";
 import { BaseContestSchedule, ContestCohort, ContestSchedule } from "../lib/ContestTile/ContestTile.types";
-import { AuditStatus, Status } from "../lib/ContestStatus/ContestStatus.types";
+import { Status } from "../lib/ContestStatus/ContestStatus.types";
 import { ContestTileData } from "../lib/ContestTile/ContestTile.types";
 import { DateTime } from "luxon";
 
