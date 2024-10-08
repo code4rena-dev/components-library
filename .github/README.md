@@ -85,8 +85,8 @@ yarn test
 
 A GitHub Action has been developed to help automate package releases. All that you will need to do is:
 
-1. Make sure to increase the `version` field in the **package.json**
+1. Make sure to increase the `version` field in the **package.json**. `npm version [major | minor | patch]` will handle the versioning, commit, and tag creation for you.
 2. On the GitHub repo's home page, navigate to the righthand side and click on **Create a new release**
 3. Give the release a `title` and `description` outlining the changes made in the release
 4. Choose/Create a **tag** corresponding to the new version that was added in the package.json in **step 1**
-5. Once the details are filled out, submit the release. You will get taken to a confirmation page. This process will automatically trigger the GitHub action that will publish the package to npm. 
+5. Once the details are filled out, submit the release. You will get taken to a confirmation page. This process will automatically trigger the GitHub action that will publish the package to npm.
