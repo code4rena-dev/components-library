@@ -6,7 +6,7 @@ import {
   CountdownProps,
 } from "./ContestTile.types";
 import { getDates } from "../../utils/time";
-import { Status } from "../ContestStatus/ContestStatus.types";
+import { AuditStatus, Status } from "../ContestStatus/ContestStatus.types";
 import { formatDistanceToNow, formatDistanceToNowStrict } from "date-fns";
 import "./ContestTile.scss";
 import CompactTemplate from "./CompactTemplate";
@@ -28,9 +28,9 @@ export const Countdown = ({
 }: CountdownProps) => {
   const secondsInDay = 86400;
   const [lessThan24h, setLessThan24h] = useState(false);
-  const [contestTimer, setContestTimer] = useState<ContestSchedule>();
+  const [contestTimer, setContestTimer] = useState<Pick<ContestSchedule, "contestStatus" | "botRaceStatus">>();
 
-  const getCountdownTarget = (schedule: ContestSchedule): Date => {
+  const getCountdownTarget = (schedule: Pick<ContestSchedule, "contestStatus" | "end" | "start">): Date => {
     if (schedule.contestStatus === Status.LIVE) {
       return schedule.end;
     }
@@ -122,6 +122,42 @@ export const Countdown = ({
       <span>{formattedCountdown}</span>
     </div>
   );
+};
+
+export const ContestCountdown = ({
+  schedule,
+  updateContestStatus
+}: {
+  schedule: ContestSchedule,
+  updateContestStatus: CountdownProps["updateContestStatus"]
+}) => {
+  let text = "Ends in ";
+  let start = schedule.start.toISOString();
+  let end = schedule.end.toISOString();
+  if (schedule.contestStatus === Status.UPCOMING) {
+    text = "Starts in ";
+  } else if (schedule.contestStatus === Status.LIVE) {
+    if (schedule.status === AuditStatus.Paused && schedule.resume && +schedule.resume >= Date.now()) {
+      text = "Next submission phase starts in ";
+      start = schedule.resume.toISOString();
+    } else if (schedule.status === AuditStatus.Paused && schedule.resume && +schedule.resume <= Date.now()) {
+      // The resume time has elapsed, give a generic time for now
+      return (
+        <div className="countdown">
+          Next submission phase starts soon
+        </div>
+      );
+    } else if (schedule.status === AuditStatus.Active && schedule.pause && +schedule.pause >= Date.now()) {
+      text = "Current submission phase ends in ";
+      end = schedule.pause.toISOString();
+    }
+  }
+  return Countdown({
+    start,
+    end,
+    text,
+    updateContestStatus,
+  });
 };
 
 /**

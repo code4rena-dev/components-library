@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Status } from "../ContestStatus/ContestStatus.types";
+import { Status, AuditStatus } from "../ContestStatus/ContestStatus.types";
 
 export enum ContestTileVariant {
   LIGHT = "LIGHT",
@@ -11,6 +11,12 @@ export enum ContestTileVariant {
 export type ContestEcosystem = "Algorand" | "Aptos" | "Blast" | "Cosmos" | "EVM" | "NEAR" | "Polkadot" | "Scroll" | "Sei" | "Solana" | "StarkNet" | "Stellar" | "Sui" | "Other";
 
 export type CodingLanguage = "Cairo" | "GO" | "HUFF" | "Ink" | "Move" | "Noir" | "Other" | "Rain" | "Rust" | "Rust evm" | "Solidity" | "Vyper" | "Yul";
+
+export interface ContestCohort {
+  resumeTime: string | null;
+  pauseTime: string | null;
+  name: string;
+}
 
 export interface ContestTileProps {
   /** An html `id` for the contest tile's wrapping div. */
@@ -53,6 +59,8 @@ export interface BountyTileData {
 export interface ContestTileData {
   /** String indicating required access for viewing contest. */
   codeAccess: string;
+  /** Array of cohorts for Rolling Triage audits. Empty for normal audits */
+  cohorts: ContestCohort[];
   /** String indicating a specific categorization for the current contest. */
   contestType?: string;
   /** Unique numerical identifier for the current contest. */
@@ -79,9 +87,10 @@ export interface ContestTileData {
   endDate: string;
   /** Boolean indicating certification status of logged in user. Required for viewing certain contests. */
   isUserCertified: boolean;
+  status: AuditStatus;
 }
 
-export interface ContestSchedule {
+export interface BaseContestSchedule {
   contestStatus?: Status;
   botRaceStatus?: Status;
   start: Date;
@@ -92,6 +101,15 @@ export interface ContestSchedule {
   timeZone: string;
   formattedBotRaceEnd: string;
   formattedDuration: string;
+}
+
+export interface ContestSchedule extends BaseContestSchedule {
+  status: AuditStatus;
+  end: Date;
+  /** The time the current cohort will pause. */
+  pause: Date | null;
+  /** The time the current cohort will resume. */
+  resume: Date | null;
 }
 
 export interface CountdownProps {

@@ -12,3 +12,21 @@ export interface ContestStatusProps {
   /** HTML element identifier */
   id?: string;
 }
+
+export const AuditStatus = {
+  Booking: "Booking",
+  PreAudit: "Pre-Audit",
+  Active: "Active",
+  /** Paused: The audit is in between Rolling Triage cohorts */
+  Paused: "Paused",
+  Review: "Review",
+  Judging: "Judging",
+  PJQA: "Post-Judging QA",
+  JudgingComplete: "Judging Complete",
+  Awarding: "Awarding",
+  Reporting: "Reporting",
+  Completed: "Completed",
+  LostDeal: "Lost Deal",
+} as const;
+// Take the AuditStatus object, and make a string literal type of the values
+export type AuditStatus = (typeof AuditStatus)[keyof typeof AuditStatus];

@@ -3,8 +3,8 @@ import clsx from "clsx";
 import { BountyTileData, ContestSchedule, ContestTileData, ContestTileProps, ContestTileVariant } from "./ContestTile.types";
 import { Status, TagSize, TagVariant } from '../types';
 import { ContestStatus } from '../ContestStatus';
-import { Countdown } from './ContestTile';
-import { getDates } from '../../utils/time';
+import { ContestCountdown } from './ContestTile';
+import { getContestSchedule } from '../../utils/time';
 import { Tag } from '../Tag';
 import { Icon } from '../Icon';
 import wolfbotIcon from "../../../public/icons/wolfbot.svg";
@@ -28,7 +28,7 @@ export default function CompactTemplate({
       c4contesttile: true,
       compact: true
     });
-      
+
     return <div className={clsx("c4tilewrapper", variantClasses)}>
       <div id={htmlId ?? undefined} className={clsx(variantClasses, tileClasses)}>
         <div className="container--inner compact-content">
@@ -82,7 +82,7 @@ const IsContest = ({title, isDarkTile = true, contestData, sponsorUrl, sponsorIm
       }
 
       if (startDate && endDate) {
-        const newTimelineObject = getDates(contestData.startDate, contestData.endDate);
+        const newTimelineObject = getContestSchedule(contestData);
         setContestTimelineObject(newTimelineObject);
       }
     }
@@ -90,7 +90,7 @@ const IsContest = ({title, isDarkTile = true, contestData, sponsorUrl, sponsorIm
 
   useEffect(() => {
     if (contestData && startDate && endDate) {
-      const newTimelineObject = getDates(startDate, endDate);
+      const newTimelineObject = getContestSchedule(contestData);
       setContestTimelineObject(newTimelineObject);
     }
   }, [contestData])
@@ -104,14 +104,12 @@ const IsContest = ({title, isDarkTile = true, contestData, sponsorUrl, sponsorIm
               status={contestTimelineObject.contestStatus} />
             {contestTimelineObject.contestStatus !== Status.ENDED && (
               <div className="timer">
-                <Countdown
-                  start={startDate}
-                  end={endDate}
+                <ContestCountdown
+                  schedule={contestTimelineObject}
                   updateContestStatus={updateContestTileStatus}
-                  text={contestTimelineObject.contestStatus === Status.UPCOMING ? 'Starts in ' : 'Ends in '}
                 />
               </div>
-            )}  
+            )}
           </span>}
           <p className="type">
             {contestType === "Audit + mitigation review"
@@ -208,7 +206,7 @@ const IsBounty = ({title, isDarkTile = true, bountyData, sponsorUrl, sponsorImag
         break;
     }
   }
-  
+
   return (
     <div className="body--bounty">
       <header>
