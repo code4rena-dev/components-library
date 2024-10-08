@@ -138,17 +138,17 @@ export const ContestCountdown = ({
     text = "Starts in ";
   } else if (schedule.contestStatus === Status.LIVE) {
     if (schedule.status === AuditStatus.Paused && schedule.resume && +schedule.resume >= Date.now()) {
-      text = "Next cohort starts in ";
+      text = "Next submission phase starts in ";
       start = schedule.resume.toISOString();
     } else if (schedule.status === AuditStatus.Paused && schedule.resume && +schedule.resume <= Date.now()) {
       // The resume time has elapsed, give a generic time for now
       return (
         <div className="countdown">
-          {"Next cohort starts soon"}
+          Next submission phase starts soon
         </div>
       );
     } else if (schedule.status === AuditStatus.Active && schedule.pause && +schedule.pause >= Date.now()) {
-      text = "Current cohort ends in ";
+      text = "Current submission phase ends in ";
       end = schedule.pause.toISOString();
     }
   }
