@@ -375,8 +375,6 @@
                     header {
                         .header--status {
                             display: flex;
-                            flex-wrap: wrap;
-                            align-items: center;
                             justify-content: space-between;
                             column-gap: 1.5rem;
                             row-gap: 0.5rem;
@@ -404,11 +402,9 @@
                                 }
     
                                 &.type {
-                                    min-width: auto;
-                                    margin-left: auto;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                    white-space: nowrap;
+                                    flex-grow: 0; // Prevent the type element from growing
+                                    flex-shrink: 0; // Prevent the type element from shrinking
+                                    white-space: nowrap; // Prevent text from wrapping
                                 }
                             }
                         }
@@ -813,6 +809,17 @@
                     }
                 }
             }
+        }
+    }
+}
+
+// Compact tile overrides
+.c4contesttile.compact {
+    .c4conteststatus {
+        align-items: start;
+
+        .statusindicator {
+            margin-top: 8px;
         }
     }
 }
