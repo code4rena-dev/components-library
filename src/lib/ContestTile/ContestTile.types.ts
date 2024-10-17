@@ -13,8 +13,8 @@ export type ContestEcosystem = "Algorand" | "Aptos" | "Blast" | "Cosmos" | "EVM"
 export type CodingLanguage = "Cairo" | "GO" | "HUFF" | "Ink" | "Move" | "Noir" | "Other" | "Rain" | "Rust" | "Rust evm" | "Solidity" | "Vyper" | "Yul";
 
 export interface ContestCohort {
-  resumeTime: string | null;
-  pauseTime: string | null;
+  resumeTime: Date | null;
+  pauseTime: Date | null;
   name: string;
 }
 
@@ -42,8 +42,8 @@ export interface ContestTileProps {
 export interface BountyTileData {
   /** Max reward amount for the current bounty. */
   amount: string;
-  /** Date string for the current bounty's start date. */
-  startDate: string;
+  /** Date for the current bounty's start date. */
+  startDate: Date;
   /** Absolute url or relative path to the page of the current bounty. */
   bountyUrl: string;
   /** Absolute url to the bounty's source code. */
@@ -81,13 +81,13 @@ export interface ContestTileData {
   amount: string;
   /** Callback function to be triggered on contest time/status changes. */
   updateContestStatus?: () => void;
-  /** Date string for the current contest's start date. */
-  startDate: string;
-  /** Date string for the current contest's end date. */
-  endDate: string;
+  /** Date for the current contest's start date. */
+  startDate: Date;
+  /** Date for the current contest's end date. */
+  endDate: Date;
   /** Boolean indicating certification status of logged in user. Required for viewing certain contests. */
   isUserCertified: boolean;
-  status: AuditStatus;
+  status: AuditStatus | null;
 }
 
 export interface BaseContestSchedule {
@@ -104,7 +104,7 @@ export interface BaseContestSchedule {
 }
 
 export interface ContestSchedule extends BaseContestSchedule {
-  status: AuditStatus;
+  status: AuditStatus | null;
   end: Date;
   /** The time the current cohort will pause. */
   pause: Date | null;
@@ -113,8 +113,8 @@ export interface ContestSchedule extends BaseContestSchedule {
 }
 
 export interface CountdownProps {
-  start: string;
-  end: string;
+  start: Date;
+  end: Date;
   text?: string | ReactNode;
   updateContestStatus?: () => void;
 }

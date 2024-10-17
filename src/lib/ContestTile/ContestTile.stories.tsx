@@ -66,14 +66,14 @@ export const ContestTileUpcoming: Story = (args) => {
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.DARK : ContestTileVariant.LIGHT}
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.COMPACT_DARK : ContestTileVariant.COMPACT_LIGHT }
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
   </Fragment>
 };
@@ -85,14 +85,14 @@ export const ContestTileUpcomingRollingTriage: Story = (args) => {
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.DARK : ContestTileVariant.LIGHT}
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.COMPACT_DARK : ContestTileVariant.COMPACT_LIGHT }
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
   </Fragment>
 };
@@ -104,14 +104,14 @@ export const ContestTileLive: Story = (args) => {
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.DARK : ContestTileVariant.LIGHT}
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.COMPACT_DARK : ContestTileVariant.COMPACT_LIGHT }
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
   </Fragment>
 };
@@ -123,14 +123,14 @@ export const ContestTileLiveCohort1: Story = (args) => {
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.DARK : ContestTileVariant.LIGHT}
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.COMPACT_DARK : ContestTileVariant.COMPACT_LIGHT }
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
   </Fragment>
 };
@@ -141,14 +141,14 @@ export const ContestTileLivePreCohort2: Story = (args) => {
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.DARK : ContestTileVariant.LIGHT}
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.COMPACT_DARK : ContestTileVariant.COMPACT_LIGHT }
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
   </Fragment>
 };
@@ -159,14 +159,14 @@ export const ContestTileLiveAwaitingCohort3: Story = (args) => {
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.DARK : ContestTileVariant.LIGHT}
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.COMPACT_DARK : ContestTileVariant.COMPACT_LIGHT }
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
   </Fragment>
 };
@@ -178,14 +178,14 @@ export const ContestTileEnded: Story = (args) => {
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.DARK : ContestTileVariant.LIGHT}
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
     <ContestTile
       {...args}
       variant={isDark ? ContestTileVariant.COMPACT_DARK : ContestTileVariant.COMPACT_LIGHT }
-      startDate={new Date(args.contestData.startDate).toISOString()}
-      endDate={new Date(args.contestData.endDate).toISOString()}
+      startDate={new Date(args.contestData.startDate)}
+      endDate={new Date(args.contestData.endDate)}
     />
   </Fragment>
 };
@@ -196,10 +196,10 @@ export const BountyTile: Story = (args) => {
   return <Fragment>
     <ContestTile {...args}
       variant={isDark ? ContestTileVariant.DARK : ContestTileVariant.LIGHT}
-      startDate={new Date(args.bountyData.startDate).toISOString()} />
+      startDate={new Date(args.bountyData.startDate)} />
     <ContestTile {...args}
       variant={isDark ? ContestTileVariant.COMPACT_DARK : ContestTileVariant.COMPACT_LIGHT }
-      startDate={new Date(args.bountyData.startDate).toISOString()} />
+      startDate={new Date(args.bountyData.startDate)} />
   </Fragment>
 }
 
@@ -216,8 +216,8 @@ ContestTileUpcoming.args = {
   ...defaultArgs,
   contestData: {
     ...defaultArgs.contestData,
-    startDate: "2030-07-12T18:00:00Z",
-    endDate: "2030-07-21T18:00:00.000Z",
+    startDate: new Date("2030-07-12T18:00:00Z"),
+    endDate: new Date("2030-07-21T18:00:00.000Z"),
     status: AuditStatus.PreAudit,
   }
 };
@@ -227,19 +227,19 @@ ContestTileUpcomingRollingTriage.args = {
     ...defaultArgs.contestData,
     cohorts: [{
       name: "cohort-1",
-      pauseTime: addDays(Date.now(), 6).toISOString(),
+      pauseTime: addDays(Date.now(), 6),
       resumeTime: null
     }, {
       name: "cohort-2",
-      pauseTime: addDays(Date.now(), 13).toISOString(),
-      resumeTime: addDays(Date.now(), 9).toISOString(),
+      pauseTime: addDays(Date.now(), 13),
+      resumeTime: addDays(Date.now(), 9),
     }, {
       name: "cohort-3",
       pauseTime: null,
-      resumeTime: addDays(Date.now(), 16).toISOString(),
+      resumeTime: addDays(Date.now(), 16),
     }],
-    startDate: addDays(Date.now(), 3).toISOString(),
-    endDate: addDays(Date.now(), 20).toISOString(),
+    startDate: addDays(Date.now(), 3),
+    endDate: addDays(Date.now(), 20),
     status: AuditStatus.PreAudit,
   }
 };
@@ -249,8 +249,8 @@ ContestTileLive.args = {
   ...defaultArgs,
   contestData: {
     ...defaultArgs.contestData,
-    startDate: "2023-07-12T18:00:00Z",
-    endDate: "2030-07-21T18:00:00.000Z",
+    startDate: new Date("2023-07-12T18:00:00Z"),
+    endDate: new Date("2030-07-21T18:00:00.000Z"),
     status: AuditStatus.Active,
   }
 };
@@ -260,19 +260,19 @@ ContestTileLiveCohort1.args = {
     ...defaultArgs.contestData,
     cohorts: [{
       name: "cohort-1",
-      pauseTime: addDays(Date.now(), 4).toISOString(),
+      pauseTime: addDays(Date.now(), 4),
       resumeTime: null
     }, {
       name: "cohort-2",
-      pauseTime: addDays(Date.now(), 11).toISOString(),
-      resumeTime: addDays(Date.now(), 7).toISOString(),
+      pauseTime: addDays(Date.now(), 11),
+      resumeTime: addDays(Date.now(), 7),
     }, {
       name: "cohort-3",
       pauseTime: null,
-      resumeTime: addDays(Date.now(), 14).toISOString(),
+      resumeTime: addDays(Date.now(), 14),
     }],
-    startDate: subDays(Date.now(), 1).toISOString(),
-    endDate: addDays(Date.now(), 18).toISOString(),
+    startDate: subDays(Date.now(), 1),
+    endDate: addDays(Date.now(), 18),
     status: AuditStatus.Active,
   }
 };
@@ -282,19 +282,19 @@ ContestTileLivePreCohort2.args = {
     ...defaultArgs.contestData,
     cohorts: [{
       name: "cohort-1",
-      pauseTime: subDays(Date.now(), 1).toISOString(),
+      pauseTime: subDays(Date.now(), 1),
       resumeTime: null
     }, {
       name: "cohort-2",
-      pauseTime: addDays(Date.now(), 6).toISOString(),
-      resumeTime: addDays(Date.now(), 2).toISOString(),
+      pauseTime: addDays(Date.now(), 6),
+      resumeTime: addDays(Date.now(), 2),
     }, {
       name: "cohort-3",
       pauseTime: null,
-      resumeTime: addDays(Date.now(), 9).toISOString(),
+      resumeTime: addDays(Date.now(), 9),
     }],
-    startDate: subDays(Date.now(), 6).toISOString(),
-    endDate: addDays(Date.now(), 16).toISOString(),
+    startDate: subDays(Date.now(), 6),
+    endDate: addDays(Date.now(), 16),
     status: AuditStatus.Paused,
   }
 };
@@ -304,19 +304,19 @@ ContestTileLiveAwaitingCohort3.args = {
     ...defaultArgs.contestData,
     cohorts: [{
       name: "cohort-1",
-      pauseTime: subDays(Date.now(), 11).toISOString(),
+      pauseTime: subDays(Date.now(), 11),
       resumeTime: null
     }, {
       name: "cohort-2",
-      pauseTime: subDays(Date.now(), 4).toISOString(),
-      resumeTime: subDays(Date.now(), 8).toISOString(),
+      pauseTime: subDays(Date.now(), 4),
+      resumeTime: subDays(Date.now(), 8),
     }, {
       name: "cohort-3",
       pauseTime: null,
-      resumeTime: subDays(Date.now(), 1).toISOString(),
+      resumeTime: subDays(Date.now(), 1),
     }],
-    startDate: subDays(Date.now(), 16).toISOString(),
-    endDate: addDays(Date.now(), 6).toISOString(),
+    startDate: subDays(Date.now(), 16),
+    endDate: addDays(Date.now(), 6),
     status: AuditStatus.Paused,
   }
 };
@@ -325,8 +325,8 @@ ContestTileEnded.args = {
   ...defaultArgs,
   contestData: {
     ...defaultArgs.contestData,
-    startDate: "2023-07-12T18:00:00Z",
-    endDate: "2023-07-21T18:00:00Z",
+    startDate: new Date("2023-07-12T18:00:00Z"),
+    endDate: new Date("2023-07-21T18:00:00Z"),
     status: AuditStatus.Review,
   }
 };
@@ -335,7 +335,7 @@ BountyTile.args = {
   htmlId: "",
   bountyData: {
     amount: "$80,000 USDC",
-    startDate: "2023-07-12T18:00:00Z",
+    startDate: new Date("2023-07-12T18:00:00Z"),
     repoUrl: "https://github.com/code-423n4/2023-07-axelar",
     bountyUrl: "https://code4rena.com/audits/2023-07-axelar-network#top",
     ecosystem: "Polkadot" as ContestEcosystem,

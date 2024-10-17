@@ -1,5 +1,16 @@
-import { addHours, format, formatDistance, isAfter, isBefore, isEqual } from "date-fns";
-import { BaseContestSchedule, ContestCohort, ContestSchedule } from "../lib/ContestTile/ContestTile.types";
+import {
+  addHours,
+  format,
+  formatDistance,
+  isAfter,
+  isBefore,
+  isEqual,
+} from "date-fns";
+import {
+  BaseContestSchedule,
+  ContestCohort,
+  ContestSchedule,
+} from "../lib/ContestTile/ContestTile.types";
 import { Status } from "../lib/ContestStatus/ContestStatus.types";
 import { ContestTileData } from "../lib/ContestTile/ContestTile.types";
 import { DateTime } from "luxon";
@@ -22,7 +33,10 @@ function getContestStatuses(
       contestStatus: Status.ENDED,
     };
   }
-  if (isBefore(currentTime, botRaceEnd) && (isAfter(currentTime, start) || isEqual(currentTime, start))) {
+  if (
+    isBefore(currentTime, botRaceEnd) &&
+    (isAfter(currentTime, start) || isEqual(currentTime, start))
+  ) {
     return {
       botRaceStatus: Status.LIVE,
       contestStatus: Status.LIVE,
@@ -44,17 +58,28 @@ function getContestStatuses(
 const getCurrentCohortDates = (cohorts: ContestCohort[]) => {
   const now = Date.now();
 
-  const currentCohort = cohorts.sort((a, b) => {
-    if (a.resumeTime === null) return -1;
-    return new Date(a.resumeTime).getTime() - (b.resumeTime ? new Date(b.resumeTime)?.getTime() : 0);
-  }).find(cohort => {
-    return cohort.pauseTime === null || new Date(cohort.pauseTime).getTime() > now;
-  });
+  const currentCohort = cohorts
+    .sort((a, b) => {
+      if (a.resumeTime === null) return -1;
+      return (
+        a.resumeTime.getTime() -
+        (b.resumeTime ? b.resumeTime?.getTime() : 0)
+      );
+    })
+    .find((cohort) => {
+      return (
+        cohort.pauseTime === null || cohort.pauseTime.getTime() > now
+      );
+    });
 
   return {
-    pauseDate: currentCohort?.pauseTime ? new Date(currentCohort.pauseTime) : null,
-    resumeDate: currentCohort?.resumeTime ? new Date(currentCohort.resumeTime) : null,
-  }
+    pauseDate: currentCohort?.pauseTime
+      ? currentCohort.pauseTime
+      : null,
+    resumeDate: currentCohort?.resumeTime
+      ? currentCohort.resumeTime
+      : null,
+  };
 };
 
 const getContestSchedule = (
@@ -65,21 +90,24 @@ const getContestSchedule = (
 
   return {
     ...schedule,
-    pause: currentCohort.pauseDate && new Date(currentCohort.pauseDate),
-    resume: currentCohort.resumeDate && new Date(currentCohort.resumeDate),
+    pause: currentCohort.pauseDate && currentCohort.pauseDate,
+    resume: currentCohort.resumeDate && currentCohort.resumeDate,
     status: contest.status,
   };
-}
+};
 
 const getDates = (
-  start: string,
-  end: string
+  start: Date | string,
+  end: Date | string
 ): BaseContestSchedule => {
-  const startDate = new Date(start);
-  const endDate = new Date(end);
+  let startDate = start;
+  let endDate = end;
+  if (typeof startDate === "string") startDate = new Date(start);
+  if (typeof endDate === "string") endDate = new Date(end);
+
   const timeZone = DateTime.local().toFormat("ZZZZ");
 
-  const botRaceEnd = addHours(new Date(startDate), 1);
+  const botRaceEnd = addHours(startDate, 1);
   const { contestStatus, botRaceStatus } = getContestStatuses(
     startDate,
     endDate,
