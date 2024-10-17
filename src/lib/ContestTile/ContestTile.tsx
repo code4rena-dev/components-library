@@ -132,14 +132,14 @@ export const ContestCountdown = ({
   updateContestStatus: CountdownProps["updateContestStatus"]
 }) => {
   let text = "Ends in ";
-  let start = schedule.start.toISOString();
-  let end = schedule.end.toISOString();
+  let start = schedule.start;
+  let end = schedule.end;
   if (schedule.contestStatus === Status.UPCOMING) {
     text = "Starts in ";
   } else if (schedule.contestStatus === Status.LIVE) {
     if (schedule.status === AuditStatus.Paused && schedule.resume && +schedule.resume >= Date.now()) {
       text = "Next submission phase starts in ";
-      start = schedule.resume.toISOString();
+      start = schedule.resume;
     } else if (schedule.status === AuditStatus.Paused && schedule.resume && +schedule.resume <= Date.now()) {
       // The resume time has elapsed, give a generic time for now
       return (
@@ -149,7 +149,7 @@ export const ContestCountdown = ({
       );
     } else if (schedule.status === AuditStatus.Active && schedule.pause && +schedule.pause >= Date.now()) {
       text = "Current submission phase ends in ";
-      end = schedule.pause.toISOString();
+      end = schedule.pause;
     }
   }
   return Countdown({

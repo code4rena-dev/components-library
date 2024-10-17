@@ -11,83 +11,83 @@ describe("utils/time", () => {
       let cohorts:ContestCohort[] = [{
         name: "cohort-1",
         resumeTime: null,
-        pauseTime: new Date(Date.now() + 1000).toISOString(),
+        pauseTime: new Date(Date.now() + 1000),
       }, {
         name: "cohort-2",
-        resumeTime: new Date(Date.now() + 2000).toISOString(),
-        pauseTime: new Date(Date.now() + 3000).toISOString(),
+        resumeTime: new Date(Date.now() + 2000),
+        pauseTime: new Date(Date.now() + 3000),
       }, {
         name: "cohort-3",
-        resumeTime: new Date(Date.now() + 4000).toISOString(),
+        resumeTime: new Date(Date.now() + 4000),
         pauseTime: null,
       }];
       let dates = getCurrentCohortDates(cohorts);
 
       expect(dates).toStrictEqual({
         resumeDate: null,
-        pauseDate: new Date(cohorts[0].pauseTime!),
+        pauseDate: cohorts[0].pauseTime,
       });
 
       // Upcoming 2nd cohort
       cohorts = [{
         name: "cohort-1",
         resumeTime: null,
-        pauseTime: new Date(Date.now() - 2000).toISOString(),
+        pauseTime: new Date(Date.now() - 2000),
       }, {
         name: "cohort-2",
-        resumeTime: new Date(Date.now() + 1000).toISOString(),
-        pauseTime: new Date(Date.now() + 2000).toISOString(),
+        resumeTime: new Date(Date.now() + 1000),
+        pauseTime: new Date(Date.now() + 2000),
       }, {
         name: "cohort-3",
-        resumeTime: new Date(Date.now() + 3000).toISOString(),
+        resumeTime: new Date(Date.now() + 3000),
         pauseTime: null,
       }];
       dates = getCurrentCohortDates(cohorts);
 
       expect(dates).toStrictEqual({
-        resumeDate: new Date(cohorts[1].resumeTime!),
-        pauseDate: new Date(cohorts[1].pauseTime!),
+        resumeDate: cohorts[1].resumeTime,
+        pauseDate: cohorts[1].pauseTime,
       });
 
       // Active 2nd cohort
       cohorts = [{
         name: "cohort-1",
         resumeTime: null,
-        pauseTime: new Date(Date.now() - 2000).toISOString(),
+        pauseTime: new Date(Date.now() - 2000),
       }, {
         name: "cohort-2",
-        resumeTime: new Date(Date.now() - 1000).toISOString(),
-        pauseTime: new Date(Date.now() + 2000).toISOString(),
+        resumeTime: new Date(Date.now() - 1000),
+        pauseTime: new Date(Date.now() + 2000),
       }, {
         name: "cohort-3",
-        resumeTime: new Date(Date.now() + 3000).toISOString(),
+        resumeTime: new Date(Date.now() + 3000),
         pauseTime: null,
       }];
       dates = getCurrentCohortDates(cohorts);
 
       expect(dates).toStrictEqual({
-        resumeDate: new Date(cohorts[1].resumeTime!),
-        pauseDate: new Date(cohorts[1].pauseTime!)
+        resumeDate: cohorts[1].resumeTime,
+        pauseDate: cohorts[1].pauseTime
       });
 
       // Upcoming 3rd
       cohorts = [{
         name: "cohort-1",
         resumeTime: null,
-        pauseTime: new Date(Date.now() - 4000).toISOString(),
+        pauseTime: new Date(Date.now() - 4000),
       }, {
         name: "cohort-2",
-        resumeTime: new Date(Date.now() - 3000).toISOString(),
-        pauseTime: new Date(Date.now() - 1000).toISOString(),
+        resumeTime: new Date(Date.now() - 3000),
+        pauseTime: new Date(Date.now() - 1000),
       }, {
         name: "cohort-3",
-        resumeTime: new Date(Date.now() + 1000).toISOString(),
+        resumeTime: new Date(Date.now() + 1000),
         pauseTime: null,
       }];
       dates = getCurrentCohortDates(cohorts);
 
       expect(dates).toStrictEqual({
-        resumeDate: new Date(cohorts[2].resumeTime!),
+        resumeDate: cohorts[2].resumeTime,
         pauseDate: null,
       });
 
@@ -95,20 +95,20 @@ describe("utils/time", () => {
       cohorts = [{
         name: "cohort-1",
         resumeTime: null,
-        pauseTime: new Date(Date.now() - 4000).toISOString(),
+        pauseTime: new Date(Date.now() - 4000),
       }, {
         name: "cohort-2",
-        resumeTime: new Date(Date.now() - 3000).toISOString(),
-        pauseTime: new Date(Date.now() - 2000).toISOString(),
+        resumeTime: new Date(Date.now() - 3000),
+        pauseTime: new Date(Date.now() - 2000),
       }, {
         name: "cohort-3",
-        resumeTime: new Date(Date.now() - 1000).toISOString(),
+        resumeTime: new Date(Date.now() - 1000),
         pauseTime: null,
       }];
       dates = getCurrentCohortDates(cohorts);
 
       expect(dates).toStrictEqual({
-        resumeDate: new Date(cohorts[2].resumeTime!),
+        resumeDate: cohorts[2].resumeTime,
         pauseDate: null,
       });
     });
@@ -118,22 +118,22 @@ describe("utils/time", () => {
       const cohorts = [{
         name: "cohort-1",
         resumeTime: null,
-        pauseTime: new Date(Date.now() + 2000).toISOString(),
+        pauseTime: new Date(Date.now() + 2000),
       }, {
         name: "cohort-2",
-        resumeTime: new Date(Date.now() + 3000).toISOString(),
-        pauseTime: new Date(Date.now() + 4000).toISOString(),
+        resumeTime: new Date(Date.now() + 3000),
+        pauseTime: new Date(Date.now() + 4000),
       }, {
         name: "cohort-3",
-        resumeTime: new Date(Date.now() + 5000).toISOString(),
+        resumeTime: new Date(Date.now() + 5000),
         pauseTime: null,
       }];
       const start = new Date(Date.now() + 1000);
       const end = new Date(Date.now() + 6000);
 
       const dates = getContestSchedule({
-        startDate: start.toISOString(),
-        endDate: end.toISOString(),
+        startDate: start,
+        endDate: end,
         cohorts,
         status: AuditStatus.PreAudit
       });
@@ -147,7 +147,7 @@ describe("utils/time", () => {
         formattedDuration: "less than a minute",
         formattedEnd: format(end, "d MMM h:mm a"),
         formattedStart: format(start, "d MMM h:mm a"),
-        pause: new Date(cohorts[0].pauseTime!),
+        pause: cohorts[0].pauseTime,
         resume: null,
         start: start,
         status: AuditStatus.PreAudit,
@@ -160,8 +160,8 @@ describe("utils/time", () => {
       const end = new Date(Date.now() + 6000);
 
       const dates = getContestSchedule({
-        startDate: start.toISOString(),
-        endDate: end.toISOString(),
+        startDate: start,
+        endDate: end,
         cohorts,
         status: AuditStatus.PreAudit
       });
@@ -186,22 +186,22 @@ describe("utils/time", () => {
       const cohorts = [{
         name: "cohort-1",
         resumeTime: null,
-        pauseTime: new Date(Date.now() + 1000).toISOString(),
+        pauseTime: new Date(Date.now() + 1000),
       }, {
         name: "cohort-2",
-        resumeTime: new Date(Date.now() + 2000).toISOString(),
-        pauseTime: new Date(Date.now() + 3000).toISOString(),
+        resumeTime: new Date(Date.now() + 2000),
+        pauseTime: new Date(Date.now() + 3000),
       }, {
         name: "cohort-3",
-        resumeTime: new Date(Date.now() + 4000).toISOString(),
+        resumeTime: new Date(Date.now() + 4000),
         pauseTime: null,
       }];
       const start = new Date(Date.now());
       const end = new Date(Date.now() + 5000);
 
       const dates = getContestSchedule({
-        startDate: start.toISOString(),
-        endDate: end.toISOString(),
+        startDate: start,
+        endDate: end,
         cohorts,
         status: AuditStatus.Active
       });
@@ -215,7 +215,7 @@ describe("utils/time", () => {
         formattedDuration: "less than a minute",
         formattedEnd: format(end, "d MMM h:mm a"),
         formattedStart: format(start, "d MMM h:mm a"),
-        pause: new Date(cohorts[0].pauseTime!),
+        pause: cohorts[0].pauseTime,
         resume: null,
         start: start,
         status: AuditStatus.Active,
@@ -226,22 +226,22 @@ describe("utils/time", () => {
       const cohorts = [{
         name: "cohort-1",
         resumeTime: null,
-        pauseTime: new Date(Date.now() - 1000).toISOString(),
+        pauseTime: new Date(Date.now() - 1000),
       }, {
         name: "cohort-2",
-        resumeTime: new Date(Date.now() + 1000).toISOString(),
-        pauseTime: new Date(Date.now() + 2000).toISOString(),
+        resumeTime: new Date(Date.now() + 1000),
+        pauseTime: new Date(Date.now() + 2000),
       }, {
         name: "cohort-3",
-        resumeTime: new Date(Date.now() + 3000).toISOString(),
+        resumeTime: new Date(Date.now() + 3000),
         pauseTime: null,
       }];
       const start = new Date(Date.now() - 2000);
       const end = new Date(Date.now() + 4000);
 
       const dates = getContestSchedule({
-        startDate: start.toISOString(),
-        endDate: end.toISOString(),
+        startDate: start,
+        endDate: end,
         cohorts,
         status: AuditStatus.Paused
       });
@@ -255,8 +255,8 @@ describe("utils/time", () => {
         formattedDuration: "less than a minute",
         formattedEnd: format(end, "d MMM h:mm a"),
         formattedStart: format(start, "d MMM h:mm a"),
-        pause: new Date(cohorts[1].pauseTime!),
-        resume: new Date(cohorts[1].resumeTime!),
+        pause: cohorts[1].pauseTime,
+        resume: cohorts[1].resumeTime,
         start: start,
         status: AuditStatus.Paused,
         timeZone: DateTime.local().toFormat("ZZZZ")
@@ -267,22 +267,22 @@ describe("utils/time", () => {
       const cohorts = [{
         name: "cohort-1",
         resumeTime: null,
-        pauseTime: new Date(Date.now() - 2000).toISOString(),
+        pauseTime: new Date(Date.now() - 2000),
       }, {
         name: "cohort-2",
-        resumeTime: new Date(Date.now() - 1000).toISOString(),
-        pauseTime: new Date(Date.now() + 1000).toISOString(),
+        resumeTime: new Date(Date.now() - 1000),
+        pauseTime: new Date(Date.now() + 1000),
       }, {
         name: "cohort-3",
-        resumeTime: new Date(Date.now() + 2000).toISOString(),
+        resumeTime: new Date(Date.now() + 2000),
         pauseTime: null,
       }];
       const start = new Date(Date.now() - 3000);
       const end = new Date(Date.now() + 3000);
 
       const dates = getContestSchedule({
-        startDate: start.toISOString(),
-        endDate: end.toISOString(),
+        startDate: start,
+        endDate: end,
         cohorts,
         status: AuditStatus.Active
       });
@@ -296,8 +296,8 @@ describe("utils/time", () => {
         formattedDuration: "less than a minute",
         formattedEnd: format(end, "d MMM h:mm a"),
         formattedStart: format(start, "d MMM h:mm a"),
-        pause: new Date(cohorts[1].pauseTime!),
-        resume: new Date(cohorts[1].resumeTime!),
+        pause: cohorts[1].pauseTime,
+        resume: cohorts[1].resumeTime,
         start: start,
         status: AuditStatus.Active,
         timeZone: DateTime.local().toFormat("ZZZZ")
@@ -308,22 +308,22 @@ describe("utils/time", () => {
       const cohorts = [{
         name: "cohort-1",
         resumeTime: null,
-        pauseTime: new Date(Date.now() - 4000).toISOString(),
+        pauseTime: new Date(Date.now() - 4000),
       }, {
         name: "cohort-2",
-        resumeTime: new Date(Date.now() - 3000).toISOString(),
-        pauseTime: new Date(Date.now() - 2000).toISOString(),
+        resumeTime: new Date(Date.now() - 3000),
+        pauseTime: new Date(Date.now() - 2000),
       }, {
         name: "cohort-3",
-        resumeTime: new Date(Date.now() - 1000).toISOString(),
+        resumeTime: new Date(Date.now() - 1000),
         pauseTime: null,
       }];
       const start = new Date(Date.now() - 5000);
       const end = new Date(Date.now() + 1000);
 
       const dates = getContestSchedule({
-        startDate: start.toISOString(),
-        endDate: end.toISOString(),
+        startDate: start,
+        endDate: end,
         cohorts,
         status: AuditStatus.Active
       });
@@ -338,7 +338,7 @@ describe("utils/time", () => {
         formattedEnd: format(end, "d MMM h:mm a"),
         formattedStart: format(start, "d MMM h:mm a"),
         pause: null,
-        resume: new Date(cohorts[2].resumeTime!),
+        resume: cohorts[2].resumeTime,
         start: start,
         status: AuditStatus.Active,
         timeZone: DateTime.local().toFormat("ZZZZ")
@@ -349,22 +349,22 @@ describe("utils/time", () => {
       const cohorts = [{
         name: "cohort-1",
         resumeTime: null,
-        pauseTime: new Date(Date.now() - 5000).toISOString(),
+        pauseTime: new Date(Date.now() - 5000),
       }, {
         name: "cohort-2",
-        resumeTime: new Date(Date.now() - 4000).toISOString(),
-        pauseTime: new Date(Date.now() - 3000).toISOString(),
+        resumeTime: new Date(Date.now() - 4000),
+        pauseTime: new Date(Date.now() - 3000),
       }, {
         name: "cohort-3",
-        resumeTime: new Date(Date.now() - 2000).toISOString(),
+        resumeTime: new Date(Date.now() - 2000),
         pauseTime: null,
       }];
       const start = new Date(Date.now() - 6000);
       const end = new Date(Date.now() - 1000);
 
       const dates = getContestSchedule({
-        startDate: start.toISOString(),
-        endDate: end.toISOString(),
+        startDate: start,
+        endDate: end,
         cohorts,
         status: AuditStatus.Review
       });
@@ -379,7 +379,7 @@ describe("utils/time", () => {
         formattedEnd: format(end, "d MMM h:mm a"),
         formattedStart: format(start, "d MMM h:mm a"),
         pause: null,
-        resume: new Date(cohorts[2].resumeTime!),
+        resume: cohorts[2].resumeTime,
         start: start,
         status: AuditStatus.Review,
         timeZone: DateTime.local().toFormat("ZZZZ")

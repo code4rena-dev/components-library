@@ -403,7 +403,7 @@ function IsBounty({
   bountyTimelineObject?: BaseContestSchedule | undefined;
 }) {
   const { bountyUrl, amount, startDate, ecosystem, languages } = bountyData;
-  const endDate = "2999-01-01T00:00:00Z"
+  const endDate = new Date("2999-01-01T00:00:00Z");
   let ecosystemLogoName: string = "";
   if (ecosystem) {
     switch (ecosystem) {
