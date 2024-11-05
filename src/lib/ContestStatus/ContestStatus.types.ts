@@ -20,6 +20,7 @@ export const AuditStatus = {
   /** Paused: The audit is in between Rolling Triage cohorts */
   Paused: "Paused",
   Review: "Review",
+  Restricted: "Restricted",
   Judging: "Judging",
   PJQA: "Post-Judging QA",
   JudgingComplete: "Judging Complete",
