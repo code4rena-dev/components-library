@@ -87,7 +87,7 @@ export interface ContestTileData {
   endDate: string;
   /** Boolean indicating certification status of logged in user. Required for viewing certain contests. */
   isUserCertified: boolean;
-  status: AuditStatus;
+  status: AuditStatus | null;
 }
 
 export interface BaseContestSchedule {
@@ -104,7 +104,7 @@ export interface BaseContestSchedule {
 }
 
 export interface ContestSchedule extends BaseContestSchedule {
-  status: AuditStatus;
+  status: AuditStatus | null;
   end: Date;
   /** The time the current cohort will pause. */
   pause: Date | null;
