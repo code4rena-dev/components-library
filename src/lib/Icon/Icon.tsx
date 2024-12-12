@@ -35,6 +35,9 @@ export const Icon = ({
         case "large":
             sizeInPx = "32px";
             break;
+        case "extra-large":
+            sizeInPx = "40px";
+            break;
         default:
             sizeInPx = "24px";
     }

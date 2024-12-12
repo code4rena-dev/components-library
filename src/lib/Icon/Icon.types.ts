@@ -9,4 +9,4 @@ export interface IconProps {
     className?: string;
 }
 
-export type IconSize = "small" | "medium" | "large";
+export type IconSize = "small" | "medium" | "large" | "extra-large";
