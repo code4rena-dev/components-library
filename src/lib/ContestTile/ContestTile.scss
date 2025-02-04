@@ -176,6 +176,7 @@
             gap: 0.5rem;
             flex: 1 0 0;
             padding-left: 0.5rem;
+            border-right: 1px solid hsla(0, 0%, 100%, 0.4);
 
             .audit-tile__status__icon {
               width: 1.1rem;
@@ -685,6 +686,7 @@
             gap: 0.5rem;
             flex: 1 0 0;
             padding-left: 0.5rem;
+            border-right: 1px solid $color__n-60;
 
             .audit-tile__status__icon {
               width: 1.1rem;
