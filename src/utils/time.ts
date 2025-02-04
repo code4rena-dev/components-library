@@ -100,4 +100,44 @@ const getDates = (
   };
 };
 
-export { getDates, getContestSchedule, getCurrentCohortDates };
+/** Get a relative date time string in long format
+ * @note Mainly for use in countdown situations like the audit timers
+ *
+ * @examples "In 00:00:05" (5 seconds)
+ * "In 00:05:00" (5 minutes)
+ * "In 05:00:00" (5 hours)
+ * "In 1 day" (1 day)
+ * "In 5 days" (5 days)
+ * "In about 1 month" (1 month)
+ * "In about 5 months" (5 months)
+ * "In about 1 year" (1 year)
+ * "In about 5 years" (5 years)
+ */
+const getRelativeDateTimeLongFormat = (date: Date) => {
+  let typedDate = date;
+  if (typeof date === "string") typedDate = new Date(date);
+
+  const now = new Date();
+  // Get the absolute difference
+  const diff = Math.abs(typedDate.getTime() - now.getTime());
+  const seconds = diff / 1000;
+  const minutes = seconds / 60;
+  const hours = minutes / 60;
+  const days = hours / 24;
+  const months = days / 30;
+  const years = days / 365;
+
+  if (seconds < 60) return `In 00:00:${Math.floor(seconds)}`;
+  if (minutes < 60)
+    return `In 00:${Math.floor(minutes)}:${Math.floor(seconds % 60)}`;
+  if (hours < 24)
+    return `In ${Math.floor(hours)}:${Math.floor(minutes % 60)}:${Math.floor(seconds % 60)}`;
+  if (days < 2) return `In 1 day`;
+  if (days < 30) return `In ${Math.floor(days)} days`;
+  if (months < 2) return `In about 1 month`;
+  if (months < 12) return `In about ${Math.floor(months)} months`;
+  if (years < 2) return `In about 1 year`;
+  return `In about ${Math.floor(years)} years`;
+};
+
+export { getDates, getContestSchedule, getCurrentCohortDates, getRelativeDateTimeLongFormat };

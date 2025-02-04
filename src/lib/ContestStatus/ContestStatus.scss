@@ -1,31 +1,33 @@
 @import "../../styles/variables";
 
 .c4conteststatus {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    color: $color__white;
-    font-size: $font-size__text;
-    
-    .statusindicator {
-        width: $spacing__s;
-        height: $spacing__s;
-        border-radius: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: $color__white;
+  font-size: $font-size__text;
 
-        &.ended {
-            display: none;
-        }
-        &.upcoming {
-            display: block;
-            background: white;
-        }
-        &.live {
-            display: block;
-            background: $color__green;
-        }
+  .statusindicator {
+    width: $spacing__s;
+    height: $spacing__s;
+    border-radius: 50%;
+
+    &.ended {
+      display: none;
     }
+    &.upcoming {
+      display: block;
+      background: white;
+    }
+    &.live {
+      display: block;
+      background: $color__green;
+    }
+  }
 
-    p { margin: 0; }
+  p {
+    margin: 0;
+  }
 }
