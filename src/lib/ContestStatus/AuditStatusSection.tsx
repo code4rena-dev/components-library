@@ -135,7 +135,7 @@ export const AuditStatusSection = ({
         className="audit-tile__status__status"
         title={comparisonTime?.toString() || ""}
       >
-        {auditStatusLabel} {relativeDateTime}
+        {auditStatusLabel} {relativeDateTime?.toLowerCase()}
       </div>
     </div>
   );
