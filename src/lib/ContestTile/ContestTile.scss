@@ -1,825 +1,881 @@
 @import "../../styles/variables";
 
-.c4tilewrapper.tile--light, .c4tilewrapper.compact--light {
-    .c4contesttile.tile--light, .c4contesttile.compact--light {
-        /* Main component wrapper. Outter wrapper is only for declaring component 
+.c4tilewrapper.tile--light,
+.c4tilewrapper.compact--light {
+  .c4contesttile.tile--light,
+  .c4contesttile.compact--light {
+    /* Main component wrapper. Outter wrapper is only for declaring component 
             as a container for container query compatibility */
-        .container--inner {
-            background: linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,.05)) !important;
-            border: 1px solid hsla(0,0%,100%,.4) !important;
-            color: $color__white !important;
+    .container--inner {
+      background: linear-gradient(
+        180deg,
+        hsla(0, 0%, 100%, 0.1),
+        hsla(0, 0%, 100%, 0.05)
+      ) !important;
+      border: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+      color: $color__white !important;
 
-            &.compact-content {
-                .body--contest {
-                    a.logo img, img.logo {
-                        border: 1px solid hsla(0,0%,100%,.4) !important;
-                    }
+      &.compact-content {
+        .body--contest {
+          a.logo img,
+          img.logo {
+            border: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+          }
 
-                    header .header--status {
-                        border-bottom: 1px solid hsla(0,0%,100%,.4) !important;
-                    }
-                }
-
-                .body--bounty {
-                    a.logo img, img.logo {
-                        border: 1px solid hsla(0,0%,100%,.4) !important;
-                    }
-
-                    header {
-                        border-bottom: 1px solid hsla(0,0%,100%,.4) !important;
-                    }
-                }
-            }
-
-            &.default-content {
-                .body--bounty {
-                    header {
-                        a.logo img, img.logo {
-                            border: 1px solid hsla(0,0%,100%,.4) !important;
-                        }
-                    }
-
-                    .bounty-award {
-                        border-bottom: 1px solid hsla(0,0%,100%,.4) !important;
-                    }
-
-                    @include containerQuery("s") {
-                        .bounty-award {
-                            border-bottom: 0px !important;
-                        }
-                    }
-                }
-
-                .body--contest {
-                    header {
-                        a.logo img, img.logo {
-                            border: 1px solid hsla(0,0%,100%,.4) !important;
-                        }
-
-                    }
-
-                    .amount {
-                        border-bottom: 1px solid hsla(0,0%,100%,.4) !important;
-                    }
-
-                    @include containerQuery("s") {
-                        .amount {
-                            border-bottom: none !important;
-                        }
-                    }
-                }
-
-                .footer--bounty {
-                    border-top: 1px solid hsla(0,0%,100%,.4) !important;
-
-                    &.live {      
-                        .details {
-                            .c4conteststatus {
-                                border-right: none !important;
-                            }
-                        }                  
-                        .options {
-                            .contest-redirect {
-                                border-top: none !important;
-                                border-left: 1px solid hsla(0,0%,100%,.4) !important;
-                            }
-                        }
-
-                        @include containerQuery("s") {
-                            .options {
-                                .contest-redirect {
-                                    border-left: 1px solid hsla(0,0%,100%,.4) !important;
-                                }
-                            }
-                        }
-                    }
-
-                    .details {
-                        .status {
-                            border-right: 1px solid hsla(0,0%,100%,.4) !important;
-                        }
-                    }
-
-                    .options {
-                        .contest-redirect {
-                            border-top: 1px solid hsla(0,0%,100%,.4) !important;
-
-                            &:hover, &:focus {
-                                background: hsla(0,0%,100%,.1);
-                            }
-
-                            &:focus {
-                                border: 1px solid $color__white !important;
-                            }
-                        }
-
-                        .c4contesttile--dropdown {
-                            border-left: 1px solid hsla(0,0%,100%,.4) !important;
-                            border-top: 1px solid hsla(0,0%,100%,.4) !important;
-
-                            &--trigger {
-                                &:hover, &:focus {
-                                    background: hsla(0,0%,100%,.1) !important;
-                                }
-
-                                &:focus {
-                                    border: 1px solid $color__white !important;
-                                }
-                            }
-                        }
-                    }
-
-                    @include containerQuery("s") {
-                        &.live {
-                            .options {
-                                .contest-redirect {
-                                    border-left: 1px solid hsla(0,0%,100%,.4) !important;
-                                }
-                            }
-                        }
-
-                        .details {
-                            .timer {
-                                border-right: 1px solid hsla(0,0%,100%,.4) !important;
-                            }
-                        }
-
-                        .options {
-                            .contest-redirect {
-                                border-top: 0px !important;
-                            }
-
-                            .c4contesttile--dropdown {
-                                border-top: 0px !important;
-                            }
-                        }
-                    }
-                }
-
-                .footer--contest {
-                    border-top: 1px solid hsla(0,0%,100%,.4) !important;
-
-                    .details {
-                        .status:not(.ended) {
-                            border-right: 1px solid hsla(0,0%,100%,.4) !important;
-                        }
-
-                    }
-
-                    .options {
-                        .contest-redirect {
-                            border-top: 1px solid hsla(0,0%,100%,.4) !important;
-                            color: $color__white;
-    
-                            &:hover, &:focus {
-                                background: hsla(0,0%,100%,.1) !important;
-                            }
-
-                            &:focus {
-                                border: 1px solid white !important;
-                            }
-                        }
-
-                        .c4contesttile--dropdown {
-                            border-top: 1px solid hsla(0,0%,100%,.4) !important;
-                            border-left: 1px solid hsla(0,0%,100%,.4) !important;
-
-                            &--trigger {
-                                &:hover, &:focus {
-                                    background: hsla(0,0%,100%,.1) !important;
-                                }
-
-                                &:focus {
-                                    border: 1px solid $color__white !important;
-                                }
-                            }
-                        }
-                    }
-
-                    &.ended {
-                        .details {
-                            .status.ended {
-                                border-right: 1px solid hsla(0,0%,100%,.4) !important;
-                            }
-                        }
-
-                        .options {
-                            .contest-redirect {
-                                border-top: none !important;
-                                width: fit-content;
-                                white-space: nowrap;
-                            }
-                        }
-                    }
-
-                    @include containerQuery("s") {
-                        .details {
-                            .timer {
-                                border-right: 1px solid hsla(0,0%,100%,.4) !important;
-                            }
-                        }
-
-                        .options {
-                            .contest-redirect {
-                                border-top: none !important;
-                                width: fit-content;
-                                white-space: nowrap;
-                            }
-
-                            .c4contesttile--dropdown {
-                                border-top: none !important;
-                            }
-                        }
-                        
-                    }
-                }
-            }
+          header .header--status {
+            border-bottom: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+          }
         }
+
+        .body--bounty {
+          a.logo img,
+          img.logo {
+            border: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+          }
+
+          header {
+            border-bottom: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+          }
+        }
+      }
+
+      &.default-content {
+        .body--bounty {
+          header {
+            a.logo img,
+            img.logo {
+              border: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+            }
+          }
+
+          .bounty-award {
+            border-bottom: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+          }
+
+          @include containerQuery("s") {
+            .bounty-award {
+              border-bottom: 0px !important;
+            }
+          }
+        }
+
+        .body--contest {
+          header {
+            a.logo img,
+            img.logo {
+              border: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+            }
+          }
+
+          .amount {
+            border-bottom: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+          }
+
+          @include containerQuery("s") {
+            .amount {
+              border-bottom: none !important;
+            }
+          }
+        }
+
+        .footer--bounty {
+          border-top: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+
+          &.live {
+            .details {
+              .c4conteststatus {
+                border-right: none !important;
+              }
+            }
+            .options {
+              .contest-redirect {
+                border-top: none !important;
+                border-left: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+              }
+            }
+
+            @include containerQuery("s") {
+              .options {
+                .contest-redirect {
+                  border-left: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+                }
+              }
+            }
+          }
+
+          .details {
+            .status {
+              border-right: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+            }
+          }
+
+          .options {
+            .contest-redirect {
+              border-top: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+
+              &:hover,
+              &:focus {
+                background: hsla(0, 0%, 100%, 0.1);
+              }
+
+              &:focus {
+                border: 1px solid $color__white !important;
+              }
+            }
+
+            .c4contesttile--dropdown {
+              border-left: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+              border-top: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+
+              &--trigger {
+                &:hover,
+                &:focus {
+                  background: hsla(0, 0%, 100%, 0.1) !important;
+                }
+
+                &:focus {
+                  border: 1px solid $color__white !important;
+                }
+              }
+            }
+          }
+
+          @include containerQuery("s") {
+            &.live {
+              .options {
+                .contest-redirect {
+                  border-left: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+                }
+              }
+            }
+
+            .details {
+              .timer {
+                border-right: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+              }
+            }
+
+            .options {
+              .contest-redirect {
+                border-top: 0px !important;
+              }
+
+              .c4contesttile--dropdown {
+                border-top: 0px !important;
+              }
+            }
+          }
+        }
+
+        .footer--contest {
+          border-top: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+
+          .details {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1 0 0;
+            padding-left: 0.5rem;
+
+            .audit-tile__status__icon {
+              width: 1.1rem;
+              height: 1.1rem;
+              border-radius: 12.5rem;
+
+              svg {
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+            .audit-tile__status__status {
+              flex: 1 0 0;
+              color: #fff;
+            }
+          }
+
+          .options {
+            .contest-redirect {
+              border-top: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+              color: $color__white;
+
+              &:hover,
+              &:focus {
+                background: hsla(0, 0%, 100%, 0.1) !important;
+              }
+
+              &:focus {
+                border: 1px solid white !important;
+              }
+            }
+
+            .c4contesttile--dropdown {
+              border-top: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+              border-left: 1px solid hsla(0, 0%, 100%, 0.4) !important;
+
+              &--trigger {
+                &:hover,
+                &:focus {
+                  background: hsla(0, 0%, 100%, 0.1) !important;
+                }
+
+                &:focus {
+                  border: 1px solid $color__white !important;
+                }
+              }
+            }
+          }
+
+          &.ended {
+            .options {
+              .contest-redirect {
+                border-top: none !important;
+                width: fit-content;
+                white-space: nowrap;
+              }
+            }
+          }
+
+          @include containerQuery("s") {
+            .options {
+              .contest-redirect {
+                border-top: none !important;
+                width: fit-content;
+                white-space: nowrap;
+              }
+
+              .c4contesttile--dropdown {
+                border-top: none !important;
+              }
+            }
+          }
+        }
+      }
     }
+  }
 }
 
 .c4tilewrapper {
+  width: 100%;
+  max-width: 1036px;
+  position: relative;
+  container-type: inline-size;
+  margin-bottom: 1.5rem;
+
+  // Important for stacking context created by container-type css property.
+  // This makes sure the dropdown always appears above any proceding elements in a list.
+  &:hover {
+    z-index: 1;
+  }
+
+  .c4contesttile,
+  .c4contesttile.compact,
+  .c4contesttile.tile--dark,
+  .c4contesttile.compact--dark {
     width: 100%;
+    height: 100%;
     max-width: 1036px;
-    position: relative;
-    container-type: inline-size;
-    margin-bottom: 1.5rem;
-    
-    // Important for stacking context created by container-type css property.
-    // This makes sure the dropdown always appears above any proceding elements in a list.
-    &:hover {
-        z-index: 1;
-    }
 
-    .c4contesttile, .c4contesttile.compact, .c4contesttile.tile--dark, .c4contesttile.compact--dark {
-        width: 100%;
-        height: 100%;
-        max-width: 1036px;
-
-        /* Main component wrapper. Outter wrapper is only for declaring component 
+    /* Main component wrapper. Outter wrapper is only for declaring component 
             as a container for container query compatibility */
-        .container--inner {
-            height: 100%;
-            background: $color__n-85;
-            border: 1px solid $color__n-60;
-            border-radius: $border-radius__base;
-            color: $color__text;
+    .container--inner {
+      height: 100%;
+      background: $color__n-85;
+      border: 1px solid $color__n-60;
+      border-radius: $border-radius__base;
+      color: $color__text;
 
-            a, button {
-                &:focus {
-                    outline: none;
-                    border: 1px solid $color__white !important;
-                    border-radius: $border-radius__base;
-                }
+      a,
+      button {
+        &:focus {
+          outline: none;
+          border: 1px solid $color__white !important;
+          border-radius: $border-radius__base;
+        }
+      }
+
+      &.compact-content {
+        .body--contest,
+        .body--bounty {
+          // Sponsor Image
+          a.logo img,
+          img.logo {
+            border: 1px solid #3e3b4e;
+          }
+
+          a.logo {
+            max-width: 26px;
+            max-height: 26px;
+            border-radius: 50%;
+            width: fit-content;
+            margin: 0;
+
+            img {
+              border-radius: 50%;
+              min-width: 1.5rem;
+              min-height: 1.5rem;
+              max-width: 1.5rem;
+              max-height: 1.5rem;
+            }
+          }
+
+          img.logo {
+            min-width: 1.5rem;
+            min-height: 1.5rem;
+            max-width: 1.5rem;
+            max-height: 1.5rem;
+            border-radius: 50%;
+            width: fit-content;
+            margin: 0;
+          }
+        }
+
+        .body--bounty {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+
+          header {
+            display: flex;
+            flex-direction: row;
+            padding: $spacing__base;
+            gap: $spacing__s;
+            align-items: center;
+            border-bottom: 1px solid $color__n-60;
+
+            .title {
+              text-align: left;
+              white-space: wrap;
+              margin: 0;
+              line-height: 154%;
+              font-size: $font-size__small;
+              font-weight: bold;
+              color: $color__white;
             }
 
-            &.compact-content {
-                .body--contest, .body--bounty {
-                    // Sponsor Image
-                    a.logo img, img.logo {
-                        border: 1px solid #3e3b4e;
-                    }
+            .type {
+              margin: 0;
+              padding: 0;
+              min-width: auto;
+              margin-left: auto;
+              overflow: hidden;
+              font-size: $font-size__small;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              font-weight: 500;
+            }
+          }
 
-                    a.logo {
-                        max-width: 26px;
-                        max-height: 26px;
-                        border-radius: 50%;
-                        width: fit-content;
-                        margin: 0;
+          .content--wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
 
-                        img {
-                            border-radius: 50%;
-                            min-width: 1.5rem;
-                            min-height: 1.5rem;
-                            max-width: 1.5rem;
-                            max-height: 1.5rem;
-                        }
-                    }
+            strong {
+              font-size: $font-size__small;
+              font-weight: bold;
+            }
 
-                    img.logo {
-                        min-width: 1.5rem;
-                        min-height: 1.5rem;
-                        max-width: 1.5rem;
-                        max-height: 1.5rem;
-                        border-radius: 50%;
-                        width: fit-content;
-                        margin: 0;
-                    }
+            .amount {
+              margin-top: 0;
+              text-align: left;
+              min-width: min-content;
+              color: $color__white;
+              font-size: $font-size__small;
+              font-weight: 500;
+            }
+          }
+        }
+
+        .body--contest {
+          padding-top: $spacing__s;
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+
+          header {
+            .header--status {
+              display: flex;
+              justify-content: space-between;
+              column-gap: 1.5rem;
+              row-gap: 0.5rem;
+              border-bottom: 1px solid $color__n-60;
+              padding: 0rem $spacing__base $spacing__base;
+              color: $color__white;
+              font-weight: 500;
+              font-size: $font-size__small;
+
+              > span {
+                display: flex;
+                flex-direction: row;
+                width: auto;
+                gap: 0.5rem;
+              }
+
+              > p,
+              span > * {
+                margin: 0;
+                padding: 0 !important;
+                border: none !important;
+
+                // Removes status label (Live, Soon)
+                &.status:not(.ended) p {
+                  display: none;
                 }
 
-                .body--bounty {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0;
-
-                    header {
-                        display: flex;
-                        flex-direction: row;
-                        padding: $spacing__base;
-                        gap: $spacing__s;
-                        align-items: center;
-                        border-bottom: 1px solid $color__n-60;
-
-                        .title {
-                            text-align: left;
-                            white-space: wrap;
-                            margin: 0;
-                            line-height: 154%;
-                            font-size: $font-size__small;
-                            font-weight: bold;
-                            color: $color__white;
-                        }
-
-                        .type {
-                            margin: 0;
-                            padding: 0;
-                            min-width: auto;
-                            margin-left: auto;
-                            overflow: hidden;
-                            font-size: $font-size__small;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
-                            font-weight: 500;
-                        }
-
-                    }
-
-                    .content--wrapper {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-between;
-                        align-items: center;
-                        
-                        strong {
-                            font-size: $font-size__small;
-                            font-weight: bold;
-                        }
-
-                        .amount {
-                            margin-top: 0;
-                            text-align: left;
-                            min-width: min-content;
-                            color: $color__white;
-                            font-size: $font-size__small;
-                            font-weight: 500;
-                        }
-                    }
+                &.type {
+                  flex-grow: 0; // Prevent the type element from growing
+                  flex-shrink: 0; // Prevent the type element from shrinking
+                  white-space: nowrap; // Prevent text from wrapping
                 }
+              }
+            }
+          }
+        }
 
-                .body--contest {
-                    padding-top: $spacing__s;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0;
-                    
-                    header {
-                        .header--status {
-                            display: flex;
-                            justify-content: space-between;
-                            column-gap: 1.5rem;
-                            row-gap: 0.5rem;
-                            border-bottom: 1px solid $color__n-60;
-                            padding: 0rem $spacing__base $spacing__base;
-                            color: $color__white;
-                            font-weight: 500;
-                            font-size: $font-size__small;
-    
-                            > span {
-                                display: flex;
-                                flex-direction: row;
-                                width: auto;
-                                gap: 0.5rem;
-                            }
-    
-                            > p, span > * {
-                                margin: 0;
-                                padding: 0 !important;
-                                border: none !important;
-    
-                                // Removes status label (Live, Soon)
-                                &.status:not(.ended) p {
-                                    display: none;
-                                }
-    
-                                &.type {
-                                    flex-grow: 0; // Prevent the type element from growing
-                                    flex-shrink: 0; // Prevent the type element from shrinking
-                                    white-space: nowrap; // Prevent text from wrapping
-                                }
-                            }
-                        }
-                    }
+        .content--wrapper {
+          display: flex;
+          flex-direction: row;
+          padding: $spacing__base;
+          gap: $spacing__s;
+          align-items: center;
+
+          .content {
+            overflow: hidden;
+
+            .title {
+              text-align: left;
+              white-space: wrap;
+              margin: 0;
+              line-height: 154%;
+              font-size: $font-size__small;
+              font-weight: bold;
+              color: $color__white;
+            }
+          }
+        }
+
+        .tags {
+          padding: 0.25rem 0.5rem 0.5rem;
+          display: flex;
+          flex-direction: row;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+
+          .c4tag {
+            height: 1.75rem;
+
+            img {
+              width: 0.75rem !important;
+              height: 0.75rem !important;
+            }
+
+            .icon {
+              svg {
+                min-width: 1.125rem;
+                min-height: 1.125rem;
+                width: 1.125rem;
+                height: 1.125rem;
+              }
+            }
+
+            .separator {
+              height: 26px;
+            }
+
+            p {
+              font-size: 0.75rem !important;
+            }
+          }
+        }
+
+        .amount {
+          margin: 0px;
+          margin-left: auto;
+          min-width: min-content;
+          color: $color__white;
+          font-size: $font-size__small;
+          font-weight: 500;
+          text-align: right;
+        }
+      }
+
+      &.default-content {
+        display: flex;
+        flex-direction: column;
+
+        .body--bounty {
+          header .content--wrapper .description {
+            margin-top: 0 !important;
+          }
+        }
+
+        .body--contest,
+        .body--bounty {
+          padding-top: $spacing__s;
+          display: flex;
+          flex-direction: column-reverse;
+          gap: 0;
+
+          header {
+            display: flex;
+            flex-direction: column;
+            padding: $spacing__m;
+            gap: $spacing__m;
+
+            a.logo img,
+            img.logo {
+              border: 1px solid #3e3b4e;
+            }
+
+            a.logo {
+              max-width: 65px;
+              max-height: 65px;
+              border-radius: 50%;
+              margin: auto;
+
+              img {
+                object-fit: cover;
+                border: 1px solid $color__n-60;
+                border-radius: 50%;
+                min-width: 63px;
+                min-height: 63px;
+                max-width: 63px;
+                max-height: 63px;
+              }
+            }
+            img.logo {
+              object-fit: cover;
+              border-radius: 50%;
+              border: 1px solid $color__n-60;
+              min-width: 63px;
+              min-height: 63px;
+              max-width: 63px;
+              max-height: 63px;
+              margin: auto;
+            }
+
+            .content--wrapper {
+              .period,
+              .description {
+                display: block;
+                text-align: center;
+              }
+
+              .tags {
+                margin-top: 0.5rem;
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+              }
+
+              .title {
+                margin: 0rem;
+                color: $color__white;
+                text-align: center;
+                font-size: $headline-font-size__xxs;
+              }
+
+              .description {
+                margin: $spacing__s 0rem 0rem;
+              }
+            }
+          }
+
+          .bounty-award {
+            border-bottom: 1px solid $color__n-60;
+            padding: 0rem $spacing__m $spacing__s;
+
+            .amount {
+              border-bottom: none;
+              padding: 0;
+            }
+
+            p:last-of-type {
+              margin: 0;
+              text-align: right;
+            }
+          }
+
+          .amount {
+            margin: 0rem;
+            min-width: max-content;
+            border-bottom: 1px solid $color__n-60;
+            padding: 0rem $spacing__m $spacing__s;
+            text-align: right;
+            color: $color__white;
+            font-weight: 500;
+            font-size: $font-size__copy;
+          }
+
+          @include containerQuery("xxs") {
+            header {
+              flex-direction: row;
+
+              a.logo,
+              img.logo {
+                margin: unset;
+              }
+
+              a.logo {
+                max-width: 90px;
+                max-height: 90px;
+
+                img {
+                  min-width: 88px;
+                  min-height: 88px;
+                  max-width: 88px;
+                  max-height: 88px;
                 }
+              }
+              img.logo {
+                min-width: 88px;
+                min-height: 88px;
+                max-width: 88px;
+                max-height: 88px;
+              }
 
-                .content--wrapper {
-                    display: flex;
-                    flex-direction: row;
-                    padding: $spacing__base;
-                    gap: $spacing__s;
-                    align-items: center;
-
-                    .content {
-                        overflow: hidden;
-                        
-                        .title {
-                            text-align: left;
-                            white-space: wrap;
-                            margin: 0;
-                            line-height: 154%;
-                            font-size: $font-size__small;
-                            font-weight: bold;
-                            color: $color__white;
-                        }
-                    }
+              .content--wrapper {
+                .period,
+                .description,
+                .title {
+                  text-align: left;
                 }
 
                 .tags {
-                    padding: 0.25rem 0.5rem 0.5rem;
-                    display: flex;
-                    flex-direction: row;
-                    gap: 0.5rem;
-                    flex-wrap: wrap;
-
-                    .c4tag {
-                        height: 1.75rem;
-
-                        img {
-                            width: 0.75rem !important;
-                            height: 0.75rem !important;
-                        }
-
-                        .icon {
-                            svg {
-                                min-width: 1.125rem;
-                                min-height: 1.125rem;
-                                width: 1.125rem;
-                                height: 1.125rem;
-                            }
-                        }
-
-
-                        .separator {
-                            height: 26px;
-                        }
-
-                        p {
-                            font-size: 0.75rem !important;
-                        }
-                    }
+                  justify-content: flex-start;
                 }
+              }
+            }
+          }
 
-                .amount {
-                    margin: 0px;
-                    margin-left: auto;
-                    min-width: min-content;
-                    color: $color__white;
-                    font-size: $font-size__small;
-                    font-weight: 500;
-                    text-align: right;
-                }
+          @include containerQuery("s") {
+            padding: $spacing__m;
+            flex-direction: row;
+            gap: $spacing__xl;
+            justify-content: space-between;
+
+            header {
+              padding: 0rem;
+
+              .title {
+                font-size: $headline-font-size__s;
+              }
             }
 
-            &.default-content {
-                display: flex;
-                flex-direction: column;
-
-                .body--bounty {
-                    header .content--wrapper .description {
-                        margin-top: 0 !important;
-                    }
-                }
-
-                .body--contest, .body--bounty {
-                    padding-top: $spacing__s;
-                    display: flex;
-                    flex-direction: column-reverse;
-                    gap: 0;
-
-                    header {
-                        display: flex;
-                        flex-direction: column;
-                        padding: $spacing__m;
-                        gap: $spacing__m;
-
-                        a.logo img, img.logo {
-                            border: 1px solid #3e3b4e;
-                        }
-
-                        a.logo {
-                            max-width: 65px;
-                            max-height: 65px;
-                            border-radius: 50%;
-                            margin: auto;
-            
-                            img {
-                                object-fit: cover;
-                                border: 1px solid $color__n-60;
-                                border-radius: 50%;
-                                min-width: 63px;
-                                min-height: 63px;
-                                max-width: 63px;
-                                max-height: 63px;
-                            }
-                        }
-                        img.logo {
-                            object-fit: cover;
-                            border-radius: 50%;
-                            border: 1px solid $color__n-60;
-                            min-width: 63px;
-                            min-height: 63px;
-                            max-width: 63px;
-                            max-height: 63px;
-                            margin: auto;
-                        }
-
-                        .content--wrapper {
-                            .period, .description {
-                                display: block;
-                                text-align: center;
-                            }
-                            
-                            .tags {
-                                margin-top: 0.5rem;
-                                display: flex;
-                                flex-direction: row;
-                                gap: 0.5rem;
-                                flex-wrap: wrap;
-                                justify-content: center;
-                            }
-
-                            .title {
-                                margin: 0rem;
-                                color: $color__white;
-                                text-align: center;
-                                font-size: $headline-font-size__xxs;
-                            }
-    
-                            .description {
-                                margin: $spacing__s 0rem 0rem;
-                            }
-                        }
-                    }
-
-                    .bounty-award {
-                        border-bottom: 1px solid $color__n-60;
-                        padding: 0rem $spacing__m $spacing__s;
-
-                        .amount {
-                            border-bottom: none;
-                            padding: 0;
-                        }
-
-                        p:last-of-type {
-                            margin: 0;
-                            text-align: right;
-                        }
-                    }
-
-                    .amount {
-                        margin: 0rem;
-                        min-width: max-content;
-                        border-bottom: 1px solid $color__n-60;
-                        padding: 0rem $spacing__m $spacing__s;
-                        text-align: right;
-                        color: $color__white;
-                        font-weight: 500;
-                        font-size: $font-size__copy;
-                    }
-                    
-                    @include containerQuery("xxs") {
-                        header {
-                            flex-direction: row;
-
-                            a.logo, img.logo {
-                                margin: unset;
-                            }
-
-                            a.logo {
-                                max-width: 90px;
-                                max-height: 90px;
-                
-                                img {
-                                    min-width: 88px;
-                                    min-height: 88px;
-                                    max-width: 88px;
-                                    max-height: 88px;
-                                }
-                            }
-                            img.logo {
-                                min-width: 88px;
-                                min-height: 88px;
-                                max-width: 88px;
-                                max-height: 88px;
-                            }
-
-                            .content--wrapper {
-                                .period, .description, .title {
-                                    text-align: left;
-                                }
-
-                                .tags {
-                                    justify-content: flex-start;
-                                }
-                            }
-                        }
-                    }
-        
-                    @include containerQuery("s") {
-                        padding: $spacing__m;
-                        flex-direction: row;
-                        gap: $spacing__xl;
-                        justify-content: space-between;
-        
-                        header {
-                            padding: 0rem;
-
-                            .title {
-                                font-size: $headline-font-size__s;
-                            }
-                        }
-
-                        .bounty-award {
-                            border-bottom: none;
-                        }
-                        .amount {
-                            border-bottom: none;
-                            padding: 0rem;
-                        }
-                    }
-                }
-
-                .footer--contest {
-                    margin-top: auto;
-                }
-        
-                .footer--bounty {
-                    &.live {
-                        flex-wrap: nowrap;
-                        
-                        .options {
-                            width: fit-content;
-
-                            .contest-redirect {
-                                border-top: none;
-                                border-left: 1px solid $color__n-60;
-                                width: max-content;
-                            }
-                        }
-
-                        @include containerQuery("s") {
-                            .options {
-                                .contest-redirect {
-                                    border-left: 1px solid $color__n-60;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                .footer--contest, .footer--bounty {
-                    border-top: 1px solid $color__n-60;
-                    display: flex;
-                    flex-wrap: wrap;
-                    flex-direction: row;
-                    height: fit-content;
-        
-                    .details {
-                        display: flex;
-                        flex-direction: row;
-                        width: 100%;
-
-                        .status, .timer {
-                            padding: $spacing__s $spacing__m;
-                        }
-
-                        .status {
-                            justify-content: flex-start;
-                            width: max-content;
-                            border-right: 1px solid $color__n-60;
-            
-                            &.ended, &.bounty {
-                                border-right: 0px;
-                            }
-                        }
-
-                        .timer {
-                            width:  100%;
-                            margin: 0px;
-                        }
-                    }
-
-                    .options {
-                        display: flex;
-                        flex-direction: row;
-                        width: 100%;
-
-                        .contest-redirect {
-                            padding: $spacing__s $spacing__m;
-                            text-align: center;
-                            width: 100%;
-                            border-top: 1px solid $color__n-60;
-                            text-decoration: none;
-                            color: $color__white;
-            
-                            &:hover, &:focus {
-                                background: $color__n-80;
-                            }
-
-                            &:focus {
-                                border-color: unset !important;
-                                border-radius: 0px;
-                            }
-                        }
-
-                        .c4contesttile--dropdown {
-                            border-left: 1px solid $color__n-60;
-                            border-top: 1px solid $color__n-60;
-                            border-radius: 0px;
-
-                            
-                            &--trigger {
-                                height: 100%;
-                                padding: 0rem $spacing__m;
-                                background: none;
-                                border: none;
-                                color: $color__white;
-                                cursor: pointer;
-
-                                svg {
-                                    min-width: 2rem;
-                                    min-height: 2rem;
-                                    width: 2rem;
-                                    height: 2rem;
-                                }
-
-                                &:hover {
-                                    background: $color__n-80;
-                                }
-                            }
-                        }
-                    }
-
-                    &.ended {
-                        flex-wrap: nowrap;
-                        
-                        .details {
-                            .status.ended, .status.bounty {
-                                width: 100%;
-                                border-right: 1px solid $color__n-60;
-                            }
-                        }
-
-                        .options {
-                            width: fit-content;
-
-                            .contest-redirect {
-                                width: fit-content;
-                                white-space: nowrap;
-                                border-top: none;
-                            }
-    
-                            .c4contesttile--dropdown {
-                                border-top: none;
-                            }
-                        }
-                    }
-        
-                    @include containerQuery("s") {
-                        flex-wrap: nowrap;
-        
-                        .details {
-                            .timer {
-                                border-right: 1px solid $color__n-60;
-                            }
-                        }
-
-                        .options {
-                            width: fit-content;
-
-                            .contest-redirect {
-                                width: fit-content;
-                                white-space: nowrap;
-                                border-top: none;
-                            }
-    
-                            .c4contesttile--dropdown {
-                                border-top: none;
-                            }
-                        }
-                    }
-                }
+            .bounty-award {
+              border-bottom: none;
             }
+            .amount {
+              border-bottom: none;
+              padding: 0rem;
+            }
+          }
         }
+
+        .footer--contest {
+          margin-top: auto;
+
+          .details {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1 0 0;
+            padding-left: 0.5rem;
+
+            .audit-tile__status__icon {
+              width: 1.1rem;
+              height: 1.1rem;
+              border-radius: 12.5rem;
+
+              svg {
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+            .audit-tile__status__status {
+              flex: 1 0 0;
+              color: #fff;
+            }
+          }
+        }
+
+        .footer--bounty {
+          &.live {
+            flex-wrap: nowrap;
+
+            .options {
+              width: fit-content;
+
+              .contest-redirect {
+                border-top: none;
+                border-left: 1px solid $color__n-60;
+                width: max-content;
+              }
+            }
+
+            @include containerQuery("s") {
+              .options {
+                .contest-redirect {
+                  border-left: 1px solid $color__n-60;
+                }
+              }
+            }
+          }
+        }
+
+        .footer--contest,
+        .footer--bounty {
+          border-top: 1px solid $color__n-60;
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: row;
+          height: fit-content;
+
+          .details {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+
+            .status,
+            .timer {
+              padding: $spacing__s $spacing__m;
+            }
+
+            .status {
+              justify-content: flex-start;
+              width: max-content;
+              border-right: 1px solid $color__n-60;
+
+              &.ended,
+              &.bounty {
+                border-right: 0px;
+              }
+            }
+
+            .timer {
+              width: 100%;
+              margin: 0px;
+            }
+          }
+
+          .options {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+
+            .contest-redirect {
+              padding: $spacing__s $spacing__m;
+              text-align: center;
+              width: 100%;
+              border-top: 1px solid $color__n-60;
+              text-decoration: none;
+              color: $color__white;
+
+              &:hover,
+              &:focus {
+                background: $color__n-80;
+              }
+
+              &:focus {
+                border-color: unset !important;
+                border-radius: 0px;
+              }
+            }
+
+            .c4contesttile--dropdown {
+              border-left: 1px solid $color__n-60;
+              border-top: 1px solid $color__n-60;
+              border-radius: 0px;
+
+              &--trigger {
+                height: 100%;
+                padding: 0rem $spacing__m;
+                background: none;
+                border: none;
+                color: $color__white;
+                cursor: pointer;
+
+                svg {
+                  min-width: 2rem;
+                  min-height: 2rem;
+                  width: 2rem;
+                  height: 2rem;
+                }
+
+                &:hover {
+                  background: $color__n-80;
+                }
+              }
+            }
+          }
+
+          &.ended {
+            flex-wrap: nowrap;
+
+            .details {
+              .status.ended,
+              .status.bounty {
+                width: 100%;
+                border-right: 1px solid $color__n-60;
+              }
+            }
+
+            .options {
+              width: fit-content;
+
+              .contest-redirect {
+                width: fit-content;
+                white-space: nowrap;
+                border-top: none;
+              }
+
+              .c4contesttile--dropdown {
+                border-top: none;
+              }
+            }
+          }
+
+          @include containerQuery("s") {
+            flex-wrap: nowrap;
+
+            .details {
+              .timer {
+                border-right: 1px solid $color__n-60;
+              }
+            }
+
+            .options {
+              width: fit-content;
+
+              .contest-redirect {
+                width: fit-content;
+                white-space: nowrap;
+                border-top: none;
+              }
+
+              .c4contesttile--dropdown {
+                border-top: none;
+              }
+            }
+          }
+        }
+      }
     }
+  }
 }
 
 // Compact tile overrides
 .c4contesttile.compact {
-    .c4conteststatus {
-        align-items: start;
+  .c4conteststatus {
+    align-items: start;
 
-        .statusindicator {
-            margin-top: 8px;
-        }
+    .statusindicator {
+      margin-top: 8px;
     }
+  }
 }

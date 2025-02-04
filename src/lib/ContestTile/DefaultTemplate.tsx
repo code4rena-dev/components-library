@@ -10,6 +10,7 @@ import { isBefore } from "date-fns";
 import { Dropdown } from "../Dropdown";
 import { Icon } from "../Icon";
 import { Tag } from "../Tag";
+import { AuditStatusSection } from "../ContestStatus/AuditStatusSection";
 
 
 export default function DefaultTemplate({
@@ -250,7 +251,16 @@ function IsContest({
     updateContestTileStatus: () => void;
     contestTimelineObject: ContestSchedule | undefined;
 }) {
-  const { contestUrl, amount, findingsRepo, startDate, endDate, ecosystem, languages } = contestData;
+  const {
+    contestUrl,
+    amount,
+    findingsRepo,
+    startDate,
+    endDate,
+    ecosystem,
+    languages,
+    status,
+  } = contestData;
   let ecosystemLogoName: string = "";
   if (ecosystem) {
     switch (ecosystem) {
@@ -351,22 +361,11 @@ function IsContest({
       </div>
       {/* Contest tile footer */}
       <footer className={clsx("footer--contest", contestTimelineObject && contestTimelineObject.contestStatus === Status.ENDED && "ended" )}>
-        <div className="details">
-          {contestTimelineObject && <ContestStatus
-              className={`status ${clsx(
-                contestTimelineObject.contestStatus === Status.ENDED && "ended"
-              )}`}
-              status={contestTimelineObject.contestStatus}
-          />}
-          {contestData && contestTimelineObject && contestTimelineObject.contestStatus !== Status.ENDED && (
-              <div className="timer">
-                <ContestCountdown
-                    schedule={contestTimelineObject}
-                    updateContestStatus={updateContestTileStatus}
-                />
-              </div>
-          )}
-        </div>
+        <AuditStatusSection 
+          auditStatus={status}
+          endTime={endDate}
+          startTime={startDate}
+        />
         <div className="options">
           <a
             className="contest-redirect"
