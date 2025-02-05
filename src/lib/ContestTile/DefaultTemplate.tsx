@@ -4,14 +4,13 @@ import wolfbotIcon from "../../../public/icons/wolfbot.svg";
 import { BaseContestSchedule, BountyTileData, ContestSchedule, ContestTileData, ContestTileProps, ContestTileVariant } from "./ContestTile.types";
 import { DropdownLink, Status, TagSize, TagVariant } from "../types";
 import { ContestStatus } from "../ContestStatus";
-import { ContestCountdown, Countdown } from "./ContestTile";
+import { Countdown } from "./ContestTile";
 import { getDates, getContestSchedule } from "../../utils/time";
 import { isBefore } from "date-fns";
 import { Dropdown } from "../Dropdown";
 import { Icon } from "../Icon";
 import { Tag } from "../Tag";
 import { AuditStatusSection } from "../ContestStatus/AuditStatusSection";
-
 
 export default function DefaultTemplate({
     variant,

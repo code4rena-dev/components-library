@@ -66,6 +66,39 @@ const getAuditStatusColor = (status: AuditStatus | null) => {
   }
 };
 
+const DotNoPaddingStrokeIcon = ({
+  className,
+  color = "var(--color__text-primary)",
+  strokeColor = "var(--color__border-secondary)",
+  width = 16,
+  height = 16,
+}: {
+  className?: string;
+  color?: string;
+  strokeColor?: string;
+  width?: number;
+  height?: number;
+}) => (
+  <svg
+    width={width}
+    height={height}
+    fill="none"
+    className={className}
+    viewBox="0 0 8 8"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect
+      x=".5"
+      y=".5"
+      width="7"
+      height="7"
+      rx="3.5"
+      fill={color}
+      stroke={strokeColor}
+    />
+  </svg>
+);
+
 export const AuditStatusSection = ({
   auditStatus,
   startTime,
@@ -128,7 +161,7 @@ export const AuditStatusSection = ({
     <div className="details">
       {iconColor && (
         <div className="audit-tile__status__icon">
-          <Icon name="dot" color={iconColor} />
+          <DotNoPaddingStrokeIcon color={iconColor} strokeColor={iconColor} />
         </div>
       )}
       <div
