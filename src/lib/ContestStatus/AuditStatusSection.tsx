@@ -4,7 +4,6 @@ import {
   MapAuditStatusToAuditPublicStage,
 } from "./ContestStatus.types";
 import { getRelativeDateTimeLongFormat } from "../../utils/time";
-import { Icon } from "../Icon";
 
 const getAuditStatusLabel = (status: AuditStatus | null) => {
   switch (status) {
@@ -52,13 +51,13 @@ const getAuditStatusColor = (status: AuditStatus | null) => {
     case AuditStatus.Reporting:
     case AuditStatus.Review:
     case AuditStatus.Triage:
+    case AuditStatus.JudgingComplete:
       return "#7549FF"; // blurple-60
     case AuditStatus.Restricted:
     case AuditStatus.Paused:
       return "#6B6680";
-    case AuditStatus.JudgingComplete:
     case AuditStatus.LostDeal:
-      case AuditStatus.Booking:
+    case AuditStatus.Booking:
     case AuditStatus.Completed:
       return null;
     default:
