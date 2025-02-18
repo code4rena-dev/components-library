@@ -17,7 +17,7 @@ type Story = StoryObj<typeof Avatar>;
 
 export const ImageAvatar: Story = (args) => <Avatar {...args} />;
 ImageAvatar.args = {
-  imgElement: <img src="/images/default-avatar.png" alt="Placeholder" />,
+  imgElement: <img src="./images/default-avatar.png" alt="Placeholder" />,
   name: "0xJohnWithALongName",
   size: 50,
   round: 25,

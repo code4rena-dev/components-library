@@ -32,7 +32,7 @@ SampleComponent.args = {
   children: <div>Team lead</div>,
   title: "MangoBurger",
   imageSize: CardImageSize.MEDIUM,
-  image: <img src="/images/default-avatar.png" />,
+  image: <img src="./images/default-avatar.png" />,
   imageBorderRadius: CardImageBorderRadius.CIRCLE,
   cta: { text: "Follow", onClick: () => console.log("follow") },
   variants: [

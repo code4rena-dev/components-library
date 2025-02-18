@@ -53,7 +53,7 @@ const defaultArgs = {
     endDate: "2030-07-21T18:00:00.000Z",
   },
   variant: ContestTileVariant.DARK,
-  sponsorImage: "/logos/apple-touch-icon.png",
+  sponsorImage: "./logos/apple-touch-icon.png",
   sponsorUrl: "https://twitter.com/axelarcore",
   title: "Axelar Network",
   description: "Decentralized interoperability network.",
@@ -342,7 +342,7 @@ BountyTile.args = {
     languages: ["Rust"] as CodingLanguage[],
   },
   variant: ContestTileVariant.LIGHT,
-  sponsorImage: "/logos/apple-touch-icon.png",
+  sponsorImage: "./logos/apple-touch-icon.png",
   sponsorUrl: "https://twitter.com/axelarcore",
   title: "Axelar Network",
   description: "Decentralized interoperability network."
