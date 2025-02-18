@@ -32,7 +32,7 @@ SampleComponent.args = {
   className: "",
   isLoggedIn: false,
   hideConnectWalletDropdown: false,
-  userImage: "/logos/apple-touch-icon.png",
+  userImage: "./logos/apple-touch-icon.png",
   username: "TestUser",
   navLinks: [
     { label: "How it works", href: "/how-it-works" },

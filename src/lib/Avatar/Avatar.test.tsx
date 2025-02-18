@@ -12,11 +12,11 @@ const defaultArgs = {
 describe("========== Avatar Component - RUNNING TESTS ==========", () => {
   test("Renders with image avatar", () => {
     const imgElement = (
-      <img src="/images/default-avatar.png" alt="Placeholder" />
+      <img src="./images/default-avatar.png" alt="Placeholder" />
     );
     render(<Avatar imgElement={imgElement} {...defaultArgs} />);
     const avatar = screen.getByRole("img");
-    expect(avatar).toHaveAttribute("src", "/images/default-avatar.png");
+    expect(avatar).toHaveAttribute("src", "./images/default-avatar.png");
   });
 
   test("Renders with initials avatar", () => {
@@ -27,7 +27,7 @@ describe("========== Avatar Component - RUNNING TESTS ==========", () => {
 
   test("Sets alt text for image avatar", () => {
     const imgElement = (
-      <img src="/images/default-avatar.png" alt="User avatar" />
+      <img src="./images/default-avatar.png" alt="User avatar" />
     );
     render(<Avatar imgElement={imgElement} {...defaultArgs} />);
     const avatar = screen.getByAltText("User avatar");
