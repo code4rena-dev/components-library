@@ -8,7 +8,7 @@ export enum ContestTileVariant {
   COMPACT_DARK = "COMPACT_DARK"
 }
 
-export type ContestEcosystem = "Algorand" | "Aptos" | "Blast" | "Cosmos" | "EVM" | "NEAR" | "Polkadot" | "Scroll" | "Sei" | "Solana" | "StarkNet" | "Stellar" | "Sui" | "Other";
+export type ContestEcosystem = "Algorand" | "Aptos" | "Blast" | "Cosmos" | "EVM" | "Hyperlink" | "NEAR" | "Polkadot" | "Scroll" | "Sei" | "Solana" | "StarkNet" | "Stellar" | "Sui" | "Other";
 
 export type CodingLanguage = "Cairo" | "GO" | "HUFF" | "Ink" | "Move" | "Noir" | "Other" | "Rain" | "Rust" | "Rust evm" | "Solidity" | "Vyper" | "Yul";
 
