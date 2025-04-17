@@ -41,6 +41,7 @@ export enum AuditPublicStage {
   Upcoming = "Upcoming",
   SubsClosed = "Submissions closed",
   Completed = "Completed",
+  LiveJudging = "Live Judging",
 }
 
 // Grouping mapping of the audit statuses to the public stages
@@ -60,6 +61,7 @@ export const MapAuditStatusToAuditPublicStage: Record<
   [AuditStatus.JudgingComplete]: AuditPublicStage.SubsClosed,
   [AuditStatus.Paused]: AuditPublicStage.SubsClosed,
   [AuditStatus.Completed]: AuditPublicStage.Completed,
+  [AuditStatus.LiveJudging]: AuditPublicStage.LiveJudging,
   // Excluded statuses:
   [AuditStatus.LostDeal]: null,
   [AuditStatus.Booking]: null,
