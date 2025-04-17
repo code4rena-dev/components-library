@@ -31,6 +31,7 @@ export const AuditStatus = {
   Reporting: "Reporting",
   Completed: "Completed",
   LostDeal: "Lost Deal",
+  LiveJudging: "LiveJudging",
 } as const;
 // Take the AuditStatus object, and make a string literal type of the values
 export type AuditStatus = (typeof AuditStatus)[keyof typeof AuditStatus];
