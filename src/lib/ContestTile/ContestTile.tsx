@@ -147,7 +147,10 @@ export const ContestCountdown = ({
           Next submission phase starts soon
         </div>
       );
-    } else if (schedule.status === AuditStatus.Active && schedule.pause && +schedule.pause >= Date.now()) {
+    } else if (
+      (schedule.status === AuditStatus.Active || schedule.status === AuditStatus.LiveJudging)
+      && schedule.pause && +schedule.pause >= Date.now()
+    ) {
       text = "Current submission phase ends in ";
       end = schedule.pause.toISOString();
     }

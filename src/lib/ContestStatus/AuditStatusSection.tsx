@@ -10,6 +10,7 @@ const getAuditStatusLabel = (status: AuditStatus | null) => {
     case AuditStatus.PreAudit:
       return "Starts";
     case AuditStatus.Active:
+    case AuditStatus.LiveJudging:
       return "Ends";
     case AuditStatus.Awarding:
       return "Awarding";
@@ -110,7 +111,7 @@ export const AuditStatusSection = ({
   // Get comparison time for relative time calculation
   const [comparisonTime, setComparisonTime] = useState<Date | null>(null);
   useEffect(() => {
-    if (auditStatus === AuditStatus.Active) {
+    if (auditStatus === AuditStatus.Active || auditStatus === AuditStatus.LiveJudging) {
       setComparisonTime(new Date(endTime));
     } else if (auditStatus === AuditStatus.PreAudit) {
       setComparisonTime(new Date(startTime));
