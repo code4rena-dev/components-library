@@ -49,16 +49,7 @@ const generateColor = (str: string) => {
   return pastelColors[index];
 };
 
-/**
- * A stylized Avatar component for displaying user avatars.
- * This component supports displaying an image avatar or a fallback avatar with initials.
- * The fallback avatar is a colored circle with the user's initials.
- *
- * @param imgElement - An optional image element to use as the avatar.
- * @param name - The name of the user. Used to generate initials for the fallback avatar.
- * @param size - The size of the avatar in pixels.
- * @param round - The border-radius of the avatar in pixels. Use this to make the avatar round.
- */
+/** @deprecated */
 export const Avatar = ({
   imgElement,
   name,
